@@ -31,4 +31,19 @@ public class AddressRepository : IAddressRepository
         _context.SaveChanges();
         return address;
     }
+
+    public bool Delete(int id)
+    {
+        var addressToDelete = _context.Address.FirstOrDefault(a => a.Id == id);
+
+        if (addressToDelete == null)
+        {
+            throw new KeyNotFoundException($"Address with id {id} has not been found");
+        }
+
+        _context.Address.Remove(addressToDelete);
+        _context.SaveChanges();
+
+        return true;
+    }
 }

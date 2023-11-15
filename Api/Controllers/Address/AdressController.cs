@@ -11,14 +11,17 @@ public class AdressController : ControllerBase
     private readonly UseCaseCreateAddress _useCaseCreateAddress;
     private readonly UseCaseFetchAllAddress _useCaseFetchAllAddress;
     private readonly UseCaseFetchAddressById _useCaseFetchAddressById;
+    private readonly UseCaseDeleteAddress _useCaseDeleteAddress;
 
     public AdressController(UseCaseCreateAddress useCaseCreateAddress, 
         UseCaseFetchAllAddress useCaseFetchAllAddress, 
-        UseCaseFetchAddressById useCaseFetchAddressById)
+        UseCaseFetchAddressById useCaseFetchAddressById, 
+        UseCaseDeleteAddress useCaseDeleteAddress)
     {
         _useCaseCreateAddress = useCaseCreateAddress;
         _useCaseFetchAllAddress = useCaseFetchAllAddress;
         _useCaseFetchAddressById = useCaseFetchAddressById;
+        _useCaseDeleteAddress = useCaseDeleteAddress;
     }
 
     [HttpGet]
@@ -56,5 +59,14 @@ public class AdressController : ControllerBase
             new { id = output.Id },
             output
         );
+    }
+
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult Delete(int id)
+    {
+        if(_useCaseDeleteAddress.Execute(id)) return NoContent();
+        return NotFound();
     }
 }

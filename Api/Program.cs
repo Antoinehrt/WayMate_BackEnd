@@ -23,6 +23,7 @@ builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<UseCaseCreateAddress>();
 builder.Services.AddScoped<UseCaseFetchAllAddress>();
 builder.Services.AddScoped<UseCaseFetchAddressById>();
+builder.Services.AddScoped<UseCaseDeleteAddress>();
 
 builder.Services.AddCors(options =>
 {

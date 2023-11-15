@@ -7,4 +7,5 @@ public interface IAddressRepository
     IEnumerable<DbAddress> FetchAll();
     DbAddress FetchById(int id);
     DbAddress Create(string street, string postalCode, string city, string number);
+    bool Delete(int id);
 }
