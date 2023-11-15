@@ -6,14 +6,14 @@ namespace Api.Controllers.Address;
 
 [ApiController]
 [Route("api/v1/address")]
-public class AdressController : ControllerBase
+public class AddressController : ControllerBase
 {
     private readonly UseCaseCreateAddress _useCaseCreateAddress;
     private readonly UseCaseFetchAllAddress _useCaseFetchAllAddress;
     private readonly UseCaseFetchAddressById _useCaseFetchAddressById;
     private readonly UseCaseDeleteAddress _useCaseDeleteAddress;
 
-    public AdressController(UseCaseCreateAddress useCaseCreateAddress, 
+    public AddressController(UseCaseCreateAddress useCaseCreateAddress, 
         UseCaseFetchAllAddress useCaseFetchAllAddress, 
         UseCaseFetchAddressById useCaseFetchAddressById, 
         UseCaseDeleteAddress useCaseDeleteAddress)
