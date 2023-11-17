@@ -1,19 +1,23 @@
+-- Creating the WayMate database
 CREATE DATABASE WayMate;
 
 GO
 
+-- Switching to the WayMate database
 USE WayMate;
 
 GO
 
-CREATE TABLE users(
+-- Creating the 'users' table
+CREATE TABLE users (
     id INT IDENTITY PRIMARY KEY NOT NULL,
-    username VARCHAR(20) NOT NULL ,
-    password VARCHAR(200) NOT NULL ,
+    username VARCHAR(20) NOT NULL,
+    password VARCHAR(200) NOT NULL,
     birthDate DATE NOT NULL
 );
 
-CREATE TABLE address(
+-- Creating the 'address' table
+CREATE TABLE address (
     id INT IDENTITY PRIMARY KEY NOT NULL,
     street VARCHAR(50) NOT NULL,
     postalCode VARCHAR(6) NOT NULL,
@@ -21,35 +25,40 @@ CREATE TABLE address(
     number VARCHAR(6) NOT NULL
 );
 
-CREATE TABLE passenger(
+-- Creating the 'passenger' table
+CREATE TABLE passenger (
     id INT IDENTITY PRIMARY KEY NOT NULL,
     userId INT NOT NULL REFERENCES users(id),
     lastName VARCHAR(50) NOT NULL,
     firstName VARCHAR(50) NOT NULL,
-    gender VARCHAR(20) not null,
+    gender VARCHAR(20) NOT NULL,
     addressId INT NOT NULL REFERENCES address(id)
 );
 
-CREATE TABLE car(
+-- Creating the 'car' table
+CREATE TABLE car (
     plateNumber VARCHAR(50) PRIMARY KEY NOT NULL,
     model VARCHAR(50) NOT NULL,
     nbSeats INT NOT NULL,
-    fuelType VARCHAR(20) NOT NULL ,
+    fuelType VARCHAR(20) NOT NULL,
     brand VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE driver(
-    id INT IDENTITY  PRIMARY KEY NOT NULL,
+-- Creating the 'driver' table
+CREATE TABLE driver (
+    id INT IDENTITY PRIMARY KEY NOT NULL,
     passengerId INT NOT NULL REFERENCES passenger(id),
     carPlate VARCHAR(50) NOT NULL REFERENCES car(plateNumber)
 );
 
-CREATE TABLE admin(
+-- Creating the 'admin' table
+CREATE TABLE admin (
     id INT IDENTITY PRIMARY KEY NOT NULL,
     idUser INT NOT NULL REFERENCES users(id)
 );
 
-CREATE TABLE trip(
+-- Creating the 'trip' table
+CREATE TABLE trip (
     id INT IDENTITY PRIMARY KEY NOT NULL,
     idDriver INT NOT NULL REFERENCES driver(id),
     smoke BIT NOT NULL,
@@ -62,7 +71,8 @@ CREATE TABLE trip(
     idDestination INT NOT NULL REFERENCES address(id)
 );
 
-CREATE TABLE booking(
+-- Creating the 'booking' table
+CREATE TABLE booking (
     id INT IDENTITY PRIMARY KEY NOT NULL,
     date DATETIME NOT NULL,
     reservedSeats INT NOT NULL,
@@ -71,15 +81,17 @@ CREATE TABLE booking(
     idTrip INT NOT NULL REFERENCES trip(id)
 );
 
-GO
+Go
 
--- Ajout de la colonne CarType
-ALTER TABLE car ADD carType VARCHAR(15) NOT NULL default 'Universal';
+-- Adding the 'carType' column to the 'car' table
+ALTER TABLE car ADD carType VARCHAR(15) NOT NULL DEFAULT 'Universal';
 
+-- Adding the 'isBanned' column to the 'users' table
+ALTER TABLE users ADD isBanned BIT NOT NULL DEFAULT 0;
 
--- Vérification de l'existance de la colonne avant de la renommer
+-- Checking the existence of the 'birtDate' column before renaming
 IF COL_LENGTH('users', 'birtDate') IS NOT NULL
 BEGIN
-    -- Renommer la colonne
+    -- Renaming the column
     EXEC sp_rename 'users.birtDate', 'birthDate', 'COLUMN';
 END
