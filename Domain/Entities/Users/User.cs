@@ -7,6 +7,7 @@ public class User {
     public string Password { get; set; }
     public string Email { get; set; }
     private string _birthdate;
+    public bool IsBanned { get; set; }
     public string Birthdate
     {
         get => _birthdate;

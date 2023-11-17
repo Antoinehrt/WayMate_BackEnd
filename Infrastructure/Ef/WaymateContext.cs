@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Ef;
 
-public class AddressContext : DbContext
+public class WaymateContext : DbContext
 {
-    public AddressContext(DbContextOptions options) : base(options)
+    public WaymateContext(DbContextOptions options) : base(options)
     {
     }
     
