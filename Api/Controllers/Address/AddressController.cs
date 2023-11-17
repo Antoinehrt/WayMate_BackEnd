@@ -12,16 +12,18 @@ public class AddressController : ControllerBase
     private readonly UseCaseFetchAllAddress _useCaseFetchAllAddress;
     private readonly UseCaseFetchAddressById _useCaseFetchAddressById;
     private readonly UseCaseDeleteAddress _useCaseDeleteAddress;
+    private readonly UseCaseUpdateAddress _useCaseUpdateAddress;
 
     public AddressController(UseCaseCreateAddress useCaseCreateAddress, 
         UseCaseFetchAllAddress useCaseFetchAllAddress, 
         UseCaseFetchAddressById useCaseFetchAddressById, 
-        UseCaseDeleteAddress useCaseDeleteAddress)
+        UseCaseDeleteAddress useCaseDeleteAddress, UseCaseUpdateAddress useCaseUpdateAddress)
     {
         _useCaseCreateAddress = useCaseCreateAddress;
         _useCaseFetchAllAddress = useCaseFetchAllAddress;
         _useCaseFetchAddressById = useCaseFetchAddressById;
         _useCaseDeleteAddress = useCaseDeleteAddress;
+        _useCaseUpdateAddress = useCaseUpdateAddress;
     }
 
     [HttpGet]
@@ -68,5 +70,14 @@ public class AddressController : ControllerBase
     {
         if(_useCaseDeleteAddress.Execute(id)) return NoContent();
         return NotFound();
+    }
+
+    [HttpPut("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult Update(int id, [FromBody] DtoInputUpdateAddress dto)
+    {
+        dto.Id = id;
+        return _useCaseUpdateAddress.Execute(dto) ? NoContent() : NotFound();
     }
 }

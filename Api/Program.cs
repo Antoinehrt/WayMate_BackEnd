@@ -24,6 +24,7 @@ builder.Services.AddScoped<UseCaseCreateAddress>();
 builder.Services.AddScoped<UseCaseFetchAllAddress>();
 builder.Services.AddScoped<UseCaseFetchAddressById>();
 builder.Services.AddScoped<UseCaseDeleteAddress>();
+builder.Services.AddScoped<UseCaseUpdateAddress>();
 
 builder.Services.AddCors(options =>
 {
