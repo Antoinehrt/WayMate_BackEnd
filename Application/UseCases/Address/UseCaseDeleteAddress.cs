@@ -1,8 +1,9 @@
-﻿using Infrastructure.Ef;
+﻿using Application.UseCases.Utils;
+using Infrastructure.Ef;
 
 namespace Application.UseCases.Address;
 
-public class UseCaseDeleteAddress
+public class UseCaseDeleteAddress: IUseCaseParameterizeQuery<bool,int>
 {
     private readonly IAddressRepository _addressRepository;
 

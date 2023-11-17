@@ -46,4 +46,18 @@ public class AddressRepository : IAddressRepository
 
         return true;
     }
+
+    public bool Update(int id, string street, string postalCode, string city, string number)
+    {
+        var addressToUpdate = _context.Address.FirstOrDefault(a => a.Id == id);
+        if (addressToUpdate == null) return false;
+
+        addressToUpdate.City = city;
+        addressToUpdate.Street = street;
+        addressToUpdate.PostalCode = postalCode;
+        addressToUpdate.Number = number;
+
+        _context.SaveChanges();
+        return true;
+    }
 }
