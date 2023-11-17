@@ -3,10 +3,10 @@
 namespace Domain.Entities; 
 
 public class Address {
-    private string _street { get; set; }
-    private string _postalCode { get; set; }
-    private string _city { get; set; }
-    private string _number { get; set; }
-    private Passenger _passenger { get; set; }
+    public string Street { get; set; }
+    public string PostalCode { get; set; }
+    public string City { get; set; }
+    public string Number { get; set; }
+    public Passenger Passenger { get; set; }
     
 }

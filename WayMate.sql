@@ -10,7 +10,7 @@ CREATE TABLE users(
     id INT IDENTITY PRIMARY KEY NOT NULL,
     username VARCHAR(20) NOT NULL ,
     password VARCHAR(200) NOT NULL ,
-    birtDate DATE NOT NULL
+    birthDate DATE NOT NULL
 );
 
 CREATE TABLE address(
@@ -73,4 +73,13 @@ CREATE TABLE booking(
 
 GO
 
+-- Ajout de la colonne CarType
 ALTER TABLE car ADD carType VARCHAR(15) NOT NULL default 'Universal';
+
+
+-- Vérification de l'existance de la colonne avant de la renommer
+IF COL_LENGTH('users', 'birtDate') IS NOT NULL
+BEGIN
+    -- Renommer la colonne
+    EXEC sp_rename 'users.birtDate', 'birthDate', 'COLUMN';
+END

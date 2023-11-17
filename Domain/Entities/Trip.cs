@@ -1,16 +1,16 @@
 ﻿namespace Domain.Entities; 
 
 public class Trip {
-    private string _TripDate { get; set; }
-    private int _occupiedSeats { get; set; }
-    private double _priceKm { get; set; }
-    private bool _luggage { get; set; }
-    private bool _smoker { get; set; }
-    private bool _petFriendly { get; set; }
-    private Address _startAddress { get; set; }
-    private Address _destinationAddress { get; set; }
-    private Car _car { get; set; }
-    private Driver _driver { get; set; }
+    public string TripDate { get; set; }
+    public int OccupiedSeats { get; set; }
+    public double PriceKm { get; set; }
+    public bool Luggage { get; set; }
+    public bool Smoker { get; set; }
+    public bool PetFriendly { get; set; }
+    public Address StartAddress { get; set; }
+    public Address DestinationAddress { get; set; }
+    public Car Car { get; set; }
+    public Driver Driver { get; set; }
 
     public int CalculateAvailableSeates() {
         //TODO : cette méthode

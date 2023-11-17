@@ -3,10 +3,10 @@
 namespace Domain.Entities; 
 
 public class Booking {
-    private string _BookingDate { get; set; }
-    private int _nbBookedSeats { get; set; }
-    private Trip _trip { get; set; }
-    private List<Passenger> _passengers { get; set; }
+    public string BookingDate { get; set; }
+    public int NbBookedSeats { get; set; }
+    public Trip Trip { get; set; }
+    public List<Passenger> Passengers { get; set; }
     
 
     public double CalculatePrice() {
@@ -15,7 +15,7 @@ public class Booking {
     }
     
     private void Add(Passenger passenger) {
-        _passengers.Add(passenger);
+        Passengers.Add(passenger);
     }
 
     private void AddRange(IEnumerable<Passenger> passengers) {
