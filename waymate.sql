@@ -1,6 +1,10 @@
-CREATE DATABASE waymate;
+CREATE DATABASE WayMate;
 
-USE waymate;
+GO
+
+USE WayMate;
+
+GO
 
 CREATE TABLE users(
     id INT IDENTITY PRIMARY KEY NOT NULL,
@@ -38,7 +42,6 @@ CREATE TABLE driver(
     id INT IDENTITY  PRIMARY KEY NOT NULL,
     passengerId INT NOT NULL REFERENCES passenger(id),
     carPlate VARCHAR(50) NOT NULL REFERENCES car(plateNumber)
-
 );
 
 CREATE TABLE admin(
@@ -67,5 +70,7 @@ CREATE TABLE booking(
     idEntryPoint INT NOT NULL REFERENCES address(id),
     idTrip INT NOT NULL REFERENCES trip(id)
 );
+
+GO
 
 ALTER TABLE car ADD carType VARCHAR(15) NOT NULL default 'Universal';
