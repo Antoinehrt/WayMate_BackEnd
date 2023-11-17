@@ -1,7 +1,7 @@
 ﻿namespace Domain.Entities.Users; 
 
 public class Passenger : User {
-    private string _lastname { get; set; }
-    private string _firstName { get; set; }
-    private string _gender { get; set; }
+    public string Lastname { get; set; }
+    public string FirstName { get; set; }
+    public string Gender { get; set; }
 }
