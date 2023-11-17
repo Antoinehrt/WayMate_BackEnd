@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Mapper));
 
-builder.Services.AddDbContext<AddressContext>(a => a.UseSqlServer(
+builder.Services.AddDbContext<WaymateContext>(a => a.UseSqlServer(
     builder.Configuration.GetConnectionString("db"))
 );
 

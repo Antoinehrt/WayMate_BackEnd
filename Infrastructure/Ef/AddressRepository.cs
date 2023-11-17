@@ -4,9 +4,9 @@ namespace Infrastructure.Ef;
 
 public class AddressRepository : IAddressRepository
 {
-    private readonly AddressContext _context;
+    private readonly WaymateContext _context;
 
-    public AddressRepository(AddressContext context)
+    public AddressRepository(WaymateContext context)
     {
         _context = context;
     }
