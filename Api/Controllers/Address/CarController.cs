@@ -11,13 +11,14 @@ public class CarController : ControllerBase
     private readonly UseCaseCreateCar _useCaseCreateCar;
     private readonly UseCaseFetchCarById _useCaseFetchCarById;
     private readonly UseCaseFetchAllCar _useCaseFetchAllCar;
-    
+    private readonly UseCaseDeleteCar _useCaseDeleteCar;
 
-    public CarController(UseCaseCreateCar useCaseCreateCar, UseCaseFetchCarById useCaseFetchCarById, UseCaseFetchAllCar useCaseFetchAllCar)
+    public CarController(UseCaseCreateCar useCaseCreateCar, UseCaseFetchCarById useCaseFetchCarById, UseCaseFetchAllCar useCaseFetchAllCar, UseCaseDeleteCar useCaseDeleteCar)
     {
         _useCaseCreateCar = useCaseCreateCar;
         _useCaseFetchCarById = useCaseFetchCarById;
         _useCaseFetchAllCar = useCaseFetchAllCar;
+        _useCaseDeleteCar = useCaseDeleteCar;
     }
 
     [HttpGet]
@@ -55,5 +56,14 @@ public class CarController : ControllerBase
             new { numberPlate = output.NumberPlate }, 
             output
             );
+    }
+
+    [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult Delete(int numberPlate)
+    {
+        if(_useCaseDeleteCar.Execute(numberPlate)) return NoContent();
+        return NotFound();
     }
 }
