@@ -6,8 +6,8 @@ namespace Infrastructure.Ef.Car;
 public interface ICarRepository
 {
     IEnumerable<DbCar> FetchAll();
-    DbCar FetchById(int numberPlate);
+    DbCar FetchById(string numberPlate);
     DbCar Create(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType);
-    bool Delete(int numberPlate);
+    bool Delete(string numberPlate);
     bool Update(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType);
 }

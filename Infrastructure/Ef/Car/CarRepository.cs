@@ -14,26 +14,49 @@ public class CarRepository : ICarRepository
 
     public IEnumerable<DbCar> FetchAll()
     {
-        throw new NotImplementedException();
+        return _context.Cars.ToList();
     }
 
-    public DbCar FetchById(int id)
+    public DbCar FetchById(string numberPlate)
     {
-        throw new NotImplementedException();
+        var car = _context.Cars.FirstOrDefault((c => c.NumberPlate == numberPlate));
+        if(car == null) throw new KeyNotFoundException($"Car with numberPlate{numberPlate} has not been found");
+        return car;
     }
 
     public DbCar Create(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType)
     {
-        throw new NotImplementedException();
+        var car = new DbCar
+        {
+            NumberPlate = numberPlate, Brand = brand, Model = model, NbSeats = nbSeats, FuelType = fuelType,
+            CarType = carType
+        };
+        _context.Cars.Add(car);
+        _context.SaveChanges();
+        return car;
     }
 
-    public bool Delete(int id)
+    public bool Delete(string numberPlate)
     {
-        throw new NotImplementedException();
+        var carToDelete = _context.Cars.FirstOrDefault(c => c.NumberPlate == numberPlate);
+        if(carToDelete == null) throw new KeyNotFoundException($"Car with numberPlate{numberPlate} has not been found");
+        _context.Cars.Add(carToDelete);
+        _context.SaveChanges();
+        return true;
     }
 
     public bool Update(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType)
     {
-        throw new NotImplementedException();
+        var carToUpdate = _context.Cars.FirstOrDefault(c => c.NumberPlate == numberPlate);
+        if (carToUpdate == null) return false;
+
+        carToUpdate.Brand = brand;
+        carToUpdate.Model = model;
+        carToUpdate.NbSeats = nbSeats;
+        carToUpdate.FuelType = fuelType;
+        carToUpdate.CarType = carType;
+
+        _context.SaveChanges();
+        return true;
     }
 }

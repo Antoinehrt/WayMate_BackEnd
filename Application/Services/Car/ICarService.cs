@@ -2,5 +2,5 @@
 
 public interface ICarService
 {
-    Domain.Entities.Car FetchById(int id);
+    Domain.Entities.Car FetchById(string numberPlate);
 }

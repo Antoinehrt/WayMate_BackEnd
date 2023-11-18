@@ -1,4 +1,5 @@
 ﻿using Application.UseCases.Address.Dtos;
+using Application.UseCases.Car.Dtos;
 using AutoMapper;
 using Domain.Entities;
 using Infrastructure.Ef.DbEntities;
@@ -13,5 +14,12 @@ public class Mapper : Profile
         CreateMap<Address, DtoOutputAddress>();
         CreateMap<DbAddress, DtoOutputAddress>();
         CreateMap<DbAddress, Address>();
+        
+        
+        //Car
+        CreateMap<Car, DtoOutputCar>();
+        CreateMap<DbCar, DtoOutputCar>();
+        CreateMap<DbCar, Car>();
+        
     }
 }

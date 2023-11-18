@@ -30,10 +30,10 @@ public class CarController : ControllerBase
     }
 
     [HttpGet]
-    [Route("{id:int}")]
+    [Route("{numberPlate:alpha}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult<DtoOutputCar> FetchById(int numberPlate)
+    public ActionResult<DtoOutputCar> FetchById(string numberPlate)
     {
         try
         {
@@ -63,13 +63,13 @@ public class CarController : ControllerBase
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult Delete(int numberPlate)
+    public ActionResult Delete(string numberPlate)
     {
         if(_useCaseDeleteCar.Execute(numberPlate)) return NoContent();
         return NotFound();
     }
     
-    [HttpPut("{id:int}")]
+    [HttpPut("{numberPlate:alpha}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult Update(string numberPlate, [FromBody] DtoInputUpdateCar dto)

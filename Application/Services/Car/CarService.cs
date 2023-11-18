@@ -14,9 +14,9 @@ public class CarService : ICarService
         _mapper = mapper;
     }
 
-    public Domain.Entities.Car FetchById(int id)
+    public Domain.Entities.Car FetchById(string numberPlate)
     {
-        var dbCar = _carRepository.FetchById(id);
+        var dbCar = _carRepository.FetchById(numberPlate);
         return _mapper.Map<Domain.Entities.Car>(dbCar);
     }
 }

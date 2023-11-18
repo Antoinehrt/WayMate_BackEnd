@@ -1,7 +1,9 @@
 using Application;
 using Application.UseCases.Address;
+using Application.UseCases.Car;
 using Infrastructure.Ef;
 using Infrastructure.Ef.Address;
+using Infrastructure.Ef.Car;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,7 @@ builder.Services.AddDbContext<WaymateContext>(a => a.UseSqlServer(
 );
 
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<ICarRepository, CarRepository>();
 
 //Use Case Address
 builder.Services.AddScoped<UseCaseCreateAddress>();
@@ -26,6 +29,13 @@ builder.Services.AddScoped<UseCaseFetchAllAddress>();
 builder.Services.AddScoped<UseCaseFetchAddressById>();
 builder.Services.AddScoped<UseCaseDeleteAddress>();
 builder.Services.AddScoped<UseCaseUpdateAddress>();
+
+//Use Case Car
+builder.Services.AddScoped<UseCaseCreateCar>();
+builder.Services.AddScoped<UseCaseFetchAllCar>();
+builder.Services.AddScoped<UseCaseFetchCarById>();
+builder.Services.AddScoped<UseCaseDeleteCar>();
+builder.Services.AddScoped<UseCaseUpdateCar>();
 
 builder.Services.AddCors(options =>
 {
