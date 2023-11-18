@@ -10,11 +10,20 @@ public class CarController : ControllerBase
 {
     private readonly UseCaseCreateCar _useCaseCreateCar;
     private readonly UseCaseFetchCarById _useCaseFetchCarById;
+    private readonly UseCaseFetchAllCar _useCaseFetchAllCar;
+    
 
-    public CarController(UseCaseCreateCar useCaseCreateCar, UseCaseFetchCarById useCaseFetchCarById)
+    public CarController(UseCaseCreateCar useCaseCreateCar, UseCaseFetchCarById useCaseFetchCarById, UseCaseFetchAllCar useCaseFetchAllCar)
     {
         _useCaseCreateCar = useCaseCreateCar;
         _useCaseFetchCarById = useCaseFetchCarById;
+        _useCaseFetchAllCar = useCaseFetchAllCar;
+    }
+
+    [HttpGet]
+    public ActionResult<IEnumerable<DtoOutputCar>> FetchAll()
+    {
+        return Ok(_useCaseFetchAllCar.Execute());
     }
 
     [HttpGet]
