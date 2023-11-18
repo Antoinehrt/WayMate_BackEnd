@@ -40,7 +40,6 @@ CREATE TABLE car (
     plateNumber VARCHAR(50) PRIMARY KEY NOT NULL,
     model VARCHAR(50) NOT NULL,
     nbSeats INT NOT NULL,
-    fuelType VARCHAR(20) NOT NULL,
     brand VARCHAR(50) NOT NULL
 );
 
@@ -84,7 +83,10 @@ CREATE TABLE booking (
 Go
 
 -- Adding the 'carType' column to the 'car' table
-ALTER TABLE car ADD carType VARCHAR(15) NOT NULL DEFAULT 'Universal';
+ALTER TABLE car ADD carType INT NOT NULL DEFAULT 0;
+-- ALTER TABLE car ADD carType VARCHAR(15) NOT NULL DEFAULT 'Universal';
+ALTER TABLE car ADD carType INT NOT NULL DEFAULT 0;
+-- ALTER TABLE car ADD carType VARCHAR(15) NOT NULL DEFAULT 'Universal';
 
 -- Adding the 'isBanned' column to the 'users' table
 ALTER TABLE users ADD isBanned BIT NOT NULL DEFAULT 0;

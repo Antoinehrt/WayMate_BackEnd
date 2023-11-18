@@ -18,9 +18,13 @@ INSERT INTO passenger (userId, lastName, firstName, gender, addressId) VALUES
 
 -- Inserting cars
 INSERT INTO car (plateNumber, model, nbSeats, fuelType, brand, carType) VALUES
-    ('ABC123', 'Millennium Falcon', 5, 'Hyperfuel', 'Corellian Engineering Corporation', 'Spaceship'),
-    ('DEF456', 'X-34 Landspeeder', 2, 'Electric', 'SoroSuub Corporation', 'Landspeeder'),
-    ('GHI789', 'Slave I', 3, 'Jet fuel', 'Kuat Systems Engineering', 'Spaceship');
+    ('ABC123', 'Millennium Falcon', 5, 0, 'Corellian Engineering Corporation', 0),
+    ('DEF456', 'X-34 Landspeeder', 2, 0, 'SoroSuub Corporation', 0),
+    ('GHI789', 'Slave I', 3, 0, 'Kuat Systems Engineering', 0);
+-- INSERT INTO car (plateNumber, model, nbSeats, fuelType, brand, carType) VALUES
+--     ('ABC123', 'Millennium Falcon', 5, 'Hyperfuel', 'Corellian Engineering Corporation', 'Spaceship'),
+--     ('DEF456', 'X-34 Landspeeder', 2, 'Electric', 'SoroSuub Corporation', 'Landspeeder'),
+--     ('GHI789', 'Slave I', 3, 'Jet fuel', 'Kuat Systems Engineering', 'Spaceship');
 
 -- Inserting drivers
 INSERT INTO driver (passengerId, carPlate) VALUES
