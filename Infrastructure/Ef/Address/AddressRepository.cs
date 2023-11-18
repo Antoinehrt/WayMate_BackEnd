@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Ef.DbEntities;
 
-namespace Infrastructure.Ef;
+namespace Infrastructure.Ef.Address;
 
 public class AddressRepository : IAddressRepository
 {

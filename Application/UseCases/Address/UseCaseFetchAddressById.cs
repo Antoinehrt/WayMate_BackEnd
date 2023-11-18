@@ -2,6 +2,7 @@
 using Application.UseCases.Utils;
 using AutoMapper;
 using Infrastructure.Ef;
+using Infrastructure.Ef.Address;
 
 namespace Application.UseCases.Address;
 

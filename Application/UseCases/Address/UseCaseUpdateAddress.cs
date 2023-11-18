@@ -1,6 +1,7 @@
 ﻿using Application.UseCases.Address.Dtos;
 using Application.UseCases.Utils;
 using Infrastructure.Ef;
+using Infrastructure.Ef.Address;
 
 namespace Application.UseCases.Address;
 

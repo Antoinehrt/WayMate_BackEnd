@@ -1,6 +1,7 @@
 using Application;
 using Application.UseCases.Address;
 using Infrastructure.Ef;
+using Infrastructure.Ef.Address;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
