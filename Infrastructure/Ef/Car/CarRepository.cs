@@ -5,9 +5,9 @@ namespace Infrastructure.Ef.Car;
 
 public class CarRepository : ICarRepository
 {
-    private readonly CarContext _context;
+    private readonly WaymateContext _context;
 
-    public CarRepository(CarContext context)
+    public CarRepository(WaymateContext context)
     {
         _context = context;
     }
