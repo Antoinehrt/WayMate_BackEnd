@@ -12,13 +12,15 @@ public class CarController : ControllerBase
     private readonly UseCaseFetchCarById _useCaseFetchCarById;
     private readonly UseCaseFetchAllCar _useCaseFetchAllCar;
     private readonly UseCaseDeleteCar _useCaseDeleteCar;
+    private readonly UseCaseUpdateCar _useCaseUpdateCar;
 
-    public CarController(UseCaseCreateCar useCaseCreateCar, UseCaseFetchCarById useCaseFetchCarById, UseCaseFetchAllCar useCaseFetchAllCar, UseCaseDeleteCar useCaseDeleteCar)
+    public CarController(UseCaseCreateCar useCaseCreateCar, UseCaseFetchCarById useCaseFetchCarById, UseCaseFetchAllCar useCaseFetchAllCar, UseCaseDeleteCar useCaseDeleteCar, UseCaseUpdateCar useCaseUpdateCar)
     {
         _useCaseCreateCar = useCaseCreateCar;
         _useCaseFetchCarById = useCaseFetchCarById;
         _useCaseFetchAllCar = useCaseFetchAllCar;
         _useCaseDeleteCar = useCaseDeleteCar;
+        _useCaseUpdateCar = useCaseUpdateCar;
     }
 
     [HttpGet]
@@ -66,4 +68,14 @@ public class CarController : ControllerBase
         if(_useCaseDeleteCar.Execute(numberPlate)) return NoContent();
         return NotFound();
     }
+    
+    [HttpPut("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult Update(string numberPlate, [FromBody] DtoInputUpdateCar dto)
+    {
+        dto.NumberPlate = numberPlate;
+        return _useCaseUpdateCar.Execute(dto) ? NoContent() : NotFound();
+    }
+    
 }

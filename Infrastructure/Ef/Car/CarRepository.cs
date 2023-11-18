@@ -32,7 +32,7 @@ public class CarRepository : ICarRepository
         throw new NotImplementedException();
     }
 
-    public bool Update(int id, string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType)
+    public bool Update(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType)
     {
         throw new NotImplementedException();
     }
