@@ -40,7 +40,7 @@ public class CarRepository : ICarRepository
     {
         var carToDelete = _context.Cars.FirstOrDefault(c => c.NumberPlate == numberPlate);
         if(carToDelete == null) throw new KeyNotFoundException($"Car with numberPlate{numberPlate} has not been found");
-        _context.Cars.Add(carToDelete);
+        _context.Cars.Remove(carToDelete);
         _context.SaveChanges();
         return true;
     }
