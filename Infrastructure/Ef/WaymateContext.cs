@@ -11,6 +11,8 @@ public class WaymateContext : DbContext
     
     public DbSet<DbAddress> Address { get; set; }
     public DbSet<DbCar> Cars { get; set; }
+    
+    public DbSet<DbUser> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -36,6 +38,19 @@ public class WaymateContext : DbContext
             entity.Property(c => c.Brand).HasColumnName("brand");
             entity.Property(c => c.CarType).HasColumnName("carType");
 
+        });
+        
+        modelBuilder.Entity<DbUser>(entity =>
+        {
+            entity.ToTable("user");
+            entity.HasKey(u => u.Id);
+            entity.Property(u => u.Id).HasColumnName("id");
+            entity.Property(u => u.Username).HasColumnName("username");
+            entity.Property(u => u.Password).HasColumnName("password");
+            entity.Property(u => u.Email).HasColumnName("email");
+            entity.Property(u => u.BirthDate).HasColumnName("birthdate");
+            entity.Property(u => u.IsBanned).HasColumnName("isbanned");
+            
         });
     }
 }
