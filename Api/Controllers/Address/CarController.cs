@@ -30,7 +30,7 @@ public class CarController : ControllerBase
     }
 
     [HttpGet]
-    [Route("{numberPlate:alpha}")]
+    [Route("{numberPlate:regex(^[[a-zA-Z0-9]]+$)}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<DtoOutputCar> FetchById(string numberPlate)
@@ -69,7 +69,7 @@ public class CarController : ControllerBase
         return NotFound();
     }
     
-    [HttpPut("{numberPlate:alpha}")]
+    [Route("{numberPlate:regex(^[[a-zA-Z0-9]]+$)}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult Update(string numberPlate, [FromBody] DtoInputUpdateCar dto)
