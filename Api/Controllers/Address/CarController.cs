@@ -69,7 +69,7 @@ public class CarController : ControllerBase
         return NotFound();
     }
     
-    [Route("{numberPlate:regex(^[[a-zA-Z0-9]]+$)}")]
+    [HttpPut("{numberPlate:regex(^[[a-zA-Z0-9]]+$)}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult Update(string numberPlate, [FromBody] DtoInputUpdateCar dto)
