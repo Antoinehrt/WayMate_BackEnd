@@ -85,7 +85,7 @@ Go
 -- Adding the 'carType' column to the 'car' table
 ALTER TABLE car ADD carType INT NOT NULL DEFAULT 0;
 -- ALTER TABLE car ADD carType VARCHAR(15) NOT NULL DEFAULT 'Universal';
-ALTER TABLE car ADD carType INT NOT NULL DEFAULT 0;
+ALTER TABLE car ADD fuelType INT NOT NULL DEFAULT 0;
 -- ALTER TABLE car ADD carType VARCHAR(15) NOT NULL DEFAULT 'Universal';
 
 -- Adding the 'isBanned' column to the 'users' table
