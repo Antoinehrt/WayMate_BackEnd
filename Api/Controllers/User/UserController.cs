@@ -1,4 +1,5 @@
 ﻿using Application.UseCases.Address;
+using Application.UseCases.User;
 using Application.UseCases.User.Dtos;
 using Application.UseCases.User.Dtos.Dtos;
 using Microsoft.AspNetCore.Mvc;
