@@ -1,4 +1,4 @@
-﻿namespace Application.Services.User;
+﻿namespace Application.Services.Users.User;
 
 public interface IUserService
 {

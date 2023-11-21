@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Infrastructure.Ef.Users.User;
 
-namespace Application.Services.User;
+namespace Application.Services.Users.User;
 
 public class UserService : IUserService
 {
