@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers.Users.User;
 
+[ApiController]
+[Route("api/v1/user")]
 public class UserController : ControllerBase
 {
     private readonly UseCaseCreateUser _useCaseCreateUser;
@@ -13,7 +15,11 @@ public class UserController : ControllerBase
     private readonly UseCaseDeleteUser _useCaseDeleteUser;
     private readonly UseCaseUpdateUser _useCaseUpdateUser;
 
-    public UserController(UseCaseCreateUser useCaseCreateUser, UseCaseFetchAllAddress useCaseFetchAllAddress, UseCaseFetchUserById useCaseFetchUserById, UseCaseDeleteUser useCaseDeleteUser, UseCaseUpdateUser useCaseUpdateUser)
+    public UserController(UseCaseCreateUser useCaseCreateUser, 
+        UseCaseFetchAllAddress useCaseFetchAllAddress, 
+        UseCaseFetchUserById useCaseFetchUserById, 
+        UseCaseDeleteUser useCaseDeleteUser, 
+        UseCaseUpdateUser useCaseUpdateUser)
     {
         _useCaseCreateUser = useCaseCreateUser;
         _useCaseFetchAllAddress = useCaseFetchAllAddress;
@@ -22,11 +28,12 @@ public class UserController : ControllerBase
         _useCaseUpdateUser = useCaseUpdateUser;
     }
 
-   /* [HttpGet]
-    public Action<IEnumerable<DtoOutputUser>> FetchAll()
+   [HttpGet]
+    public ActionResult<IEnumerable<DtoOutputUser>> FetchAll()
     {
-        return Ok(_useCase)
-    }*/
+        return Ok(_useCaseFetchAllAddress.Execute());
+    }
+    
    [HttpGet]
    [Route("{id:int}")]
    [ProducesResponseType(StatusCodes.Status200OK)]
@@ -45,7 +52,6 @@ public class UserController : ControllerBase
            });
        }
    }
-
    
    [HttpPost]
    [ProducesResponseType(StatusCodes.Status201Created)]
@@ -59,4 +65,21 @@ public class UserController : ControllerBase
        );
    }
 
+   [HttpDelete("{id:int}")]
+   [ProducesResponseType(StatusCodes.Status204NoContent)]
+   [ProducesResponseType(StatusCodes.Status404NotFound)]
+   public ActionResult Delete(int id)
+   {
+       if(_useCaseDeleteUser.Execute(id)) return NoContent();
+       return NotFound();
+   }
+
+   [HttpPut("{di:int}")]
+   [ProducesResponseType(StatusCodes.Status204NoContent)]
+   [ProducesResponseType(StatusCodes.Status404NotFound)]
+   public ActionResult Update(int id, [FromBody] DtoInputUpdateUser dto)
+   {
+       dto.Id = id;
+       return _useCaseUpdateUser.Execute(dto) ? NoContent() : NotFound();
+   }
 }
