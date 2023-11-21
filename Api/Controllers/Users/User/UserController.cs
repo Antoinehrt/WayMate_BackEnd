@@ -10,19 +10,19 @@ namespace Api.Controllers.Users.User;
 public class UserController : ControllerBase
 {
     private readonly UseCaseCreateUser _useCaseCreateUser;
-    private readonly UseCaseFetchAllAddress _useCaseFetchAllAddress;
+    private readonly UseCaseFetchAllUser _useCaseFetchAllUser;
     private readonly UseCaseFetchUserById _useCaseFetchUserById;
     private readonly UseCaseDeleteUser _useCaseDeleteUser;
     private readonly UseCaseUpdateUser _useCaseUpdateUser;
 
     public UserController(UseCaseCreateUser useCaseCreateUser, 
-        UseCaseFetchAllAddress useCaseFetchAllAddress, 
+        UseCaseFetchAllUser useCaseFetchAllUser, 
         UseCaseFetchUserById useCaseFetchUserById, 
         UseCaseDeleteUser useCaseDeleteUser, 
         UseCaseUpdateUser useCaseUpdateUser)
     {
         _useCaseCreateUser = useCaseCreateUser;
-        _useCaseFetchAllAddress = useCaseFetchAllAddress;
+        _useCaseFetchAllUser = useCaseFetchAllUser;
         _useCaseFetchUserById = useCaseFetchUserById;
         _useCaseDeleteUser = useCaseDeleteUser;
         _useCaseUpdateUser = useCaseUpdateUser;
@@ -31,7 +31,7 @@ public class UserController : ControllerBase
    [HttpGet]
     public ActionResult<IEnumerable<DtoOutputUser>> FetchAll()
     {
-        return Ok(_useCaseFetchAllAddress.Execute());
+        return Ok(_useCaseFetchAllUser.Execute());
     }
     
    [HttpGet]
@@ -74,7 +74,7 @@ public class UserController : ControllerBase
        return NotFound();
    }
 
-   [HttpPut("{di:int}")]
+   [HttpPut("{id:int}")]
    [ProducesResponseType(StatusCodes.Status204NoContent)]
    [ProducesResponseType(StatusCodes.Status404NotFound)]
    public ActionResult Update(int id, [FromBody] DtoInputUpdateUser dto)

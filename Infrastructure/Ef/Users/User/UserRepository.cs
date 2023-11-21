@@ -25,7 +25,7 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public DbUser Create(string username, string password, string email, string birthdate, bool isbanned)
+    public DbUser Create(string username, string password, string email, DateTime birthdate, bool isbanned)
     {
         var user = new DbUser { Username = username, Password = password, Email = email, BirthDate = birthdate, IsBanned = isbanned };
         _context.Users.Add(user);
@@ -48,7 +48,7 @@ public class UserRepository : IUserRepository
         return true;
     }
 
-    public bool Update(int id, string username, string password, string email, string birthdate, bool isbanned)
+    public bool Update(int id, string username, string password, string email, DateTime birthdate, bool isbanned)
     {
         var userToUpdate = _context.Users.FirstOrDefault(u => u.Id == id);
 

@@ -41,14 +41,15 @@ public class WaymateContext : DbContext
         
         modelBuilder.Entity<DbUser>(entity =>
         {
-            entity.ToTable("user");
+            entity.ToTable("users");
             entity.HasKey(u => u.Id);
             entity.Property(u => u.Id).HasColumnName("id");
             entity.Property(u => u.Username).HasColumnName("username");
             entity.Property(u => u.Password).HasColumnName("password");
             entity.Property(u => u.Email).HasColumnName("email");
+            entity.Property(u => u.IsBanned).HasColumnName("isBanned");
             entity.Property(u => u.BirthDate).HasColumnName("birthdate");
-            entity.Property(u => u.IsBanned).HasColumnName("isbanned");
+            
             
         });
     }
