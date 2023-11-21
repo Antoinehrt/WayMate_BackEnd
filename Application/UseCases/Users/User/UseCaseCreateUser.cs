@@ -10,6 +10,12 @@ public class UseCaseCreateUser : IUseCaseWriter<DtoOutputUser, DtoInputCreateUse
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
+    public UseCaseCreateUser(IUserRepository userRepository, IMapper mapper)
+    {
+        _userRepository = userRepository;
+        _mapper = mapper;
+    }
+
     public DtoOutputUser Execute(DtoInputCreateUser input)
     {
         var dbUser = _userRepository.Create(input.Username, input.Password, input.Email, input.Birthdate, input.IsBanned);
