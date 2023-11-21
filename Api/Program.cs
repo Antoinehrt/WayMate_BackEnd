@@ -1,9 +1,11 @@
 using Application;
 using Application.UseCases.Address;
 using Application.UseCases.Car;
+using Application.UseCases.Users.User;
 using Infrastructure.Ef;
 using Infrastructure.Ef.Address;
 using Infrastructure.Ef.Car;
+using Infrastructure.Ef.Users.User;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +24,7 @@ builder.Services.AddDbContext<WaymateContext>(a => a.UseSqlServer(
 
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 //Use Case Address
 builder.Services.AddScoped<UseCaseCreateAddress>();
@@ -36,6 +39,13 @@ builder.Services.AddScoped<UseCaseFetchAllCar>();
 builder.Services.AddScoped<UseCaseFetchCarById>();
 builder.Services.AddScoped<UseCaseDeleteCar>();
 builder.Services.AddScoped<UseCaseUpdateCar>();
+
+//Use Case User
+builder.Services.AddScoped<UseCaseCreateUser>();
+builder.Services.AddScoped<UseCaseFetchAllUser>();
+builder.Services.AddScoped<UseCaseFetchUserById>();
+builder.Services.AddScoped<UseCaseDeleteUser>();
+builder.Services.AddScoped<UseCaseUpdateUser>();
 
 builder.Services.AddCors(options =>
 {
