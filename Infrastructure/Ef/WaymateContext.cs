@@ -11,7 +11,6 @@ public class WaymateContext : DbContext
     
     public DbSet<DbAddress> Address { get; set; }
     public DbSet<DbCar> Cars { get; set; }
-    
     public DbSet<DbUser> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
