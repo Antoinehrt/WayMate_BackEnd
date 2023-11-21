@@ -1,7 +1,9 @@
 ﻿using Application.UseCases.Address.Dtos;
 using Application.UseCases.Car.Dtos;
+using Application.UseCases.Users.User.Dtos;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Entities.Users;
 using Infrastructure.Ef.DbEntities;
 
 namespace Application;
@@ -20,6 +22,12 @@ public class Mapper : Profile
         CreateMap<Car, DtoOutputCar>();
         CreateMap<DbCar, DtoOutputCar>();
         CreateMap<DbCar, Car>();
+        
+        //User
+        CreateMap<User, DtoOutputUser>();
+        CreateMap<DbUser, DtoOutputUser>();
+        CreateMap<DbUser, User>();
+        
         
     }
 }
