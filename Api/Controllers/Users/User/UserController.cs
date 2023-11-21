@@ -1,10 +1,9 @@
 ﻿using Application.UseCases.Address;
-using Application.UseCases.User;
-using Application.UseCases.User.Dtos;
-using Application.UseCases.User.Dtos.Dtos;
+using Application.UseCases.Users.User;
+using Application.UseCases.Users.User.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers.User;
+namespace Api.Controllers.Users.User;
 
 public class UserController : ControllerBase
 {

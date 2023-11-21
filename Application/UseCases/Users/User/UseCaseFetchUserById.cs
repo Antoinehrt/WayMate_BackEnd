@@ -1,9 +1,9 @@
-﻿using Application.UseCases.User.Dtos.Dtos;
+﻿using Application.UseCases.Users.User.Dtos;
 using Application.UseCases.Utils;
 using AutoMapper;
-using Infrastructure.Ef.User;
+using Infrastructure.Ef.Users.User;
 
-namespace Application.UseCases.User;
+namespace Application.UseCases.Users.User;
 
 public class UseCaseFetchUserById : IUseCaseParameterizeQuery<DtoOutputUser, int>
 {

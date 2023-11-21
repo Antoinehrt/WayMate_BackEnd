@@ -2,7 +2,7 @@
 using Application.UseCases.Address.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers.Address;
+namespace Api.Controllers;
 
 [ApiController]
 [Route("api/v1/address")]

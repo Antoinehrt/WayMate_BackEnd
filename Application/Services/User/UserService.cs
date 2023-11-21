@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Infrastructure.Ef.User;
+using Infrastructure.Ef.Users.User;
 
 namespace Application.Services.User;
 

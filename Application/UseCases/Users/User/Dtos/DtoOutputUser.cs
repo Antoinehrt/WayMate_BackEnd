@@ -1,4 +1,4 @@
-﻿namespace Application.UseCases.User.Dtos.Dtos;
+﻿namespace Application.UseCases.Users.User.Dtos;
 
 public class DtoOutputUser
 {

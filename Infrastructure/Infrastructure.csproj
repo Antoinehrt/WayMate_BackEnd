@@ -14,4 +14,8 @@
       <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Ef\Users\" />
+    </ItemGroup>
+
 </Project>

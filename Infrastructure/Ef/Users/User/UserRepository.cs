@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Ef.DbEntities;
 
-namespace Infrastructure.Ef.User;
+namespace Infrastructure.Ef.Users.User;
 
 public class UserRepository : IUserRepository
 {

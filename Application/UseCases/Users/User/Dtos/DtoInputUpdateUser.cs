@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Application.UseCases.User.Dtos.Dtos;
+namespace Application.UseCases.Users.User.Dtos;
 
 public class DtoInputUpdateUser
 {
