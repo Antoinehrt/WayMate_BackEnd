@@ -1,12 +1,32 @@
--- Creating the WayMate database
-CREATE DATABASE WayMate;
-
+-- CREATE DATABASE WayMate;
 GO
-
 -- Switching to the WayMate database
 USE WayMate;
-
 GO
+
+drop table dbo.admin
+go
+
+drop table dbo.booking
+go
+
+drop table dbo.trip
+go
+
+drop table dbo.driver
+go
+
+drop table dbo.car
+go
+
+drop table dbo.passenger
+go
+
+drop table dbo.address
+go
+
+drop table dbo.users
+go
 
 -- Creating the 'users' table
 CREATE TABLE users (
