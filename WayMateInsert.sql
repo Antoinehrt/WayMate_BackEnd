@@ -1,8 +1,8 @@
 -- Inserting users
-INSERT INTO users (username, password, birthDate, isBanned) VALUES
-    ('luke_skywalker', 'password123', '1980-05-25', 0),
-    ('leia_organa', 'pass456', '1983-09-19', 0),
-    ('han_solo', 'soloPass', '1977-04-29', 0);
+INSERT INTO users (username, password, email, birthDate, isBanned) VALUES
+    ('luke_skywalker', 'password123', 'luke@example.com', '1980-05-25', 0),
+    ('leia_organa', 'pass456', 'leia@example.com', '1983-09-19', 0),
+    ('han_solo', 'soloPass', 'han@example.com', '1977-04-29', 0);
 
 -- Inserting addresses
 INSERT INTO address (street, postalCode, city, number) VALUES
@@ -17,14 +17,10 @@ INSERT INTO passenger (userId, lastName, firstName, gender, addressId) VALUES
     (3, 'Solo', 'Han', 'Male', 3);
 
 -- Inserting cars
-INSERT INTO car (plateNumber, model, nbSeats, fuelType, brand, carType) VALUES
-    ('ABC123', 'Millennium Falcon', 5, 0, 'Corellian Engineering Corporation', 0),
-    ('DEF456', 'X-34 Landspeeder', 2, 0, 'SoroSuub Corporation', 0),
-    ('GHI789', 'Slave I', 3, 0, 'Kuat Systems Engineering', 0);
--- INSERT INTO car (plateNumber, model, nbSeats, fuelType, brand, carType) VALUES
---     ('ABC123', 'Millennium Falcon', 5, 'Hyperfuel', 'Corellian Engineering Corporation', 'Spaceship'),
---     ('DEF456', 'X-34 Landspeeder', 2, 'Electric', 'SoroSuub Corporation', 'Landspeeder'),
---     ('GHI789', 'Slave I', 3, 'Jet fuel', 'Kuat Systems Engineering', 'Spaceship');
+INSERT INTO car (plateNumber, model, nbSeats, brand, carType, fuelType) VALUES
+    ('ABC123', 'Millennium Falcon', 5, 'Corellian Engineering Corporation', 0, 0),
+    ('DEF456', 'X-34 Landspeeder', 2, 'SoroSuub Corporation', 0, 0),
+    ('GHI789', 'Slave I', 3, 'Kuat Systems Engineering', 0, 0);
 
 -- Inserting drivers
 INSERT INTO driver (passengerId, carPlate) VALUES
