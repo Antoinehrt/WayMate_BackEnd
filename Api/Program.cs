@@ -4,8 +4,10 @@ using Application.UseCases.Car;
 using Application.UseCases.Users.User;
 using Infrastructure.Ef;
 using Infrastructure.Ef.Address;
+using Infrastructure.Ef.Authentification;
 using Infrastructure.Ef.Car;
 using Infrastructure.Ef.Users.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +27,8 @@ builder.Services.AddDbContext<WaymateContext>(a => a.UseSqlServer(
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+
 
 //Use Case Address
 builder.Services.AddScoped<UseCaseCreateAddress>();
