@@ -1,14 +1,15 @@
-﻿using Infrastructure.Ef.DbEntities;
+﻿using Infrastructure.Ef.Authentification;
+using Infrastructure.Ef.DbEntities;
 
 namespace Infrastructure.Ef.Users.User;
 
 public class UserRepository : IUserRepository
 {
     private readonly WaymateContext _context;
-
-    public UserRepository(WaymateContext context)
-    {
+    private readonly IPasswordHasher _passwordHasher;
+    public UserRepository(WaymateContext context, IPasswordHasher passwordHasher) {
         _context = context;
+        _passwordHasher = passwordHasher;
     }
 
     public IEnumerable<DbUser> FetchAll()
@@ -25,9 +26,15 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public DbUser Create(string username, string password, string email, DateTime birthdate, bool isbanned)
-    {
-        var user = new DbUser { Username = username, Password = password, Email = email, BirthDate = birthdate, IsBanned = isbanned };
+    public DbUser Create(string username, string password, string email, DateTime birthdate, bool isbanned) {
+        
+        var user = new DbUser {
+            Username = username, 
+            Password = _passwordHasher.HashPwd(password), 
+            Email = email, 
+            BirthDate = birthdate, 
+            IsBanned = isbanned
+        };
         _context.Users.Add(user);
         _context.SaveChanges();
         return user;
@@ -52,13 +59,12 @@ public class UserRepository : IUserRepository
     {
         var userToUpdate = _context.Users.FirstOrDefault(u => u.Id == id);
 
-        if (userToUpdate == null)
-        {
+        if (userToUpdate == null) {
             throw new KeyNotFoundException($"User with id {id} has not been found");
         }
 
         userToUpdate.Username = username;
-        userToUpdate.Password = password;
+        userToUpdate.Password = _passwordHasher.HashPwd(password);
         userToUpdate.Email = email;
         userToUpdate.BirthDate = birthdate;
         userToUpdate.IsBanned = isbanned;
