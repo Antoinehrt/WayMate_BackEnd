@@ -25,6 +25,6 @@ public class User {
         double age = DateTime.Today.Subtract(
             DateTime.Parse(Birthdate)
         ).TotalDays / 365.2425;
-        return Convert.ToInt32(Math.Round(age));
+        return Convert.ToInt32(Math.Truncate(age));
     }
 }
