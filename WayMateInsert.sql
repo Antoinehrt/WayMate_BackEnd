@@ -1,3 +1,4 @@
+USE WayMate;
 -- Inserting users
 INSERT INTO users (username, password, email, birthDate, isBanned) VALUES
     ('luke_skywalker', 'password123', 'luke@example.com', '1980-05-25', 0),
