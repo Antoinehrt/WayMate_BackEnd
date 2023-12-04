@@ -1,6 +1,6 @@
 -- CREATE DATABASE WayMate;
 GO
--- Switching to the WayMate database
+
 USE WayMate;
 GO
 
@@ -34,7 +34,8 @@ CREATE TABLE users (
     username VARCHAR(20) NOT NULL,
     password VARCHAR(200) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    birthDate DATE NOT NULL
+    birthDate DATE NOT NULL,
+    isBanned BIT NOT NULL DEFAULT 0
 );
 
 -- Creating the 'address' table
@@ -61,7 +62,9 @@ CREATE TABLE car (
     plateNumber VARCHAR(50) PRIMARY KEY NOT NULL,
     model VARCHAR(50) NOT NULL,
     nbSeats INT NOT NULL,
-    brand VARCHAR(50) NOT NULL
+    brand VARCHAR(50) NOT NULL,
+    carType INT NOT NULL DEFAULT 0,
+    fuelType INT NOT NULL DEFAULT 0
 );
 
 -- Creating the 'driver' table
@@ -100,21 +103,3 @@ CREATE TABLE booking (
     idEntryPoint INT NOT NULL REFERENCES address(id),
     idTrip INT NOT NULL REFERENCES trip(id)
 );
-
-Go
-
--- Adding the 'carType' column to the 'car' table
-ALTER TABLE car ADD carType INT NOT NULL DEFAULT 0;
--- ALTER TABLE car ADD carType VARCHAR(15) NOT NULL DEFAULT 'Universal';
-ALTER TABLE car ADD fuelType INT NOT NULL DEFAULT 0;
--- ALTER TABLE car ADD carType VARCHAR(15) NOT NULL DEFAULT 'Universal';
-
--- Adding the 'isBanned' column to the 'users' table
-ALTER TABLE users ADD isBanned BIT NOT NULL DEFAULT 0;
-
--- Checking the existence of the 'birtDate' column before renaming
-IF COL_LENGTH('users', 'birtDate') IS NOT NULL
-BEGIN
-    -- Renaming the column
-    EXEC sp_rename 'users.birtDate', 'birthDate', 'COLUMN';
-END
