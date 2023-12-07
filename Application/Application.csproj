@@ -18,7 +18,6 @@
 
     <ItemGroup>
       <Folder Include="Services\Users\" />
-      <Folder Include="UseCases\Authentification\" />
     </ItemGroup>
 
 </Project>
