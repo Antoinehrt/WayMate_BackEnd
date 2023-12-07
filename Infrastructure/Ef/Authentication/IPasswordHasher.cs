@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Ef.Authentification; 
+﻿namespace Infrastructure.Ef.Authentication; 
 
 public interface IPasswordHasher {
 
