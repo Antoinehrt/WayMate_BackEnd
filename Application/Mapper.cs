@@ -1,4 +1,5 @@
 ﻿using Application.UseCases.Address.Dtos;
+using Application.UseCases.Authentication.Dtos;
 using Application.UseCases.Car.Dtos;
 using Application.UseCases.Users.User.Dtos;
 using AutoMapper;
@@ -28,6 +29,12 @@ public class Mapper : Profile
         CreateMap<DbUser, DtoOutputUser>();
         CreateMap<DbUser, User>();
         
+        //Authentication
+        CreateMap<bool, DtoOutputLogin>();
+        //A utiliser pour JWT
+        //CreateMap<string, DtoOutputLogin>();
         
+
+
     }
 }

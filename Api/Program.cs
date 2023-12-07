@@ -1,10 +1,11 @@
 using Application;
 using Application.UseCases.Address;
+using Application.UseCases.Authentication;
 using Application.UseCases.Car;
 using Application.UseCases.Users.User;
 using Infrastructure.Ef;
 using Infrastructure.Ef.Address;
-using Infrastructure.Ef.Authentification;
+using Infrastructure.Ef.Authentication;
 using Infrastructure.Ef.Car;
 using Infrastructure.Ef.Users.User;
 using Microsoft.AspNetCore.Identity;
@@ -51,6 +52,9 @@ builder.Services.AddScoped<UseCaseFetchAllUser>();
 builder.Services.AddScoped<UseCaseFetchUserById>();
 builder.Services.AddScoped<UseCaseDeleteUser>();
 builder.Services.AddScoped<UseCaseUpdateUser>();
+
+//Use Case Authentication
+builder.Services.AddScoped<UseCaseLogin>();
 
 builder.Services.AddCors(options =>
 {
