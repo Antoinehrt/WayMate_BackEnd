@@ -11,6 +11,7 @@ public class PasswordHasher : IPasswordHasher {
     }
 
     public bool VerifyPwd(string hashedPwd, string inputPwd) {
+        if (string.IsNullOrWhiteSpace(hashedPwd) || string.IsNullOrWhiteSpace(inputPwd)) return false;
         return BCrypt.Net.BCrypt.Verify(inputPwd, hashedPwd);
     }
 }
