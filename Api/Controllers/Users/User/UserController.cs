@@ -12,23 +12,29 @@ public class UserController : ControllerBase
     private readonly UseCaseCreateUser _useCaseCreateUser;
     private readonly UseCaseFetchAllUser _useCaseFetchAllUser;
     private readonly UseCaseFetchUserById _useCaseFetchUserById;
-    private readonly UseCaseDeleteUser _useCaseDeleteUser;
-    private readonly UseCaseUpdateUser _useCaseUpdateUser;
 
     public UserController(UseCaseCreateUser useCaseCreateUser, 
         UseCaseFetchAllUser useCaseFetchAllUser, 
-        UseCaseFetchUserById useCaseFetchUserById, 
+        UseCaseFetchUserById useCaseFetchUserById,
+        UserCaseFetchUserByEmail userCaseFetchUserByEmail,
         UseCaseDeleteUser useCaseDeleteUser, 
         UseCaseUpdateUser useCaseUpdateUser)
     {
         _useCaseCreateUser = useCaseCreateUser;
         _useCaseFetchAllUser = useCaseFetchAllUser;
         _useCaseFetchUserById = useCaseFetchUserById;
+        _userCaseFetchUserByEmail = userCaseFetchUserByEmail;
         _useCaseDeleteUser = useCaseDeleteUser;
         _useCaseUpdateUser = useCaseUpdateUser;
     }
 
-   [HttpGet]
+    private readonly UserCaseFetchUserByEmail _userCaseFetchUserByEmail;
+
+    private readonly UseCaseDeleteUser _useCaseDeleteUser;
+
+    private readonly UseCaseUpdateUser _useCaseUpdateUser;
+
+    [HttpGet]
     public ActionResult<IEnumerable<DtoOutputUser>> FetchAll()
     {
         return Ok(_useCaseFetchAllUser.Execute());
@@ -52,6 +58,24 @@ public class UserController : ControllerBase
            });
        }
    }
+
+   [HttpGet]
+   [Route("{email}")]
+   [ProducesResponseType(StatusCodes.Status200OK)]
+   [ProducesResponseType(StatusCodes.Status404NotFound)]
+   public ActionResult<DtoOutputUser> FetchByEmail(string email) {
+       try {
+           var result =  _userCaseFetchUserByEmail.Execute(email);
+           if (result == null) return NotFound(new { Message = "User not found" });
+           return result;
+       }
+       catch (KeyNotFoundException e) {
+           return NotFound(new {
+               e.Message
+           });
+       }
+   }
+   
    
    [HttpPost]
    [ProducesResponseType(StatusCodes.Status201Created)]

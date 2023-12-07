@@ -34,6 +34,7 @@ builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<UseCaseCreateAddress>();
 builder.Services.AddScoped<UseCaseFetchAllAddress>();
 builder.Services.AddScoped<UseCaseFetchAddressById>();
+builder.Services.AddScoped<UserCaseFetchUserByEmail>();
 builder.Services.AddScoped<UseCaseDeleteAddress>();
 builder.Services.AddScoped<UseCaseUpdateAddress>();
 
