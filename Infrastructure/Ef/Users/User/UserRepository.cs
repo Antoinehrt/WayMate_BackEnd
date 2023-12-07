@@ -1,4 +1,4 @@
-﻿using Infrastructure.Ef.Authentification;
+﻿using Infrastructure.Ef.Authentication;
 using Infrastructure.Ef.DbEntities;
 
 namespace Infrastructure.Ef.Users.User;

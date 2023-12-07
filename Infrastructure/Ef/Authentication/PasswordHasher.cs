@@ -1,16 +1,13 @@
 ﻿using BCrypt.Net;
 
-namespace Infrastructure.Ef.Authentification; 
+namespace Infrastructure.Ef.Authentication; 
 
 public class PasswordHasher : IPasswordHasher {
-    
-    private int _COST = 12;
-    private HashType _hashType = HashType.SHA384; 
-    
-    
+    private const int Cost = 12;
+
+
     public string HashPwd(string pwd) {
-        return BCrypt.Net.BCrypt.HashPassword(pwd, workFactor: _COST);
-        
+        return BCrypt.Net.BCrypt.HashPassword(pwd, workFactor: Cost);
     }
 
     public bool VerifyPwd(string hashedPwd, string inputPwd) {
