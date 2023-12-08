@@ -5,20 +5,20 @@ using Infrastructure.Ef.Users.User;
 
 namespace Application.UseCases.Users.User;
 
-public class UseCaseCreateUser : IUseCaseWriter<DtoOutputUser, DtoInputCreateUser>
+public class UseCaseCreateAdmin : IUseCaseWriter<DtoOutputUser, DtoInputCreateAdmin>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public UseCaseCreateUser(IUserRepository userRepository, IMapper mapper)
+    public UseCaseCreateAdmin(IUserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
         _mapper = mapper;
     }
 
-    public DtoOutputUser Execute(DtoInputCreateUser input)
+    public DtoOutputUser Execute(DtoInputCreateAdmin input)
     {
-        var dbUser = _userRepository.Create(input.Username, input.Password, input.Email, input.Birthdate, input.IsBanned);
+        var dbUser = _userRepository.CreateAdmin(input.Username, input.Password, input.Email, input.Birthdate, input.IsBanned, input.PhoneNumber);
         return _mapper.Map<DtoOutputUser>(dbUser);
     }
 }

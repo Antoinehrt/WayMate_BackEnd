@@ -1,4 +1,5 @@
-﻿using Infrastructure.Ef.Authentication;
+﻿using Domain.Enums;
+using Infrastructure.Ef.Authentication;
 using Infrastructure.Ef.DbEntities;
 
 namespace Infrastructure.Ef.Users.User;
@@ -34,14 +35,21 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public DbUser Create(string username, string password, string email, DateTime birthdate, bool isbanned) {
+    public DbUser CreateAdmin(string username, string password, string email, DateTime birthdate, bool isbanned, string phoneNumber) {
         
         var user = new DbUser {
             Username = username, 
+            UserType = UserType.Admin.ToString(),
             Password = _passwordHasher.HashPwd(password), 
             Email = email, 
             BirthDate = birthdate, 
-            IsBanned = isbanned
+            IsBanned = isbanned,
+            PhoneNumber = phoneNumber
+        };
+        _context.Users.Add(user);
+        _context.SaveChanges();
+        return user;
+    }
         };
         _context.Users.Add(user);
         _context.SaveChanges();

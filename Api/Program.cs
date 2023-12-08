@@ -47,7 +47,7 @@ builder.Services.AddScoped<UseCaseDeleteCar>();
 builder.Services.AddScoped<UseCaseUpdateCar>();
 
 //Use Case User
-builder.Services.AddScoped<UseCaseCreateUser>();
+builder.Services.AddScoped<UseCaseCreateAdmin>();
 builder.Services.AddScoped<UseCaseFetchAllUser>();
 builder.Services.AddScoped<UseCaseFetchUserById>();
 builder.Services.AddScoped<UseCaseDeleteUser>();

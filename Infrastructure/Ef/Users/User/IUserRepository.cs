@@ -7,7 +7,8 @@ public interface IUserRepository
     IEnumerable<DbUser> FetchAll();
     DbUser FetchById(int id);
     DbUser FetchByEmail(string email);
-    DbUser Create(string username, string password, string email, DateTime birthdate, bool isbanned);
+
+    DbUser CreateAdmin(string username, string password, string email, DateTime birthdate, bool isbanned, string phoneNumber);
     bool Delete(int id);
     bool Update(int id, string username, string password, string email, DateTime birthdate, bool isbanned);
 }

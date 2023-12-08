@@ -8,7 +8,7 @@ namespace Api.Controllers.Users.User;
 [ApiController]
 [Route("api/v1/user")]
 public class UserController : ControllerBase {
-    private readonly UseCaseCreateUser _useCaseCreateUser;
+    private readonly UseCaseCreateAdmin _useCaseCreateAdmin;
     private readonly UseCaseFetchAllUser _useCaseFetchAllUser;
     private readonly UseCaseFetchUserById _useCaseFetchUserById;
     private readonly UserCaseFetchUserByEmail _userCaseFetchUserByEmail;
@@ -22,11 +22,13 @@ public class UserController : ControllerBase {
         UseCaseDeleteUser useCaseDeleteUser,
         UseCaseUpdateUser useCaseUpdateUser) {
         _useCaseCreateUser = useCaseCreateUser;
+        UseCaseUpdateUser useCaseUpdateUser, UseCaseCreateAdmin useCaseCreateAdmin) {
         _useCaseFetchAllUser = useCaseFetchAllUser;
         _useCaseFetchUserById = useCaseFetchUserById;
         _userCaseFetchUserByEmail = userCaseFetchUserByEmail;
         _useCaseDeleteUser = useCaseDeleteUser;
         _useCaseUpdateUser = useCaseUpdateUser;
+        _useCaseCreateAdmin = useCaseCreateAdmin;
     }
 
     [HttpGet]
@@ -71,6 +73,11 @@ public class UserController : ControllerBase {
     [ProducesResponseType(StatusCodes.Status201Created)]
     public ActionResult<DtoOutputUser> Create(DtoInputCreateUser dto) {
         var output = _useCaseCreateUser.Execute(dto);
+    [HttpPost]
+    [Route("admin")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    public ActionResult<DtoOutputUser> CreateAdmin(DtoInputCreateAdmin dto) {
+        var output = _useCaseCreateAdmin.Execute(dto);
         return CreatedAtAction(
             nameof(FetchById),
             new { id = output.Id },
