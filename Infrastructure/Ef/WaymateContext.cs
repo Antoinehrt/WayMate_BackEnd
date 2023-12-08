@@ -49,8 +49,12 @@ public class WaymateContext : DbContext
             entity.Property(u => u.Email).HasColumnName("email");
             entity.Property(u => u.IsBanned).HasColumnName("isBanned");
             entity.Property(u => u.BirthDate).HasColumnName("birthdate");
-            
-            
+            entity.Property(u => u.PhoneNumber).HasColumnName("phoneNumber");
+            entity.Property(u => u.LastName).HasColumnName("lastName");
+            entity.Property(u => u.FirstName).HasColumnName("firstName");
+            entity.Property(u => u.Gender).HasColumnName("gender");
+            entity.Property(u => u.AddressId).HasColumnName("addressId");
+            entity.Property(u => u.CarPlate).HasColumnName("carPlate");
         });
     }
 }
