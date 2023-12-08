@@ -14,6 +14,8 @@ public class UseCaseUpdateUser : IUseCaseParameterizeQuery<bool, DtoInputUpdateU
     }
     public bool Execute(DtoInputUpdateUser param)
     {
-        return _userRepository.Update(param.Id, param.Username, param.Password, param.Email, param.Birthdate, param.IsBanned);
+        return _userRepository.Update(param.Id, param.Username, param.Password, param.Email, param.Birthdate,
+            param.IsBanned, param.PhoneNumber, param.LastName, param.FirstName, param.Gender, param.AddressId, 
+            param.CarPlate);
     }
 }

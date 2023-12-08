@@ -87,7 +87,8 @@ public class UserRepository : IUserRepository
         return true;
     }
 
-    public bool Update(int id, string username, string password, string email, DateTime birthdate, bool isbanned)
+    public bool Update(int id, string username, string password, string email, DateTime birthdate, bool isbanned, string phoneNumber,
+        string lastName, string firstName, string gender, int addressId, string? carPlate)
     {
         var userToUpdate = _context.Users.FirstOrDefault(u => u.Id == id);
 
@@ -95,11 +96,26 @@ public class UserRepository : IUserRepository
             throw new KeyNotFoundException($"User with id {id} has not been found");
         }
 
+        if (userToUpdate.UserType != UserType.Admin.ToString())
+        {
+            if (carPlate != null)
+            {
+                userToUpdate.UserType = UserType.Driver.ToString();
+            }
+            else userToUpdate.UserType = UserType.Passenger.ToString();
+        }
+
         userToUpdate.Username = username;
         userToUpdate.Password = _passwordHasher.HashPwd(password);
         userToUpdate.Email = email;
         userToUpdate.BirthDate = birthdate;
         userToUpdate.IsBanned = isbanned;
+        userToUpdate.PhoneNumber = phoneNumber;
+        userToUpdate.LastName = lastName;
+        userToUpdate.FirstName = firstName;
+        userToUpdate.Gender = gender;
+        userToUpdate.AddressId = addressId;
+        userToUpdate.CarPlate = carPlate;
 
         _context.SaveChanges();
         return true;
