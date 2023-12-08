@@ -8,6 +8,7 @@ namespace Api.Controllers.Users.User;
 [ApiController]
 [Route("api/v1/user")]
 public class UserController : ControllerBase {
+    private readonly UseCaseCreatePassenger _useCaseCreatePassenger;
     private readonly UseCaseCreateAdmin _useCaseCreateAdmin;
     private readonly UseCaseFetchAllUser _useCaseFetchAllUser;
     private readonly UseCaseFetchUserById _useCaseFetchUserById;
@@ -15,14 +16,13 @@ public class UserController : ControllerBase {
     private readonly UseCaseDeleteUser _useCaseDeleteUser;
     private readonly UseCaseUpdateUser _useCaseUpdateUser;
 
-    public UserController(UseCaseCreateUser useCaseCreateUser,
+    public UserController(UseCaseCreatePassenger useCaseCreatePassenger,
         UseCaseFetchAllUser useCaseFetchAllUser,
         UseCaseFetchUserById useCaseFetchUserById,
         UserCaseFetchUserByEmail userCaseFetchUserByEmail,
         UseCaseDeleteUser useCaseDeleteUser,
-        UseCaseUpdateUser useCaseUpdateUser) {
-        _useCaseCreateUser = useCaseCreateUser;
         UseCaseUpdateUser useCaseUpdateUser, UseCaseCreateAdmin useCaseCreateAdmin) {
+        _useCaseCreatePassenger = useCaseCreatePassenger;
         _useCaseFetchAllUser = useCaseFetchAllUser;
         _useCaseFetchUserById = useCaseFetchUserById;
         _userCaseFetchUserByEmail = userCaseFetchUserByEmail;
@@ -70,9 +70,18 @@ public class UserController : ControllerBase {
 
 
     [HttpPost]
+    [Route("passenger")]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public ActionResult<DtoOutputUser> Create(DtoInputCreateUser dto) {
-        var output = _useCaseCreateUser.Execute(dto);
+    public ActionResult<DtoOutputUser> CreatePassenger(DtoInputCreatePassenger dto) {
+        var output = _useCaseCreatePassenger.Execute(dto);
+        return CreatedAtAction(
+            nameof(FetchById),
+            new { id = output.Id },
+            output
+        );
+    }
+
+
     [HttpPost]
     [Route("admin")]
     [ProducesResponseType(StatusCodes.Status201Created)]

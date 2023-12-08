@@ -50,6 +50,22 @@ public class UserRepository : IUserRepository
         _context.SaveChanges();
         return user;
     }
+    
+    public DbUser CreatePassenger(string username, string password, string email, DateTime birthdate, bool isbanned, string phoneNumber,
+        string lastName, string firstName, string gender, int addressId) {
+        
+        var user = new DbUser {
+            Username = username, 
+            UserType = UserType.Passenger.ToString(),
+            Password = _passwordHasher.HashPwd(password), 
+            Email = email, 
+            BirthDate = birthdate, 
+            IsBanned = isbanned,
+            PhoneNumber = phoneNumber,
+            LastName = lastName,
+            FirstName = firstName,
+            Gender = gender,
+            AddressId = addressId
         };
         _context.Users.Add(user);
         _context.SaveChanges();
