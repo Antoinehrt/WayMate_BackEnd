@@ -11,10 +11,10 @@ INSERT INTO car (plateNumber, model, nbSeats, brand, carType, fuelType) VALUES
     ('ABC123', 'Millennium Falcon', 5, 'Corellian Engineering Corporation', 0, 0);
 
 -- Inserting users
-INSERT INTO users (userType, username, password, email, birthDate, isBanned, lastName, firstName, gender, addressId, carPlate) VALUES
-    ('PASSENGER', 'MastroDamo87', 'test', 'mastrodamo@test.be', '2003-09-08', 0, 'Renaut', N'Mickaël', 'Male', '1', null),
-    ('DRIVER', 'NextAndCie', 'test', 'nextandcie@multi.dimension.be', '1987-11-13', 0, 'Dimen', 'Undernext', 'Male', 2, 'ABC123'),
-    ('ADMIN', 'NextOS', 'admin', 'NextOS@dimension.net', '1990-01-01', 0, null, null, null, null, null);
+INSERT INTO users (userType, username, password, email, birthDate, isBanned, phoneNumber, lastName, firstName, gender, addressId, carPlate) VALUES
+    ('PASSENGER', 'MastroDamo87', 'test', 'mastrodamo@test.be', '2003-09-08', 0, '0494/48.72.04', 'Renaut', N'Mickaël', 'Male', '1', null),
+    ('DRIVER', 'NextAndCie', 'test', 'nextandcie@multi.dimension.be', '1987-11-13', 0, '0491/20.96.35', 'Dimen', 'Undernext', 'Male', 2, 'ABC123'),
+    ('ADMIN', 'NextOS', 'admin', 'NextOS@dimension.net', '1990-01-01', 0, '0492/84.26.58', null, null, null, null, null);
 
 -- Inserting trips
 INSERT INTO trip (idDriver, smoke, priceKm, luggage, petFriendly, date, occupiedSeats, idStartingPoint, idDestination) VALUES

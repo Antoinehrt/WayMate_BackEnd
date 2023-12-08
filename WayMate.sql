@@ -4,22 +4,13 @@ GO
 USE WayMate;
 GO
 
-drop table dbo.admin;
-go
-
 drop table dbo.booking;
 go
 
 drop table dbo.trip;
 go
 
-drop table dbo.driver;
-go
-
 drop table dbo.car;
-go
-
-drop table dbo.passenger;
 go
 
 drop table dbo.address;
@@ -56,6 +47,7 @@ CREATE TABLE users (
     email VARCHAR(100) NOT NULL UNIQUE,
     birthDate DATE NOT NULL,
     isBanned BIT NOT NULL DEFAULT 0,
+    phoneNumber VARCHAR(16) NOT NULL,
     lastName VARCHAR(50),
     firstName VARCHAR(50),
     gender VARCHAR(20),
