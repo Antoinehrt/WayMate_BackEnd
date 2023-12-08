@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <Folder Include="Services\Users\" />
+      <Folder Include="Services\Users\Admin" />
     </ItemGroup>
 
 </Project>
