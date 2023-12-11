@@ -3,7 +3,7 @@
 namespace Application.UseCases.Users.Admin.Dtos; 
 
 public class DtoInputUpdateAdmin {
-    [Required] public string Id { get; set; }
+    [Required] public int Id { get; set; }
     [Required] public string Username { get; set; }
     [Required] public string Password { get; set; }
     [Required] public string Email { get; set; }

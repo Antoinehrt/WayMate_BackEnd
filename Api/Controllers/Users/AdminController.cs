@@ -14,11 +14,13 @@ namespace Api.Controllers.Users;
 public class AdminController : ControllerBase {
     private readonly UseCaseCreateAdmin _useCaseCreateAdmin;
     private readonly UseCaseFetchUserById _useCaseFetchUserById;
+    private readonly UseCaseUpdateAdmin _useCaseUpdateAdmin;
 
     public AdminController(UseCaseCreateAdmin useCaseCreateAdmin,
-        UseCaseFetchUserById useCaseFetchUserById) {
+        UseCaseFetchUserById useCaseFetchUserById, UseCaseUpdateAdmin useCaseUpdateAdmin) {
         _useCaseCreateAdmin = useCaseCreateAdmin;
         _useCaseFetchUserById = useCaseFetchUserById;
+        _useCaseUpdateAdmin = useCaseUpdateAdmin;
     }
 
 
@@ -55,6 +57,19 @@ public class AdminController : ControllerBase {
     [ProducesResponseType(StatusCodes.Status201Created)]
     public ActionResult<DtoOutputAdmin> Create(DtoInputCreateAdmin dto) {
         var output = _useCaseCreateAdmin.Execute(dto);
+        return CreatedAtAction(
+            nameof(FetchById),
+            new { id = output.Id },
+            output
+        );
+    }
+
+    [HttpPut("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult update(int id, [FromBody] DtoInputUpdateAdmin dto) {
+        dto.Id = id;
+        var output = _useCaseUpdateAdmin.Execute(dto);
         return CreatedAtAction(
             nameof(FetchById),
             new { id = output.Id },
