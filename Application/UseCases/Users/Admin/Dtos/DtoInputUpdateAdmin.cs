@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 
-namespace Application.UseCases.Users.User.Dtos;
+namespace Application.UseCases.Users.Admin.Dtos; 
 
-public class DtoInputCreateAdmin
-{
+public class DtoInputUpdateAdmin {
+    [Required] public string Id { get; set; }
     [Required] public string Username { get; set; }
     [Required] public string Password { get; set; }
     [Required] public string Email { get; set; }
