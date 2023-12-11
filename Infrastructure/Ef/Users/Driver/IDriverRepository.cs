@@ -1,5 +1,5 @@
 ﻿namespace Infrastructure.Ef.Users.Driver; 
 
-public class IDriverRepository {
+public interface IDriverRepository {
     
 }
