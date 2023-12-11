@@ -1,15 +1,13 @@
-﻿using Application.UseCases.Address;
+﻿using Application.UseCases.Users.Admin;
 using Application.UseCases.Users.User;
 using Application.UseCases.Users.User.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers.Users.User;
+namespace Api.Controllers.Users;
 
 [ApiController]
 [Route("api/v1/user")]
 public class UserController : ControllerBase {
-    private readonly UseCaseCreatePassenger _useCaseCreatePassenger;
-    private readonly UseCaseCreateAdmin _useCaseCreateAdmin;
     private readonly UseCaseFetchAllUser _useCaseFetchAllUser;
     private readonly UseCaseFetchUserById _useCaseFetchUserById;
     private readonly UserCaseFetchUserByEmail _userCaseFetchUserByEmail;
@@ -22,13 +20,11 @@ public class UserController : ControllerBase {
         UserCaseFetchUserByEmail userCaseFetchUserByEmail,
         UseCaseDeleteUser useCaseDeleteUser,
         UseCaseUpdateUser useCaseUpdateUser, UseCaseCreateAdmin useCaseCreateAdmin) {
-        _useCaseCreatePassenger = useCaseCreatePassenger;
         _useCaseFetchAllUser = useCaseFetchAllUser;
         _useCaseFetchUserById = useCaseFetchUserById;
         _userCaseFetchUserByEmail = userCaseFetchUserByEmail;
         _useCaseDeleteUser = useCaseDeleteUser;
         _useCaseUpdateUser = useCaseUpdateUser;
-        _useCaseCreateAdmin = useCaseCreateAdmin;
     }
 
     [HttpGet]
@@ -67,33 +63,6 @@ public class UserController : ControllerBase {
             });
         }
     }
-
-
-    [HttpPost]
-    [Route("passenger")]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    public ActionResult<DtoOutputUser> CreatePassenger(DtoInputCreatePassenger dto) {
-        var output = _useCaseCreatePassenger.Execute(dto);
-        return CreatedAtAction(
-            nameof(FetchById),
-            new { id = output.Id },
-            output
-        );
-    }
-
-
-    [HttpPost]
-    [Route("admin")]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    public ActionResult<DtoOutputUser> CreateAdmin(DtoInputCreateAdmin dto) {
-        var output = _useCaseCreateAdmin.Execute(dto);
-        return CreatedAtAction(
-            nameof(FetchById),
-            new { id = output.Id },
-            output
-        );
-    }
-
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
