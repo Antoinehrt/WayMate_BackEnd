@@ -14,7 +14,7 @@ public class UserController : ControllerBase {
     private readonly UseCaseDeleteUser _useCaseDeleteUser;
     private readonly UseCaseUpdateUser _useCaseUpdateUser;
 
-    public UserController(UseCaseCreatePassenger useCaseCreatePassenger,
+    public UserController(
         UseCaseFetchAllUser useCaseFetchAllUser,
         UseCaseFetchUserById useCaseFetchUserById,
         UserCaseFetchUserByEmail userCaseFetchUserByEmail,
@@ -38,7 +38,7 @@ public class UserController : ControllerBase {
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<DtoOutputUser> FetchById(int id) {
         try {
-            return _useCaseFetchUserById.Execute(id);
+            return  Ok(_useCaseFetchUserById.Execute(id));
         }
         catch (KeyNotFoundException e) {
             return NotFound(new {
@@ -54,8 +54,8 @@ public class UserController : ControllerBase {
     public ActionResult<DtoOutputUser> FetchByEmail(string email) {
         try {
             var result = _userCaseFetchUserByEmail.Execute(email);
-            if (result == null) return NotFound(new { Message = "User not found" });
-            return result;
+            return result != null ? Ok(result) : NotFound(new { Message = "User not found" });
+    
         }
         catch (KeyNotFoundException e) {
             return NotFound(new {
