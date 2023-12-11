@@ -2,6 +2,7 @@ using Application;
 using Application.UseCases.Address;
 using Application.UseCases.Authentication;
 using Application.UseCases.Car;
+using Application.UseCases.Users.Admin;
 using Application.UseCases.Users.User;
 using Infrastructure.Ef;
 using Infrastructure.Ef.Address;
@@ -47,12 +48,20 @@ builder.Services.AddScoped<UseCaseDeleteCar>();
 builder.Services.AddScoped<UseCaseUpdateCar>();
 
 //Use Case User
-builder.Services.AddScoped<UseCaseCreatePassenger>();
-builder.Services.AddScoped<UseCaseCreateAdmin>();
 builder.Services.AddScoped<UseCaseFetchAllUser>();
 builder.Services.AddScoped<UseCaseFetchUserById>();
 builder.Services.AddScoped<UseCaseDeleteUser>();
 builder.Services.AddScoped<UseCaseUpdateUser>();
+
+//Use Case Admin
+builder.Services.AddScoped<UseCaseCreateAdmin>();
+builder.Services.AddScoped<UseCaseFetchAllAdmin>();
+builder.Services.AddScoped<UseCaseUpdateAdmin>();
+
+//Use Case Passenger
+builder.Services.AddScoped<UseCaseCreatePassenger>();
+
+//Use Case Driver
 
 //Use Case Authentication
 builder.Services.AddScoped<UseCaseLogin>();
