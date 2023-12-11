@@ -15,10 +15,10 @@ public class UseCaseUpdateAdmin : IUseCaseWriter<DtoOutputAdmin, DtoInputUpdateA
         _userRepository = userRepository;
         _mapper = mapper;
     }
-    bool Update(int id, string username, string password, string email, DateTime birthdate, bool isbanned, string phoneNumber,
-        string lastName, string firstName, string gender, int addressId, string carPlate);
+   // bool Update(int id, string username, string password, string email, DateTime birthdate, bool isbanned, string phoneNumber,
+     //   string lastName, string firstName, string gender, int addressId, string carPlate);
     public DtoOutputAdmin Execute(DtoInputUpdateAdmin input) {
-        var dbUser = _userRepository.Update(input.Id, input.Username, input.Email, input.Birthdate, input.IsBanned,
-            input.PhoneNumber);
+        //var dbUser = _userRepository.Update(input.Id, input.Username, input.Email, input.Birthdate, input.IsBanned input.PhoneNumber);
+        return null;
     }
 }
