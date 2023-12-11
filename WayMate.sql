@@ -1,24 +1,10 @@
--- CREATE DATABASE WayMate;
+DROP DATABASE IF EXISTS WayMate;
+GO
+CREATE DATABASE WayMate;
 GO
 
 USE WayMate;
 GO
-
-drop table dbo.booking;
-go
-
-drop table dbo.trip;
-go
-
-drop table dbo.car;
-go
-
-drop table dbo.address;
-go
-
-drop table dbo.users;
-go
-
 -- Creating the 'address' table
 CREATE TABLE address (
     id INT IDENTITY PRIMARY KEY NOT NULL,
@@ -27,7 +13,7 @@ CREATE TABLE address (
     city VARCHAR(50) NOT NULL,
     number VARCHAR(6) NOT NULL
 );
-
+GO
 -- Creating the 'car' table
 CREATE TABLE car (
     plateNumber VARCHAR(50) PRIMARY KEY NOT NULL,
@@ -37,7 +23,7 @@ CREATE TABLE car (
     carType INT NOT NULL DEFAULT 0,
     fuelType INT NOT NULL DEFAULT 0
 );
-
+GO
 -- Creating the 'users' table
 CREATE TABLE users (
     id INT IDENTITY PRIMARY KEY NOT NULL,
@@ -54,7 +40,7 @@ CREATE TABLE users (
     addressId INT REFERENCES address(id),
     carPlate VARCHAR(50) REFERENCES car(plateNumber)
 );
-
+GO
 -- Creating the 'trip' table
 CREATE TABLE trip (
     id INT IDENTITY PRIMARY KEY NOT NULL,
@@ -68,7 +54,7 @@ CREATE TABLE trip (
     idStartingPoint INT NOT NULL REFERENCES address(id),
     idDestination INT NOT NULL REFERENCES address(id)
 );
-
+GO
 -- Creating the 'booking' table
 CREATE TABLE booking (
     id INT IDENTITY PRIMARY KEY NOT NULL,
@@ -78,3 +64,4 @@ CREATE TABLE booking (
     idEntryPoint INT NOT NULL REFERENCES address(id),
     idTrip INT NOT NULL REFERENCES trip(id)
 );
+GO
