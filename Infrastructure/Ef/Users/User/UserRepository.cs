@@ -34,6 +34,15 @@ public class UserRepository : IUserRepository
         return user;
     }
 
+    public DbUser FetchByUsername(string username)
+    {
+        var user = _context.Users.FirstOrDefault(u => u.Username == username);
+
+        if (user == null) throw new KeyNotFoundException($"User with username {username} has not been found");
+
+        return user;
+    }
+
     public DbUser Create(string username, string password, string email, DateTime birthdate, bool isbanned) {
         
         var user = new DbUser {
