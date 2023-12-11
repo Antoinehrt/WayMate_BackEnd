@@ -8,14 +8,17 @@ using Infrastructure.Ef;
 using Infrastructure.Ef.Address;
 using Infrastructure.Ef.Authentication;
 using Infrastructure.Ef.Car;
+using Infrastructure.Ef.Users.Admin;
+using Infrastructure.Ef.Users.Driver;
+using Infrastructure.Ef.Users.Passenger;
 using Infrastructure.Ef.Users.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -26,9 +29,15 @@ builder.Services.AddDbContext<WaymateContext>(a => a.UseSqlServer(
     builder.Configuration.GetConnectionString("db"))
 );
 
+//Controllers
+
+//Repository
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<IPassengerRepository, PassengerRepository>();
+builder.Services.AddScoped<IDriverRepository, DriverRepository>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 
