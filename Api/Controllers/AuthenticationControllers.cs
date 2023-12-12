@@ -21,10 +21,10 @@ public class AuthenticationControllers : ControllerBase {
         _useCaseRegistrationUsername = useCaseRegistrationUsername;
     }
 
-    [HttpGet]
+    [HttpGet("login")]
     [ProducesResponseTypeAttribute(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<DtoOutputLogin> Login([Required] string email, [Required] string password) {
+    public ActionResult<DtoOutputLogin> Login([FromQuery][Required] string email, [FromQuery][Required] string password) {
         try {
             if (string.IsNullOrWhiteSpace(password)) return BadRequest(); 
             return _useCaseLogin.Execute(email, password);
