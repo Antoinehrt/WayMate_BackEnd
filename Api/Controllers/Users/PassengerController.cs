@@ -1,5 +1,5 @@
 ﻿using Application.UseCases.Users.Passenger;
-using Application.UseCases.Users.Passenger.Dtos;
+using Application.UseCases.Users.Passenger.Dto;
 using Application.UseCases.Users.User;
 using Domain.Enums;
 using Microsoft.AspNetCore.Mvc;

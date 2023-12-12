@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
-namespace Application.UseCases.Users.User.Dtos;
+namespace Application.UseCases.Users.User.Dto;
 
 public class DtoInputUpdateUser
 {

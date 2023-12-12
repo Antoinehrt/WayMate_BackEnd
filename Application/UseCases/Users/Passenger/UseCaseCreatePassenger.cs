@@ -1,6 +1,5 @@
 ﻿using Application.UseCases.Users.Admin.Dtos;
-using Application.UseCases.Users.Passenger.Dtos;
-using Application.UseCases.Users.User.Dtos;
+using Application.UseCases.Users.Passenger.Dto;
 using Application.UseCases.Utils;
 using AutoMapper;
 using Infrastructure.Ef.Authentication;

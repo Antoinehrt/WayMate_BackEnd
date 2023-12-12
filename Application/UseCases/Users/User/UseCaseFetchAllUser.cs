@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Application.UseCases.Users.User.Dtos;
+using Application.UseCases.Users.User.Dto;
 using Application.UseCases.Utils;
 using AutoMapper;
 using Infrastructure.Ef.Users.User;

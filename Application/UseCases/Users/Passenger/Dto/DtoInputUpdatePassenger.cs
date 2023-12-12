@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 
-namespace Application.UseCases.Users.Passenger.Dtos;
+namespace Application.UseCases.Users.Passenger.Dto; 
 
-public class DtoInputCreatePassenger
-{
+public class DtoInputUpdatePassenger {
+    
+    [Required] public int Id { get; set; }
     [Required] public string Username { get; set; }
     [Required] public string Password { get; set; }
     [Required] public string Email { get; set; }

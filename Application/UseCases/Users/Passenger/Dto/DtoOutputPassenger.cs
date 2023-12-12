@@ -1,4 +1,4 @@
-﻿namespace Application.UseCases.Users.Passenger.Dtos; 
+﻿namespace Application.UseCases.Users.Passenger.Dto; 
 
 public class DtoOutputPassenger {
     public int Id { get; set; }

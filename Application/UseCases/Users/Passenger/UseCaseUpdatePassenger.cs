@@ -1,5 +1,4 @@
-﻿using Application.UseCases.Users.Passenger.Dtos;
-using Application.UseCases.Users.User.Dtos;
+﻿using Application.UseCases.Users.Passenger.Dto;
 using AutoMapper;
 using Infrastructure.Ef.Users.Passenger;
 

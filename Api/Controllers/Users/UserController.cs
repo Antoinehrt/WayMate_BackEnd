@@ -1,6 +1,6 @@
 ﻿using Application.UseCases.Users.Admin;
 using Application.UseCases.Users.User;
-using Application.UseCases.Users.User.Dtos;
+using Application.UseCases.Users.User.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers.Users;

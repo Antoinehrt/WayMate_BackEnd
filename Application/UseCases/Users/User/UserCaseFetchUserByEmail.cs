@@ -1,4 +1,4 @@
-﻿using Application.UseCases.Users.User.Dtos;
+﻿using Application.UseCases.Users.User.Dto;
 using AutoMapper;
 using Infrastructure.Ef.Users.User;
 

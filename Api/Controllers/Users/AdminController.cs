@@ -1,7 +1,7 @@
 ﻿using Application.UseCases.Users.Admin;
+using Application.UseCases.Users.Admin.Dto;
 using Application.UseCases.Users.Admin.Dtos;
 using Application.UseCases.Users.User;
-using Application.UseCases.Users.User.Dtos;
 using Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;

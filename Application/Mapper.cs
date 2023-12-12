@@ -2,8 +2,8 @@
 using Application.UseCases.Authentication.Dtos;
 using Application.UseCases.Car.Dtos;
 using Application.UseCases.Users.Admin.Dtos;
-using Application.UseCases.Users.Passenger.Dtos;
-using Application.UseCases.Users.User.Dtos;
+using Application.UseCases.Users.Passenger.Dto;
+using Application.UseCases.Users.User.Dto;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Entities.Users;
