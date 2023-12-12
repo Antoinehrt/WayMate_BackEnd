@@ -2,9 +2,9 @@
 using Infrastructure.Ef.Authentication;
 using Infrastructure.Ef.DbEntities;
 
-namespace Infrastructure.Ef.Users.Admin; 
+namespace Infrastructure.Ef.Users.Admin;
 
-public class AdminRepository: IAdminRepository {
+public class AdminRepository : IAdminRepository {
     private readonly WaymateContext _context;
     private readonly IPasswordHasher _passwordHasher;
 
@@ -32,10 +32,8 @@ public class AdminRepository: IAdminRepository {
     public DbUser UpdateAdmin(int id, string username, string password, string email, DateTime birthDate, bool isBanned,
         string phoneNumber) {
         var adminToUpdate = _context.Users.FirstOrDefault(u => u.Id == id);
-        if (adminToUpdate == null) {
-            throw new KeyNotFoundException($"Admin with id {id} has not been found");
-        }
-        
+        if (adminToUpdate == null) throw new KeyNotFoundException($"Admin with id {id} has not been found");
+
         adminToUpdate.Username = username;
         adminToUpdate.Password = _passwordHasher.HashPwd(password);
         adminToUpdate.Email = email;
