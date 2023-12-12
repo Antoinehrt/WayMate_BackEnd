@@ -15,4 +15,5 @@ public class DtoOutputUser
      public string? FirstName { get; set; }
      public string? Gender { get; set; }
      public int AddressId { get; set; }
+     public string CarPlate { get; set; }
 }

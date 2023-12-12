@@ -55,7 +55,7 @@ public class PassengerController : ControllerBase{
             var passenger = _useCaseFetchUserById.Execute(id);
 
             if (passenger.UserType != UserType.Passenger.ToString())
-                return NotFound($"User with ID {id} is not an admin.");
+                return NotFound($"User with ID {id} is not an passenger.");
             
             return new DtoOutputPassenger() {
                 Id = passenger.Id,
@@ -92,7 +92,7 @@ public class PassengerController : ControllerBase{
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult update(int id, [FromBody] DtoInputUpdatePassenger dto) {
+    public ActionResult Update(int id, [FromBody] DtoInputUpdatePassenger dto) {
         dto.Id = id;
         var output = _useCaseUpdatePassenger.Execute(dto);
         return CreatedAtAction(

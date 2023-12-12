@@ -19,7 +19,7 @@ public class DriverRepository : IDriverRepository {
         
             var newDriver = new DbUser {
                 Username = username,
-                UserType = UserType.Passenger.ToString(),
+                UserType = UserType.Driver.ToString(),
                 Password = _passwordHasher.HashPwd(password),
                 Email = email,
                 BirthDate = birthdate,

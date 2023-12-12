@@ -1,10 +1,11 @@
 ﻿using Application.UseCases.Users.Passenger.Dto;
+using Application.UseCases.Utils;
 using AutoMapper;
 using Infrastructure.Ef.Users.Passenger;
 
 namespace Application.UseCases.Users.Passenger; 
 
-public class UseCaseUpdatePassenger {
+public class UseCaseUpdatePassenger : IUseCaseWriter<DtoOutputPassenger, DtoInputUpdatePassenger> {
     private readonly IPassengerRepository _passengerRepository;
     private readonly IMapper _mapper;
 
