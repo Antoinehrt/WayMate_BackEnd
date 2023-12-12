@@ -15,14 +15,36 @@ public class AdminController : ControllerBase {
     private readonly UseCaseCreateAdmin _useCaseCreateAdmin;
     private readonly UseCaseFetchUserById _useCaseFetchUserById;
     private readonly UseCaseUpdateAdmin _useCaseUpdateAdmin;
+    private readonly UseCaseFetchAllUser _useCaseFetchAllUser;
 
     public AdminController(UseCaseCreateAdmin useCaseCreateAdmin,
-        UseCaseFetchUserById useCaseFetchUserById, UseCaseUpdateAdmin useCaseUpdateAdmin) {
+        UseCaseFetchUserById useCaseFetchUserById, UseCaseUpdateAdmin useCaseUpdateAdmin, UseCaseFetchAllUser useCaseFetchAllUser) {
         _useCaseCreateAdmin = useCaseCreateAdmin;
         _useCaseFetchUserById = useCaseFetchUserById;
         _useCaseUpdateAdmin = useCaseUpdateAdmin;
+        _useCaseFetchAllUser = useCaseFetchAllUser;
     }
+    
+    [HttpGet]
+    public ActionResult<IEnumerable<DtoOutputAdmin>> FetchAll()
+    {
+        var userResult = _useCaseFetchAllUser.Execute()
+            .Where(admin => admin.UserType == UserType.Admin.ToString())
+            .Select(admin => new DtoOutputAdmin
+            {
+                Id = admin.Id,
+                UserType = admin.UserType,
+                Username = admin.Username,
+                Password = admin.Password,
+                Email = admin.Email,
+                Birthdate = admin.Birthdate,
+                IsBanned = admin.IsBanned,
+                PhoneNumber = admin.PhoneNumber
+            })
+            .ToList();
 
+        return userResult;
+    }
 
     [HttpGet("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
