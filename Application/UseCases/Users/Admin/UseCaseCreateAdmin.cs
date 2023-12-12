@@ -7,7 +7,7 @@ using Infrastructure.Ef.Users.User;
 
 namespace Application.UseCases.Users.Admin;
 
-public class UseCaseCreateAdmin : IUseCaseWriter<DtoOutputUser, DtoInputCreateAdmin>
+public class UseCaseCreateAdmin : IUseCaseWriter<DtoOutputAdmin, DtoInputCreateAdmin>
 {
     private readonly IAdminRepository _adminRepository;
     private readonly IMapper _mapper;
@@ -18,9 +18,9 @@ public class UseCaseCreateAdmin : IUseCaseWriter<DtoOutputUser, DtoInputCreateAd
         _adminRepository = adminRepository;
     }
 
-    public DtoOutputUser Execute(DtoInputCreateAdmin input)
+    public DtoOutputAdmin Execute(DtoInputCreateAdmin input)
     {
         var dbUser = _adminRepository.CreateAdmin(input.Username, input.Password, input.Email, input.Birthdate, input.IsBanned, input.PhoneNumber);
-        return _mapper.Map<DtoOutputUser>(dbUser);
+        return _mapper.Map<DtoOutputAdmin>(dbUser);
     }
 }
