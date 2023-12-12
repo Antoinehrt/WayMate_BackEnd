@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
-namespace Application.UseCases.Users.User.Dto;
+namespace Application.UseCases.Users.User.Dto; 
 
-public class DtoInputUpdateUser {
-    [JsonIgnore] public int Id { get; set; }
+public class DtoInputCreateUser {
     [Required] public string Username { get; set; }
     [Required] public string Password { get; set; }
     [Required] public string Email { get; set; }
@@ -15,6 +14,6 @@ public class DtoInputUpdateUser {
     [AllowNull] public string LastName { get; set; }
     [AllowNull] public string FirstName { get; set; }
     [AllowNull] public string Gender { get; set; }
-    [AllowNull] public int AddressId { get; set; }
+    [AllowNull]public int AddressId { get; set; }
     [AllowNull] public string? CarPlate { get; set; }
 }
