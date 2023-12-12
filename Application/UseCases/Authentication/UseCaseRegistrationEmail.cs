@@ -7,12 +7,10 @@ namespace Application.UseCases.Authentication;
 public class UseCaseRegistrationEmail
 {
     private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
 
-    public UseCaseRegistrationEmail(IUserRepository userRepository, IMapper mapper)
+    public UseCaseRegistrationEmail(IUserRepository userRepository)
     {
         _userRepository = userRepository;
-        _mapper = mapper;
     }
 
     public DtoOutputRegistration Execute(string email)

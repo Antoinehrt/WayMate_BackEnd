@@ -10,13 +10,15 @@ namespace Api.Controllers;
 public class AuthenticationControllers : ControllerBase {
     private readonly UseCaseLogin _useCaseLogin;
     private readonly UseCaseRegistrationEmail _useCaseRegistrationEmail;
+    private readonly UseCaseRegistrationUsername _useCaseRegistrationUsername;
     
     
 
-    public AuthenticationControllers(UseCaseLogin useCaseLogin, UseCaseRegistrationEmail useCaseRegistrationEmail)
+    public AuthenticationControllers(UseCaseLogin useCaseLogin, UseCaseRegistrationEmail useCaseRegistrationEmail, UseCaseRegistrationUsername useCaseRegistrationUsername)
     {
         _useCaseLogin = useCaseLogin;
         _useCaseRegistrationEmail = useCaseRegistrationEmail;
+        _useCaseRegistrationUsername = useCaseRegistrationUsername;
     }
 
     [HttpGet]
@@ -34,36 +36,18 @@ public class AuthenticationControllers : ControllerBase {
         }
     }
     
-    [HttpGet]
-    [Route("{email:regex(^[[a-z0-9]]+(?:.[[a-z0-9]]+)*@(?:[[a-z0-9]](?:[[a-z0-9-]]*[[a-z0-9]])?.)+[[a-z0-9]](?:[[a-z0-9-]]*[[a-z0-9]])?$)}")]
+    [HttpGet("registration/by-email/{email:regex(^[[a-z0-9]]+(?:.[[a-z0-9]]+)*@(?:[[a-z0-9]](?:[[a-z0-9-]]*[[a-z0-9]])?.)+[[a-z0-9]](?:[[a-z0-9-]]*[[a-z0-9]])?$)}")]
     [ProducesResponseTypeAttribute(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public ActionResult<DtoOutputRegistration> FetchByEmail(string email) {
-        try {
-            if (string.IsNullOrWhiteSpace(email)) return BadRequest(); 
-            return _useCaseRegistrationEmail.Execute(email);
-        }
-        catch (KeyNotFoundException e) {
-            return _useCaseRegistrationEmail.Execute(email);
-        }
+        return _useCaseRegistrationEmail.Execute(email);
     }
-    // [HttpGet]
-    // [Route("{username:regex(^[[a-zA-Z0-9_-]]${{5,20}})}")]
-    // [ProducesResponseTypeAttribute(StatusCodes.Status200OK)]
-    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    // public ActionResult<DtoOutputRegistration> FetchByUsername(string username)
-    // {
-    //     try
-    //     {
-    //         return _useCaseFetchByUsernameRegistration.Execute(username);
-    //     }
-    //     catch (KeyNotFoundException e)
-    //     {
-    //         return NotFound(new
-    //         {
-    //             e.Message
-    //         });
-    //     }
-    // }
+    
+    [HttpGet("registration/by-username/{username:regex(^[[a-zA-Z0-9_-]]{{5,20}}$)}")]
+    [ProducesResponseTypeAttribute(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public ActionResult<DtoOutputRegistration> FetchByUsername(string username) {
+        return _useCaseRegistrationUsername.Execute(username);
+    }
     
 }

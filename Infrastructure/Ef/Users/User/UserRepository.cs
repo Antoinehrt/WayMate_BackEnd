@@ -41,13 +41,13 @@ public class UserRepository : IUserRepository
         return true;
     }
 
-    public DbUser FetchByUsername(string username)
+    public bool FetchByUsername(string username)
     {
-        var user = _context.Users.FirstOrDefault(u => u.Username == username);
+        var user = _context.Users.FirstOrDefault(a => a.Username == username);
 
-        if (user == null) throw new KeyNotFoundException($"User with username {username} has not been found");
+        if (user == null)  return false;
 
-        return user;
+        return true;
     }
 
     public DbUser Create(string username, string password, string email, DateTime birthdate, bool isbanned) {
