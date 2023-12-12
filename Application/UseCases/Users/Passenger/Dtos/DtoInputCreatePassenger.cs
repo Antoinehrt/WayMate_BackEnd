@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Application.UseCases.Users.User.Dtos;
+namespace Application.UseCases.Users.Passenger.Dtos;
 
 public class DtoInputCreatePassenger
 {
@@ -11,8 +11,8 @@ public class DtoInputCreatePassenger
     [Required] public DateTime Birthdate { get; set; }
     [Required] public bool IsBanned { get; set; }
     [Required] public string PhoneNumber { get; set; }
-    [AllowNull] public string LastName { get; set; }
-    [AllowNull] public string FirstName { get; set; }
-    [AllowNull] public string Gender { get; set; }
-    public int AddressId { get; set; }
+    [Required] public string LastName { get; set; }
+    [Required] public string FirstName { get; set; }
+    [Required] public string Gender { get; set; }
+    [Required] public int AddressId { get; set; }
 }
