@@ -1,7 +1,10 @@
 ﻿using Application.UseCases.Address.Dtos;
 using Application.UseCases.Authentication.Dtos;
 using Application.UseCases.Car.Dtos;
-using Application.UseCases.Users.User.Dtos;
+using Application.UseCases.Users.Admin.Dtos;
+using Application.UseCases.Users.Driver.Dto;
+using Application.UseCases.Users.Passenger.Dto;
+using Application.UseCases.Users.User.Dto;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Entities.Users;
@@ -28,6 +31,15 @@ public class Mapper : Profile
         CreateMap<User, DtoOutputUser>();
         CreateMap<DbUser, DtoOutputUser>();
         CreateMap<DbUser, User>();
+        
+        //Admin
+        CreateMap<DbUser, DtoOutputAdmin>();
+        
+        //Passenger
+        CreateMap<DbUser, DtoOutputPassenger>();
+        
+        //Driver
+        CreateMap<DbUser, DtoOuputDriver>();
         
         //Authentication
         CreateMap<bool, DtoOutputLogin>();

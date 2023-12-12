@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Users;
+using Domain.Enums;
 
 namespace Domain.Entities; 
 
@@ -6,7 +7,7 @@ public class Booking {
     public string BookingDate { get; set; }
     public int NbBookedSeats { get; set; }
     public Trip Trip { get; set; }
-    public List<Passenger> Passengers { get; set; }
+    public List<User> Passengers { get; set; }
     
 
     public double CalculatePrice() {
@@ -14,13 +15,15 @@ public class Booking {
         return 0.0;
     }
     
-    private void Add(Passenger passenger) {
-        Passengers.Add(passenger);
+    private void Add(User passenger) {
+        if(passenger.UserType == UserType.Passenger)
+            Passengers.Add(passenger);
     }
 
-    private void AddRange(IEnumerable<Passenger> passengers) {
+    private void AddRange(IEnumerable<User> passengers) {
         foreach (var p in passengers) {
-            Add(p);
+            if(p.UserType == UserType.Passenger)
+                Add(p);
         }
     }
 }

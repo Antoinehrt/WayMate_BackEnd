@@ -1,13 +1,21 @@
 ﻿using System.Text.RegularExpressions;
+using Domain.Enums;
 
 namespace Domain.Entities.Users; 
 
 public class User {
+    public UserType UserType { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
     private string _birthdate;
     public bool IsBanned { get; set; }
+    private string _phoneNumber;
+    public string? LastName { get; set; }
+    public string? FirstName { get; set; }
+    public string? Gender { get; set; }
+    public Address? Address { get; set; }
+    public Car? Car { get; set; }
     public string Birthdate
     {
         get => _birthdate;
@@ -17,6 +25,18 @@ public class User {
                 _birthdate = value;
             else 
                 throw new ArgumentException($"Date format not respected");
+        }
+    }
+
+    public string PhoneNumber
+    {
+        get => _birthdate;
+        set
+        {
+            if (Regex.IsMatch(value, @"^((((\+3[2-3]) )|0)4[0-9]{2})/[0-9]{2}\.[0-9]{2}\.[0-9]{2}$"))
+                _phoneNumber = value;
+            else
+                throw new ArgumentException("Phone number format not respected for french and belgian numbers");
         }
     }
 
