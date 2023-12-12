@@ -13,10 +13,6 @@ public class AdminRepository: IAdminRepository {
         _passwordHasher = passwordHasher;
     }
 
-    public IEnumerable<DbUser> FectchAll() {
-        return _context.Users.ToList();
-    }
-
     public DbUser CreateAdmin(string username, string password, string email, DateTime birthdate, bool isBanned,
         string phoneNumber) {
         var newAdmin = new DbUser {

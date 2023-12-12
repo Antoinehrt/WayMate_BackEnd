@@ -64,7 +64,6 @@ builder.Services.AddScoped<UseCaseUpdateUser>();
 
 //Use Case Admin
 builder.Services.AddScoped<UseCaseCreateAdmin>();
-builder.Services.AddScoped<UseCaseFetchAllAdmin>();
 builder.Services.AddScoped<UseCaseUpdateAdmin>();
 
 //Use Case Passenger
