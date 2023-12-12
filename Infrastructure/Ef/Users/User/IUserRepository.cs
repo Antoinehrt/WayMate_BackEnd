@@ -15,4 +15,6 @@ public interface IUserRepository
         string lastName, string firstName, string gender, int addressId, string carPlate);
 
     bool Delete(int id);
+    bool FetchByUsername(string username);
+    bool FetchByEmailBool(string email);
 }
