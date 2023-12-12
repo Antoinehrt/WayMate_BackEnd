@@ -3,6 +3,7 @@ using Application.UseCases.Address;
 using Application.UseCases.Authentication;
 using Application.UseCases.Car;
 using Application.UseCases.Users.Admin;
+using Application.UseCases.Users.Driver;
 using Application.UseCases.Users.Passenger;
 using Application.UseCases.Users.User;
 using Infrastructure.Ef;
@@ -72,6 +73,8 @@ builder.Services.AddScoped<UseCaseCreatePassenger>();
 builder.Services.AddScoped<UseCaseUpdatePassenger>();
 
 //Use Case Driver
+builder.Services.AddScoped<UseCaseCreateDriver>();
+builder.Services.AddScoped<UseCaseUpdateDriver>();
 
 //Use Case Authentication
 builder.Services.AddScoped<UseCaseLogin>();

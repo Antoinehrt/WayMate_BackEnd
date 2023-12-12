@@ -2,6 +2,7 @@
 using Application.UseCases.Authentication.Dtos;
 using Application.UseCases.Car.Dtos;
 using Application.UseCases.Users.Admin.Dtos;
+using Application.UseCases.Users.Driver.Dto;
 using Application.UseCases.Users.Passenger.Dto;
 using Application.UseCases.Users.User.Dto;
 using AutoMapper;
@@ -36,6 +37,9 @@ public class Mapper : Profile
         
         //Passenger
         CreateMap<DbUser, DtoOutputPassenger>();
+        
+        //Driver
+        CreateMap<DbUser, DtoOuputDriver>();
         
         //Authentication
         CreateMap<bool, DtoOutputLogin>();
