@@ -1,4 +1,5 @@
 ﻿using Application.UseCases.Users.Admin;
+using Application.UseCases.Users.Driver.Dto;
 using Application.UseCases.Users.User;
 using Application.UseCases.Users.User.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +14,20 @@ public class UserController : ControllerBase {
     private readonly UserCaseFetchUserByEmail _userCaseFetchUserByEmail;
     private readonly UseCaseDeleteUser _useCaseDeleteUser;
     private readonly UseCaseUpdateUser _useCaseUpdateUser;
+    private readonly UseCaseCreateUser _useCaseCreateUser;
 
     public UserController(
         UseCaseFetchAllUser useCaseFetchAllUser,
         UseCaseFetchUserById useCaseFetchUserById,
         UserCaseFetchUserByEmail userCaseFetchUserByEmail,
         UseCaseDeleteUser useCaseDeleteUser,
-        UseCaseUpdateUser useCaseUpdateUser, UseCaseCreateAdmin useCaseCreateAdmin) {
+        UseCaseUpdateUser useCaseUpdateUser, UseCaseCreateAdmin useCaseCreateAdmin, UseCaseCreateUser useCaseCreateUser) {
         _useCaseFetchAllUser = useCaseFetchAllUser;
         _useCaseFetchUserById = useCaseFetchUserById;
         _userCaseFetchUserByEmail = userCaseFetchUserByEmail;
         _useCaseDeleteUser = useCaseDeleteUser;
         _useCaseUpdateUser = useCaseUpdateUser;
+        _useCaseCreateUser = useCaseCreateUser;
     }
 
     [HttpGet]
@@ -71,11 +74,27 @@ public class UserController : ControllerBase {
         return NotFound();
     }
 
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    public ActionResult<DtoOutputUser> Create(DtoInputCreateUser dto ) {
+        var output = _useCaseCreateUser.Execute(dto);
+        return CreatedAtAction(
+            nameof(FetchById),
+            new {id = output.Id},
+            output
+            );
+    }
+
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult Update(int id, [FromBody] DtoInputUpdateUser dto) {
         dto.Id = id;
-        return _useCaseUpdateUser.Execute(dto) ? NoContent() : NotFound();
+        var output = _useCaseUpdateUser.Execute(dto);
+        return CreatedAtAction(
+            nameof(FetchById),
+            new {id = output.Id},
+            output
+            );
     }
 }
