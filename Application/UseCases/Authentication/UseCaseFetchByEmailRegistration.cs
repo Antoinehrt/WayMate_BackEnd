@@ -18,7 +18,7 @@ public class UseCaseFetchByEmailRegistration
 
     public DtoOutputRegistration Execute(string username)
     {
-        var dbUser = _userRepository.FetchByUsername(username);
+        var dbUser = _userRepository.FetchByEmail(username);
         return _mapper.Map<DtoOutputRegistration>(dbUser);
     }
 }
