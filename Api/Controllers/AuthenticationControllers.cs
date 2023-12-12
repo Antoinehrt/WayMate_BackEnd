@@ -9,15 +9,14 @@ namespace Api.Controllers;
 [Route("api/v1/authentication")]
 public class AuthenticationControllers : ControllerBase {
     private readonly UseCaseLogin _useCaseLogin;
-    private readonly UseCaseFetchByEmailRegistration _useCaseFetchByEmailRegistration;
-    private readonly UseCaseFetchByUsernameRegistration _useCaseFetchByUsernameRegistration;
+    private readonly UseCaseRegistrationEmail _useCaseRegistrationEmail;
+    
     
 
-    public AuthenticationControllers(UseCaseLogin useCaseLogin, UseCaseFetchByUsernameRegistration useCaseFetchByUsernameRegistration, UseCaseFetchByEmailRegistration useCaseFetchByEmailRegistration)
+    public AuthenticationControllers(UseCaseLogin useCaseLogin, UseCaseRegistrationEmail useCaseRegistrationEmail)
     {
         _useCaseLogin = useCaseLogin;
-        _useCaseFetchByUsernameRegistration = useCaseFetchByUsernameRegistration;
-        _useCaseFetchByEmailRegistration = useCaseFetchByEmailRegistration;
+        _useCaseRegistrationEmail = useCaseRegistrationEmail;
     }
 
     [HttpGet]
@@ -34,43 +33,37 @@ public class AuthenticationControllers : ControllerBase {
             });
         }
     }
-
+    
     [HttpGet]
     [Route("{email:regex(^[[a-z0-9]]+(?:.[[a-z0-9]]+)*@(?:[[a-z0-9]](?:[[a-z0-9-]]*[[a-z0-9]])?.)+[[a-z0-9]](?:[[a-z0-9-]]*[[a-z0-9]])?$)}")]
     [ProducesResponseTypeAttribute(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<DtoOutputRegistration> FetchByEmail(string email)
-    {
-        try
-        {
-            return _useCaseFetchByEmailRegistration.Execute(email);
+    public ActionResult<DtoOutputRegistration> FetchByEmail(string email) {
+        try {
+            if (string.IsNullOrWhiteSpace(email)) return BadRequest(); 
+            return _useCaseRegistrationEmail.Execute(email);
         }
-        catch (KeyNotFoundException e)
-        {
-            return NotFound(new
-            {
-                e.Message
-            });
+        catch (KeyNotFoundException e) {
+            return _useCaseRegistrationEmail.Execute(email);
         }
     }
-    
-    [HttpGet]
-    [Route("{username:regex(^[[a-zA-Z0-9_-]]${{3,16}})}")]
-    [ProducesResponseTypeAttribute(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<DtoOutputRegistration> FetchByUsername(string username)
-    {
-        try
-        {
-            return _useCaseFetchByUsernameRegistration.Execute(username);
-        }
-        catch (KeyNotFoundException e)
-        {
-            return NotFound(new
-            {
-                e.Message
-            });
-        }
-    }
+    // [HttpGet]
+    // [Route("{username:regex(^[[a-zA-Z0-9_-]]${{5,20}})}")]
+    // [ProducesResponseTypeAttribute(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // public ActionResult<DtoOutputRegistration> FetchByUsername(string username)
+    // {
+    //     try
+    //     {
+    //         return _useCaseFetchByUsernameRegistration.Execute(username);
+    //     }
+    //     catch (KeyNotFoundException e)
+    //     {
+    //         return NotFound(new
+    //         {
+    //             e.Message
+    //         });
+    //     }
+    // }
     
 }

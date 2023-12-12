@@ -31,7 +31,7 @@ public class Mapper : Profile
         
         //Authentication
         CreateMap<bool, DtoOutputLogin>();
-        CreateMap<DbUser, DtoOutputRegistration>();
+        CreateMap<bool, DtoOutputRegistration>();
         //A utiliser pour JWT
         //CreateMap<string, DtoOutputLogin>();
         

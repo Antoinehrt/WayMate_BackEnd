@@ -33,6 +33,13 @@ public class UserRepository : IUserRepository
 
         return user;
     }
+    public bool FetchByEmailBool(string email) {
+        var user = _context.Users.FirstOrDefault(u => u.Email == email);
+
+        if (user == null) return false;
+
+        return true;
+    }
 
     public DbUser FetchByUsername(string username)
     {
