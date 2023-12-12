@@ -11,5 +11,8 @@ public enum UserType: int
     Passenger = 1,
     
     [Description("DRIVER")]
-    Driver = 2
+    Driver = 2,
+    
+    [Description("USER")]
+    User = 3
 }
