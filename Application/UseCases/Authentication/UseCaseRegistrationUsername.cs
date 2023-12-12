@@ -4,21 +4,19 @@ using Infrastructure.Ef.Users.User;
 
 namespace Application.UseCases.Authentication;
 
-public class UseCaseFetchByEmailRegistration
+public class UseCaseRegistrationUsername
 {
     private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
 
-
-    public UseCaseFetchByEmailRegistration(IUserRepository userRepository, IMapper mapper)
+    public UseCaseRegistrationUsername(IUserRepository userRepository)
     {
         _userRepository = userRepository;
-        _mapper = mapper;
     }
 
     public DtoOutputRegistration Execute(string username)
     {
         var dbUser = _userRepository.FetchByUsername(username);
-        return _mapper.Map<DtoOutputRegistration>(dbUser);
+
+        return new DtoOutputRegistration { IsInDb = dbUser };
     }
 }

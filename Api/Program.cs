@@ -55,6 +55,9 @@ builder.Services.AddScoped<UseCaseUpdateUser>();
 
 //Use Case Authentication
 builder.Services.AddScoped<UseCaseLogin>();
+builder.Services.AddScoped<UseCaseRegistrationEmail>();
+builder.Services.AddScoped<UseCaseRegistrationUsername>();
+
 
 builder.Services.AddCors(options =>
 {
