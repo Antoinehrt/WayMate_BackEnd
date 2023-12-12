@@ -2,6 +2,7 @@
 using Application.UseCases.Authentication.Dtos;
 using Application.UseCases.Car.Dtos;
 using Application.UseCases.Users.Admin.Dtos;
+using Application.UseCases.Users.Passenger.Dtos;
 using Application.UseCases.Users.User.Dtos;
 using AutoMapper;
 using Domain.Entities;
@@ -32,6 +33,9 @@ public class Mapper : Profile
         
         //Admin
         CreateMap<DbUser, DtoOutputAdmin>();
+        
+        //Passenger
+        CreateMap<DbUser, DtoOutputPassenger>();
         
         //Authentication
         CreateMap<bool, DtoOutputLogin>();
