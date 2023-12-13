@@ -13,17 +13,20 @@ public class AddressController : ControllerBase
     private readonly UseCaseFetchAddressById _useCaseFetchAddressById;
     private readonly UseCaseDeleteAddress _useCaseDeleteAddress;
     private readonly UseCaseUpdateAddress _useCaseUpdateAddress;
+    private readonly UseCaseFetchAddressByAddress _useCaseFetchAddressByAddress;
 
     public AddressController(UseCaseCreateAddress useCaseCreateAddress, 
         UseCaseFetchAllAddress useCaseFetchAllAddress, 
         UseCaseFetchAddressById useCaseFetchAddressById, 
-        UseCaseDeleteAddress useCaseDeleteAddress, UseCaseUpdateAddress useCaseUpdateAddress)
+        UseCaseDeleteAddress useCaseDeleteAddress, UseCaseUpdateAddress useCaseUpdateAddress, 
+        UseCaseFetchAddressByAddress useCaseFetchAddressByAddress)
     {
         _useCaseCreateAddress = useCaseCreateAddress;
         _useCaseFetchAllAddress = useCaseFetchAllAddress;
         _useCaseFetchAddressById = useCaseFetchAddressById;
         _useCaseDeleteAddress = useCaseDeleteAddress;
         _useCaseUpdateAddress = useCaseUpdateAddress;
+        _useCaseFetchAddressByAddress = useCaseFetchAddressByAddress;
     }
 
     [HttpGet]
@@ -50,6 +53,25 @@ public class AddressController : ControllerBase
             });
         }
     }
+
+    [HttpGet("fetchByAddress")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<DtoOutputAddress> FetchByAddress(DtoInputFetchByAddress dto)
+    {
+        try
+        {
+            return _useCaseFetchAddressByAddress.Execute(dto);
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound(new
+            {
+                e.Message
+            });
+        }
+    }
+
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]

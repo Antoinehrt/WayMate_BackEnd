@@ -23,6 +23,16 @@ public class AddressRepository : IAddressRepository
 
         return address;
     }
+    public int? FetchIdByValue(string street, string postalCode, string city, string number)
+    {
+        var address = _context.Address.FirstOrDefault(a =>
+            a.Street == street &&
+            a.PostalCode == postalCode &&
+            a.City == city &&
+            a.Number == number);
+
+        return address?.Id;
+    }
 
     public DbAddress Create(string street, string postalCode, string city, string number)
     {
