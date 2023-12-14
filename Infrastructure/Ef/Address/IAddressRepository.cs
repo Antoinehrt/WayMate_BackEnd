@@ -9,4 +9,5 @@ public interface IAddressRepository
     DbAddress Create(string street, string postalCode, string city, string number);
     bool Delete(int id);
     bool Update(int id, string street, string postalCode, string city, string number);
+    Task<int> GetIdByAddress(string street, string postalCode, string city, string number);
 }

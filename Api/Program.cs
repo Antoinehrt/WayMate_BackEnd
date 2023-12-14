@@ -47,9 +47,9 @@ builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<UseCaseCreateAddress>();
 builder.Services.AddScoped<UseCaseFetchAllAddress>();
 builder.Services.AddScoped<UseCaseFetchAddressById>();
-builder.Services.AddScoped<UserCaseFetchUserByEmail>();
 builder.Services.AddScoped<UseCaseDeleteAddress>();
 builder.Services.AddScoped<UseCaseUpdateAddress>();
+builder.Services.AddScoped<UseCaseFetchIdByAddress>();
 
 //Use Case Car
 builder.Services.AddScoped<UseCaseCreateCar>();
@@ -64,6 +64,7 @@ builder.Services.AddScoped<UseCaseFetchUserById>();
 builder.Services.AddScoped<UseCaseCreateUser>();
 builder.Services.AddScoped<UseCaseUpdateUser>();
 builder.Services.AddScoped<UseCaseDeleteUser>();
+builder.Services.AddScoped<UserCaseFetchUserByEmail>();
 
 //Use Case Admin
 builder.Services.AddScoped<UseCaseCreateAdmin>();
