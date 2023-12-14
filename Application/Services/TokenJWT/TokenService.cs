@@ -4,17 +4,15 @@ using System.Text;
 using Application.Services.TokenJWT.dto;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Application.Services.TokenJWT; 
+namespace Application.Services.TokenJWT;
 
 public class TokenService : ITokenService {
     private const double EXPIRY_DURATION_MINUTES = 30;
 
-    public string BuildToken(string key, string issuer, DtoInputUser user)
-    {
-        var claims = new[]
-        {
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.UserType.ToString()),
+    public string BuildToken(string key, string issuer, DtoInputToken token) {
+        var claims = new[] {
+            new Claim(ClaimTypes.Name, token.Username),
+            new Claim(ClaimTypes.Role, token.UserType.ToString()),
             new Claim(ClaimTypes.NameIdentifier,
                 Guid.NewGuid().ToString())
         };
@@ -26,26 +24,22 @@ public class TokenService : ITokenService {
         return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
     }
 
-    public bool IsTokenValid(string key, string issuer, string token)
-    {
+    public bool IsTokenValid(string key, string issuer, string token) {
         var mySecret = Encoding.UTF8.GetBytes(key);
         var mySecurityKey = new SymmetricSecurityKey(mySecret);
         var tokenHandler = new JwtSecurityTokenHandler();
-        try
-        {
+        try {
             tokenHandler.ValidateToken(token,
-                new TokenValidationParameters
-                {
+                new TokenValidationParameters {
                     ValidateIssuerSigningKey = true,
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidIssuer = issuer,
                     ValidAudience = issuer,
-                    IssuerSigningKey = mySecurityKey,
-                }, out SecurityToken validatedToken);
+                    IssuerSigningKey = mySecurityKey
+                }, out var validatedToken);
         }
-        catch
-        {
+        catch {
             return false;
         }
 
