@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Ef.DbEntities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Ef.Address;
 
@@ -23,16 +24,6 @@ public class AddressRepository : IAddressRepository
 
         return address;
     }
-    public int? FetchIdByValue(string street, string postalCode, string city, string number)
-    {
-        var address = _context.Address.FirstOrDefault(a =>
-            a.Street == street &&
-            a.PostalCode == postalCode &&
-            a.City == city &&
-            a.Number == number);
-
-        return address?.Id;
-    }
 
     public DbAddress Create(string street, string postalCode, string city, string number)
     {
@@ -41,7 +32,6 @@ public class AddressRepository : IAddressRepository
         _context.SaveChanges();
         return address;
     }
-
     public bool Delete(int id)
     {
         var addressToDelete = _context.Address.FirstOrDefault(a => a.Id == id);
@@ -69,5 +59,17 @@ public class AddressRepository : IAddressRepository
 
         _context.SaveChanges();
         return true;
+    }
+
+    public async Task<int> GetIdByAddress(string street, string postalCode, string city, string number)
+    {
+        var addressEntity = await _context.Address
+            .FirstOrDefaultAsync(a =>
+                a.Street == street &&
+                a.PostalCode == postalCode &&
+                a.City == city &&
+                a.Number == number);
+
+        return addressEntity?.Id ?? 0;
     }
 }

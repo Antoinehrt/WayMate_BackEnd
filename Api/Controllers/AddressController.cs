@@ -13,22 +13,21 @@ public class AddressController : ControllerBase
     private readonly UseCaseFetchAddressById _useCaseFetchAddressById;
     private readonly UseCaseDeleteAddress _useCaseDeleteAddress;
     private readonly UseCaseUpdateAddress _useCaseUpdateAddress;
-    private readonly UseCaseFetchAddressByAddress _useCaseFetchAddressByAddress;
+    private readonly UseCaseFetchIdByAddress _useCaseFetchIdByAddress;
 
     public AddressController(UseCaseCreateAddress useCaseCreateAddress, 
         UseCaseFetchAllAddress useCaseFetchAllAddress, 
         UseCaseFetchAddressById useCaseFetchAddressById, 
-        UseCaseDeleteAddress useCaseDeleteAddress, UseCaseUpdateAddress useCaseUpdateAddress, 
-        UseCaseFetchAddressByAddress useCaseFetchAddressByAddress)
+        UseCaseDeleteAddress useCaseDeleteAddress, UseCaseUpdateAddress useCaseUpdateAddress, UseCaseFetchIdByAddress useCaseFetchIdByAddress)
     {
         _useCaseCreateAddress = useCaseCreateAddress;
         _useCaseFetchAllAddress = useCaseFetchAllAddress;
         _useCaseFetchAddressById = useCaseFetchAddressById;
         _useCaseDeleteAddress = useCaseDeleteAddress;
         _useCaseUpdateAddress = useCaseUpdateAddress;
-        _useCaseFetchAddressByAddress = useCaseFetchAddressByAddress;
+        _useCaseFetchIdByAddress = useCaseFetchIdByAddress;
     }
-
+    
     [HttpGet]
     public ActionResult<IEnumerable<DtoOutputAddress>> FetchAll()
     {
@@ -53,25 +52,6 @@ public class AddressController : ControllerBase
             });
         }
     }
-
-    [HttpGet("fetchByAddress")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult<DtoOutputAddress> FetchByAddress(DtoInputFetchByAddress dto)
-    {
-        try
-        {
-            return _useCaseFetchAddressByAddress.Execute(dto);
-        }
-        catch (KeyNotFoundException e)
-        {
-            return NotFound(new
-            {
-                e.Message
-            });
-        }
-    }
-
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -101,5 +81,32 @@ public class AddressController : ControllerBase
     {
         dto.Id = id;
         return _useCaseUpdateAddress.Execute(dto) ? NoContent() : NotFound();
+    }
+    
+    [HttpGet]
+    [Route("get-id")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<DtoOutputAddressId>> GetAddressId(
+        [FromQuery] string street,
+        [FromQuery] string postalCode,
+        [FromQuery] string city,
+        [FromQuery] string number)
+    {
+        try
+        {
+            int addressId = await _useCaseFetchIdByAddress.GetIdByAddressAsync(street, postalCode, city, number);
+
+            var dto = new DtoOutputAddressId
+            {
+                Id = addressId
+            };
+
+            return Ok(dto);
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { Message = ex.Message });
+        }
     }
 }

@@ -6,8 +6,8 @@ public interface IAddressRepository
 {
     IEnumerable<DbAddress> FetchAll();
     DbAddress FetchById(int id);
-    int? FetchIdByValue(string street, string postalCode, string city, string number);
     DbAddress Create(string street, string postalCode, string city, string number);
     bool Delete(int id);
     bool Update(int id, string street, string postalCode, string city, string number);
+    Task<int> GetIdByAddress(string street, string postalCode, string city, string number);
 }
