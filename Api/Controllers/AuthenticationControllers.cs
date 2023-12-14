@@ -4,6 +4,7 @@ using Application.Services.TokenJWT.dto;
 using Application.UseCases.Authentication;
 using Application.UseCases.Authentication.Dtos;
 using Application.UseCases.Users.User;
+using Application.UseCases.Users.User.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,63 +31,30 @@ public class AuthenticationControllers : ControllerBase {
         _userCaseFetchUserByEmail = userCaseFetchUserByEmail;
     }
     
-    
     [AllowAnonymous]
-    [HttpPost]
-    public DtoOutputToken Auth(DtoInputToken dto) {
-        var token = _tokenService.BuildToken(_configuration["Jwt:Key"], _configuration["Jwt:Issuer"], dto);
-        Response.Cookies.Append("cookie", token, new CookieOptions {
-            Secure = true,
-            HttpOnly = true
-        });
-        return new DtoOutputToken {
-            Token = token
-        };
-    }
- 
-    [HttpGet]
-    [Authorize(Roles = "Admin")]
-    public ActionResult TestConnectionAdmin() {
-        return Ok(new {
-            text = "Ok"
-        });
-    }
-    [HttpGet]
-    [Authorize(Roles = "Passenger")]
-    public ActionResult TestConnectionPassenger() {
-        return Ok(new {
-            text = "Ok"
-        });
-    }
-    [HttpGet]
-    [Authorize(Roles = "Driver")]
-    public ActionResult TestConnectionDriver() {
-        return Ok(new {
-            text = "Ok"
-        });
-    }
-    [HttpGet]
-    [Authorize]
-    [Route("IsConnected")]
-    public ActionResult IsConnected() {
-        return Ok();
-    }
-
     [HttpGet("login")]
-    [ProducesResponseTypeAttribute(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<DtoOutputLogin>> Login([FromQuery][Required] string email, [FromQuery][Required] string password) {
+    public ActionResult<DtoOutputLogin> Login([FromQuery][Required] string email, [FromQuery][Required] string password) {
         try {
-            var user = _userCaseFetchUserByEmail.Execute(email);
-            if (string.IsNullOrWhiteSpace(password)) return BadRequest();
-            if (_useCaseLogin.Execute(email, password).IsLogged) {
-                return new DtoOutputLogin {
-                    Token = Auth(new DtoInputToken { Username = user.Username, UserType = user.UserType }).Token,
-                    IsLogged = true
-                };
+            if (string.IsNullOrWhiteSpace(password)) {
+                return BadRequest("Password is required.");
             }
 
-            return Unauthorized("Connection failed.");
+            if (!_useCaseLogin.Execute(email, password).IsLogged) {
+                return Unauthorized();
+            }
+
+            var user = _userCaseFetchUserByEmail.Execute(email);
+            if (user == null) {
+                throw new KeyNotFoundException($"User with email '{email}' not found.");
+            }
+            var token = GenerateAndSetToken(user);
+
+            return new DtoOutputLogin {
+                Token = token.Token,
+                IsLogged = true
+            };
         }
         catch (KeyNotFoundException e) {
             return NotFound(new {
@@ -94,19 +62,52 @@ public class AuthenticationControllers : ControllerBase {
             });
         }
     }
-    
+
+    private DtoOutputLogin GenerateAndSetToken(DtoOutputUser user) {
+        var dto = new DtoInputToken { Username = user.Username, UserType = user.UserType };
+        var token = _tokenService.BuildToken(_configuration["JWT:Key"], _configuration["JWT:Issuer"], dto);
+
+        Response.Cookies.Append("cookie", token, new CookieOptions {
+            Secure = true,
+            HttpOnly = true
+        });
+
+        return new DtoOutputLogin {
+            Token = token,
+            IsLogged = true
+        };
+    }
+
     [HttpGet("registration/by-email/{email:regex(^[[a-z0-9]]+(?:.[[a-z0-9]]+)*@(?:[[a-z0-9]](?:[[a-z0-9-]]*[[a-z0-9]])?.)+[[a-z0-9]](?:[[a-z0-9-]]*[[a-z0-9]])?$)}")]
     [ProducesResponseTypeAttribute(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public ActionResult<DtoOutputRegistration> FetchByEmail(string email) {
         return _useCaseRegistrationEmail.Execute(email);
     }
-    
+
     [HttpGet("registration/by-username/{username:regex(^[[a-zA-Z0-9_-]]{{5,20}}$)}")]
     [ProducesResponseTypeAttribute(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public ActionResult<DtoOutputRegistration> FetchByUsername(string username) {
         return _useCaseRegistrationUsername.Execute(username);
     }
-    
+
+    /*
+    [HttpGet]
+    [Authorize(Roles = "Admin")]
+    public ActionResult TestConnection() {
+        var identityName = User.Identity.Name;
+        Console.Write(identityName);
+        return Ok(new {
+            text = "Ok"
+        });
+    }
+
+    [HttpGet]
+    [Authorize]
+    [Route("IsConnected")]
+    public ActionResult IsConnected() {
+        return Ok();
+    }
+    */
 }
