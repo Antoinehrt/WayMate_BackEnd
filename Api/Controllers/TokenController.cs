@@ -1,33 +1,29 @@
-﻿using Application.Services.TokenJWT;
+﻿using System.Security.Authentication;
+using System.Security.Claims;
+using Application.Services.TokenJWT;
 using Application.Services.TokenJWT.dto;
 using Domain.Entities.Users;
+using Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
-/*
- * https://medium.com/@vndpal/how-to-implement-jwt-token-authentication-in-net-core-6-ab7f48470f5c
- * https://www.c-sharpcorner.com/article/jwt-token-creation-authentication-and-authorization-in-asp-net-core-6-0-with-po/
- * https://www.c-sharpcorner.com/article/jwt-json-web-token-authentication-in-asp-net-core/
- */
-[ApiController]
-[Route("api/v1/users")]
-public class TokenController {
-    private readonly IConfiguration _configuration;
-    private readonly TokenService _service;
 
-    public TokenController(TokenService service, IConfiguration configuration) {
-        _service = service;
+[ApiController]
+[Route("api/v1/token")]
+public class TokenController : ControllerBase {
+    private readonly IConfiguration _configuration;
+    private readonly TokenService _tokenService;
+
+    public TokenController(TokenService tokenService, IConfiguration configuration) {
+        _tokenService = tokenService;
         _configuration = configuration;
     }
 
     [AllowAnonymous]
     [HttpPost]
     public ActionResult<DtoOutputToken> Auth(DtoInputToken dto) {
-        var token = _service.BuildToken(
-            _configuration["Jwt:Key"],
-            _configuration["Jwt:Issuer"],
-            dto);
+        var token = _tokenService.BuildToken(_configuration["Jwt:Key"], _configuration["Jwt:Issuer"], dto);
         Response.Cookies.Append("cookie", token, new CookieOptions {
             Secure = true,
             HttpOnly = true
@@ -36,17 +32,28 @@ public class TokenController {
             Token = token
         };
     }
-
+ 
     [HttpGet]
     [Authorize(Roles = "Admin")]
-    public ActionResult TestConnection() {
-        var identityName = User.Identity.Name;
-        Console.Write(identityName);
+    public ActionResult TestConnectionAdmin() {
         return Ok(new {
             text = "Ok"
         });
     }
-
+    [HttpGet]
+    [Authorize(Roles = "Passenger")]
+    public ActionResult TestConnectionPassenger() {
+        return Ok(new {
+            text = "Ok"
+        });
+    }
+    [HttpGet]
+    [Authorize(Roles = "Driver")]
+    public ActionResult TestConnectionDriver() {
+        return Ok(new {
+            text = "Ok"
+        });
+    }
     [HttpGet]
     [Authorize]
     [Route("IsConnected")]
