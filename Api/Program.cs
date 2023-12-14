@@ -1,4 +1,6 @@
+using System.Text;
 using Application;
+using Application.Services.TokenJWT;
 using Application.UseCases.Address;
 using Application.UseCases.Authentication;
 using Application.UseCases.Car;
@@ -14,8 +16,10 @@ using Infrastructure.Ef.Users.Admin;
 using Infrastructure.Ef.Users.Driver;
 using Infrastructure.Ef.Users.Passenger;
 using Infrastructure.Ef.Users.User;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,7 +35,27 @@ builder.Services.AddDbContext<WaymateContext>(a => a.UseSqlServer(
     builder.Configuration.GetConnectionString("db"))
 );
 
-//Controllers
+//JWT configuration
+var jwtKey = builder.Configuration.GetSection("JWT:Key").Get<string>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options => {
+        options.TokenValidationParameters = new TokenValidationParameters {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
+            ValidAudience = builder.Configuration["JWT:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+        };
+        options.Events = new JwtBearerEvents {
+            OnMessageReceived = context => {
+                context.Token = context.Request.Cookies["cookie"];
+                return Task.CompletedTask;
+            }
+        };
+    });
 
 //Repository
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
@@ -42,6 +66,8 @@ builder.Services.AddScoped<IPassengerRepository, PassengerRepository>();
 builder.Services.AddScoped<IDriverRepository, DriverRepository>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
+//Token
+builder.Services.AddScoped<TokenService>();
 
 //Use Case Address
 builder.Services.AddScoped<UseCaseCreateAddress>();
@@ -84,8 +110,8 @@ builder.Services.AddScoped<UseCaseRegistrationEmail>();
 builder.Services.AddScoped<UseCaseRegistrationUsername>();
 
 
-builder.Services.AddCors(options =>
-{
+
+builder.Services.AddCors(options => {
     options.AddPolicy("Dev", policyBuilder =>
         policyBuilder.WithOrigins("http://localhost:4200")
             .AllowAnyMethod()
