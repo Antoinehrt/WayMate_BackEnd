@@ -49,10 +49,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidAudience = builder.Configuration["JWT:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
         };
-        options.Events = new JwtBearerEvents
-        {
-            OnMessageReceived = context =>
-            {
+        options.Events = new JwtBearerEvents {
+            OnMessageReceived = context => {
                 context.Token = context.Request.Cookies["cookie"];
                 return Task.CompletedTask;
             }
@@ -68,6 +66,8 @@ builder.Services.AddScoped<IPassengerRepository, PassengerRepository>();
 builder.Services.AddScoped<IDriverRepository, DriverRepository>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
+//Token
+builder.Services.AddScoped<TokenService>();
 
 //Use Case Address
 builder.Services.AddScoped<UseCaseCreateAddress>();
@@ -107,11 +107,10 @@ builder.Services.AddScoped<UseCaseUpdateDriver>();
 builder.Services.AddScoped<UseCaseLogin>();
 builder.Services.AddScoped<UseCaseRegistrationEmail>();
 builder.Services.AddScoped<UseCaseRegistrationUsername>();
-builder.Services.AddScoped<ITokenService, TokenService>();
 
 
-builder.Services.AddCors(options =>
-{
+
+builder.Services.AddCors(options => {
     options.AddPolicy("Dev", policyBuilder =>
         policyBuilder.WithOrigins("http://localhost:4200")
             .AllowAnyMethod()

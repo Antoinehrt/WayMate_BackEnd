@@ -6,15 +6,14 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Application.Services.TokenJWT;
 
-public class TokenService : ITokenService {
-    private const double EXPIRY_DURATION_MINUTES = 30;
+public class TokenService{
+    private const double EXPIRY_DURATION_MINUTES = 60;
 
     public string BuildToken(string key, string issuer, DtoInputToken token) {
         var claims = new[] {
             new Claim(ClaimTypes.Name, token.Username),
             new Claim(ClaimTypes.Role, token.UserType.ToString()),
-            new Claim(ClaimTypes.NameIdentifier,
-                Guid.NewGuid().ToString())
+            new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
         };
 
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
@@ -39,10 +38,9 @@ public class TokenService : ITokenService {
                     IssuerSigningKey = mySecurityKey
                 }, out var validatedToken);
         }
-        catch {
+        catch (SecurityTokenInvalidSignatureException) {
             return false;
         }
-
         return true;
     }
 }
