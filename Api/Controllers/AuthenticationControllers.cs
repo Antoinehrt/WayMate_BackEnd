@@ -35,7 +35,7 @@ public class AuthenticationControllers : ControllerBase {
     [HttpGet("login")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<DtoOutputLogin> Login([FromQuery][Required] string email, [FromQuery][Required] string password) {
+    public ActionResult<string> Login([FromQuery][Required] string email, [FromQuery][Required] string password) {
         try {
             if (string.IsNullOrWhiteSpace(password)) {
                 return BadRequest("Password is required.");
@@ -49,12 +49,7 @@ public class AuthenticationControllers : ControllerBase {
             if (user == null) {
                 throw new KeyNotFoundException($"User with email '{email}' not found.");
             }
-            var token = GenerateAndSetToken(user);
-
-            return new DtoOutputLogin {
-                Token = token.Token,
-                IsLogged = true
-            };
+            return GenerateAndSetToken(user).Token.ToString();
         }
         catch (KeyNotFoundException e) {
             return NotFound(new {
@@ -63,7 +58,7 @@ public class AuthenticationControllers : ControllerBase {
         }
     }
 
-    private DtoOutputLogin GenerateAndSetToken(DtoOutputUser user) {
+    private DtoOutputToken GenerateAndSetToken(DtoOutputUser user) {
         var dto = new DtoInputToken { Username = user.Username, UserType = user.UserType };
         var token = _tokenService.BuildToken(_configuration["JWT:Key"], _configuration["JWT:Issuer"], dto);
 
@@ -72,9 +67,8 @@ public class AuthenticationControllers : ControllerBase {
             HttpOnly = true
         });
 
-        return new DtoOutputLogin {
-            Token = token,
-            IsLogged = true
+        return new DtoOutputToken {
+            Token = token
         };
     }
 
