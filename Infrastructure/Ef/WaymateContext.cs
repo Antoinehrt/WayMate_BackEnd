@@ -12,6 +12,8 @@ public class WaymateContext : DbContext
     public DbSet<DbAddress> Address { get; set; }
     public DbSet<DbCar> Cars { get; set; }
     public DbSet<DbUser> Users { get; set; }
+    
+    public DbSet<DbTrip> Trip { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -55,6 +57,22 @@ public class WaymateContext : DbContext
             entity.Property(u => u.Gender).HasColumnName("gender");
             entity.Property(u => u.AddressId).HasColumnName("addressId");
             entity.Property(u => u.CarPlate).HasColumnName("carPlate");
+        });
+
+        modelBuilder.Entity<DbTrip>(entity =>
+        {
+            entity.ToTable("trip");
+            entity.HasKey(t => t.Id);
+            entity.Property(t => t.Id).HasColumnName("id");
+            entity.Property(t => t.IdDriver).HasColumnName("idDriver");
+            entity.Property(t => t.Smoke).HasColumnName("smoke");
+            entity.Property(t => t.PriceKm).HasColumnName("priceKm");
+            entity.Property(t => t.Luggage).HasColumnName("luggage");
+            entity.Property(t => t.PetFriendly).HasColumnName("petFriendly");
+            entity.Property(t => t.Date).HasColumnName("date");
+            entity.Property(t => t.OccupiedSeats).HasColumnName("occupiedSeats");
+            entity.Property(t => t.IdStratingPoint).HasColumnName("idStratingPoint");
+            entity.Property(t => t.IdDestination).HasColumnName("idDestination");
         });
     }
 }
