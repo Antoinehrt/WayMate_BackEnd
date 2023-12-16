@@ -71,7 +71,7 @@ public class WaymateContext : DbContext
             entity.Property(t => t.PetFriendly).HasColumnName("petFriendly");
             entity.Property(t => t.Date).HasColumnName("date");
             entity.Property(t => t.OccupiedSeats).HasColumnName("occupiedSeats");
-            entity.Property(t => t.IdStratingPoint).HasColumnName("idStratingPoint");
+            entity.Property(t => t.IdStartingPoint).HasColumnName("idStartingPoint");
             entity.Property(t => t.IdDestination).HasColumnName("idDestination");
         });
     }
