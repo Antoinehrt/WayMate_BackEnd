@@ -4,6 +4,7 @@ using Application.Services.TokenJWT;
 using Application.UseCases.Address;
 using Application.UseCases.Authentication;
 using Application.UseCases.Car;
+using Application.UseCases.Trip;
 using Application.UseCases.Users.Admin;
 using Application.UseCases.Users.Driver;
 using Application.UseCases.Users.Passenger;
@@ -12,6 +13,7 @@ using Infrastructure.Ef;
 using Infrastructure.Ef.Address;
 using Infrastructure.Ef.Authentication;
 using Infrastructure.Ef.Car;
+using Infrastructure.Ef.Trip;
 using Infrastructure.Ef.Users.Admin;
 using Infrastructure.Ef.Users.Driver;
 using Infrastructure.Ef.Users.Passenger;
@@ -59,6 +61,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 //Repository
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<ITripRepository, TripRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
@@ -76,6 +79,9 @@ builder.Services.AddScoped<UseCaseFetchAddressById>();
 builder.Services.AddScoped<UseCaseDeleteAddress>();
 builder.Services.AddScoped<UseCaseUpdateAddress>();
 builder.Services.AddScoped<UseCaseFetchIdByAddress>();
+
+//Use Case Trip
+builder.Services.AddScoped<UseCaseFetchAllTrip>();
 
 //Use Case Car
 builder.Services.AddScoped<UseCaseCreateCar>();

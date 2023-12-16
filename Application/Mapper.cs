@@ -1,6 +1,7 @@
 ﻿using Application.UseCases.Address.Dtos;
 using Application.UseCases.Authentication.Dtos;
 using Application.UseCases.Car.Dtos;
+using Application.UseCases.Trip.Dtos;
 using Application.UseCases.Users.Admin.Dtos;
 using Application.UseCases.Users.Driver.Dto;
 using Application.UseCases.Users.Passenger.Dto;
@@ -21,7 +22,9 @@ public class Mapper : Profile
         CreateMap<DbAddress, DtoOutputAddress>();
         CreateMap<DbAddress, Address>();
         
-        
+        //Trip
+        CreateMap<DbTrip, DtoOutputTrip>();
+                
         //Car
         CreateMap<Car, DtoOutputCar>();
         CreateMap<DbCar, DtoOutputCar>();
