@@ -23,7 +23,9 @@ public class Mapper : Profile
         CreateMap<DbAddress, Address>();
         
         //Trip
+        CreateMap<Trip, DtoOutputTrip>();
         CreateMap<DbTrip, DtoOutputTrip>();
+        CreateMap<DbTrip, Trip>();
                 
         //Car
         CreateMap<Car, DtoOutputCar>();
