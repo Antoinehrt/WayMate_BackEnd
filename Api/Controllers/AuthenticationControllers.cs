@@ -5,6 +5,7 @@ using Application.UseCases.Authentication;
 using Application.UseCases.Authentication.Dtos;
 using Application.UseCases.Users.User;
 using Application.UseCases.Users.User.Dto;
+using Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,7 +50,7 @@ public class AuthenticationControllers : ControllerBase {
             if (user == null) {
                 throw new KeyNotFoundException($"User with email '{email}' not found.");
             }
-            return GenerateAndSetToken(user).Token.ToString();
+            return GenerateAndSetToken(user.Username, user.UserType).Token.ToString();
         }
         catch (KeyNotFoundException e) {
             return NotFound(new {
@@ -57,9 +58,13 @@ public class AuthenticationControllers : ControllerBase {
             });
         }
     }
-
-    private DtoOutputToken GenerateAndSetToken(DtoOutputUser user) {
-        var dto = new DtoInputToken { Username = user.Username, UserType = user.UserType };
+    
+    [AllowAnonymous]
+    [HttpGet("token")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public DtoOutputToken GenerateAndSetToken([FromQuery][Required]string username, [FromQuery][Required]string userType) {
+        var dto = new DtoInputToken { Username = username, UserType = userType };
         var token = _tokenService.BuildToken(_configuration["JWT:Key"], _configuration["JWT:Issuer"], dto);
 
         Response.Cookies.Append("cookie", token, new CookieOptions {
