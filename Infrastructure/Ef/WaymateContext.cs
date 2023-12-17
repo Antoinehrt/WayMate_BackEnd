@@ -5,14 +5,27 @@ namespace Infrastructure.Ef;
 
 public class WaymateContext : DbContext
 {
-    public WaymateContext(DbContextOptions options) : base(options)
+    private readonly IConnectionStringProvider _connectionStringProvider;
+  /*  public WaymateContext(DbContextOptions options) : base(options)
     {
-    }
+    }*/
     
     public DbSet<DbAddress> Address { get; set; }
     public DbSet<DbCar> Cars { get; set; }
     public DbSet<DbUser> Users { get; set; }
+    
+    public WaymateContext(IConnectionStringProvider connectionStringProvider)
+    {
+        _connectionStringProvider = connectionStringProvider;
+    }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+           // optionsBuilder.UseSqlServer(_connectionStringProvider.GetConnectionString("DbRemote"));
+        }
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<DbAddress>(entity =>
