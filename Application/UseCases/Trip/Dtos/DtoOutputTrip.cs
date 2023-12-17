@@ -10,6 +10,6 @@ public class DtoOutputTrip
     public bool PetFriendly { get; set; }
     public DateTime Date { get; set; }
     public int OccupiedSeats { get; set; }
-    public int IdStratingPoint { get; set; }
+    public int IdStartingPoint { get; set; }
     public int IdDestination { get; set; }
 }
