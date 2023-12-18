@@ -24,4 +24,13 @@ public class TripRepository : ITripRepository
         _context.SaveChanges();
         return trip;
     }
+
+    public DbTrip FetchById(int id)
+    {
+        var trip = _context.Trip.FirstOrDefault(t => t.Id == id);
+        
+        if(trip == null) throw new KeyNotFoundException($"Trip with id{id} has not been found");
+
+        return trip;
+    }
 }
