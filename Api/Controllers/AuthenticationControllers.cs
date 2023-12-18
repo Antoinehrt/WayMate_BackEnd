@@ -51,14 +51,16 @@ public class AuthenticationControllers : ControllerBase {
         }
     }
     
-    [AllowAnonymous]
     [HttpPost("token")]
     public DtoOutputToken GenerateAndSetToken(DtoInputToken dto) {
         var token = _tokenService.BuildToken(_configuration["JWT:Key"], _configuration["JWT:Issuer"], dto);
-        
-        Response.Cookies.Append("WayMateToken", token, new CookieOptions {
+        HttpContext.Response.Cookies.Append("WayMateToken", token, new CookieOptions {
             Secure = true,
-            HttpOnly = false,
+            HttpOnly = true,
+            SameSite = SameSiteMode.None, 
+            Expires = DateTime.UtcNow.AddHours(1),
+            MaxAge = TimeSpan.FromHours(1),
+            IsEssential = true, 
         });
 
         return new DtoOutputToken {
