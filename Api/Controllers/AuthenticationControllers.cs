@@ -7,8 +7,6 @@ using Application.UseCases.Authentication.Dtos;
 using Application.UseCases.Users.Passenger;
 using Application.UseCases.Users.Passenger.Dto;
 using Application.UseCases.Users.User;
-using Application.UseCases.Users.User.Dto;
-using Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -100,7 +98,7 @@ public class AuthenticationControllers : ControllerBase {
     [HttpGet]
     [Authorize(Roles = "Admin")]
     public ActionResult TestConnection() {
-        var identityName = User.Identity.Name;
+        var identityName = User.Identity?.Name;
         Console.Write(identityName);
         return Ok(new {
             text = "Ok"
