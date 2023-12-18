@@ -20,11 +20,12 @@ public class UseCaseLogin {
 
     public DtoOutputLogin Execute(string email, string password) {
         var dbUser = _userRepository.FetchByEmail(email);
-        if (dbUser == null) return new DtoOutputLogin { IsLogged = false }; //Cette ligne pourrait aussi retourner une erreur
-        if (string.IsNullOrEmpty(password)) return new DtoOutputLogin { IsLogged = false };
+        if (dbUser == null || string.IsNullOrEmpty(password)) return new DtoOutputLogin { isLogged = false }; //Cette ligne pourrait aussi retourner une erreur
         
-        var isPasswordValid =  _passwordHasher.VerifyPwd(dbUser.Password, password);
-
-        return new DtoOutputLogin { IsLogged = isPasswordValid };
+        return new DtoOutputLogin {
+            isLogged = _passwordHasher.VerifyPwd(dbUser.Password, password),
+            username = dbUser.Username,
+            usertype = dbUser.UserType
+        };
     }
 }

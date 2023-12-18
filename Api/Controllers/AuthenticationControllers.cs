@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Api.Controllers.Users;
 using Application.Services.TokenJWT;
 using Application.Services.TokenJWT.dto;
 using Application.UseCases.Authentication;
 using Application.UseCases.Authentication.Dtos;
+using Application.UseCases.Users.Passenger;
+using Application.UseCases.Users.Passenger.Dto;
 using Application.UseCases.Users.User;
 using Application.UseCases.Users.User.Dto;
 using Domain.Enums;
@@ -20,9 +23,10 @@ public class AuthenticationControllers : ControllerBase {
     private readonly IConfiguration _configuration;
     private readonly TokenService _tokenService;
     private readonly UserCaseFetchUserByEmail _userCaseFetchUserByEmail;
+    private readonly UseCaseCreatePassenger _useCaseCreatePassenger;
     
 
-    public AuthenticationControllers(UseCaseLogin useCaseLogin, UseCaseRegistrationEmail useCaseRegistrationEmail, UseCaseRegistrationUsername useCaseRegistrationUsername, TokenService tokenService, IConfiguration configuration, UserCaseFetchUserByEmail userCaseFetchUserByEmail)
+    public AuthenticationControllers(UseCaseLogin useCaseLogin, UseCaseRegistrationEmail useCaseRegistrationEmail, UseCaseRegistrationUsername useCaseRegistrationUsername, TokenService tokenService, IConfiguration configuration, UserCaseFetchUserByEmail userCaseFetchUserByEmail, UseCaseCreatePassenger useCaseCreatePassenger)
     {
         _useCaseLogin = useCaseLogin;
         _useCaseRegistrationEmail = useCaseRegistrationEmail;
@@ -30,27 +34,20 @@ public class AuthenticationControllers : ControllerBase {
         _tokenService = tokenService;
         _configuration = configuration;
         _userCaseFetchUserByEmail = userCaseFetchUserByEmail;
+        _useCaseCreatePassenger = useCaseCreatePassenger;
     }
     
     [AllowAnonymous]
     [HttpGet("login")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<string> Login([FromQuery][Required] string email, [FromQuery][Required] string password) {
+    public ActionResult<DtoOutputToken> Login([FromQuery][Required] string email, [FromQuery][Required] string password) {
         try {
-            if (string.IsNullOrWhiteSpace(password)) {
-                return BadRequest("Password is required.");
+            var authResult = _useCaseLogin.Execute(email, password); 
+            if (!authResult.isLogged) {
+                return BadRequest("Wrong credentials");
             }
-
-            if (!_useCaseLogin.Execute(email, password).IsLogged) {
-                return Unauthorized();
-            }
-
-            var user = _userCaseFetchUserByEmail.Execute(email);
-            if (user == null) {
-                throw new KeyNotFoundException($"User with email '{email}' not found.");
-            }
-            return GenerateAndSetToken(user.Username, user.UserType).Token.ToString();
+            return Ok(GenerateAndSetToken(new DtoInputToken{username = authResult.username, userType = authResult.usertype}));
         }
         catch (KeyNotFoundException e) {
             return NotFound(new {
@@ -58,22 +55,30 @@ public class AuthenticationControllers : ControllerBase {
             });
         }
     }
-    
-    [AllowAnonymous]
-    [HttpGet("token")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public DtoOutputToken GenerateAndSetToken([FromQuery][Required]string username, [FromQuery][Required]string userType) {
-        var dto = new DtoInputToken { Username = username, UserType = userType };
-        var token = _tokenService.BuildToken(_configuration["JWT:Key"], _configuration["JWT:Issuer"], dto);
 
-        Response.Cookies.Append("cookie", token, new CookieOptions {
+    [AllowAnonymous]
+    [HttpPost("registration")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    public ActionResult<DtoOutputPassenger> Registration(DtoInputCreatePassenger dto) {
+            var registrationResult = _useCaseCreatePassenger.Execute(dto);
+            GenerateAndSetToken(new DtoInputToken
+                { username = registrationResult.Username, userType = registrationResult.UserType });
+            return Ok(registrationResult);
+    }
+    
+    [HttpPost("token")]
+    public DtoOutputToken GenerateAndSetToken(DtoInputToken dto) {
+        var token = _tokenService.BuildToken(_configuration["JWT:Key"], _configuration["JWT:Issuer"], dto);
+        HttpContext.Response.Cookies.Append("WayMateToken", token, new CookieOptions {
             Secure = true,
-            HttpOnly = true
+            HttpOnly = true,
+            SameSite = SameSiteMode.None,
+            MaxAge = TimeSpan.FromHours(2),
+            IsEssential = true, 
         });
 
         return new DtoOutputToken {
-            Token = token
+            token = token
         };
     }
 
@@ -91,7 +96,7 @@ public class AuthenticationControllers : ControllerBase {
         return _useCaseRegistrationUsername.Execute(username);
     }
 
-    /*
+    
     [HttpGet]
     [Authorize(Roles = "Admin")]
     public ActionResult TestConnection() {
@@ -108,5 +113,5 @@ public class AuthenticationControllers : ControllerBase {
     public ActionResult IsConnected() {
         return Ok();
     }
-    */
+    
 }

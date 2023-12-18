@@ -3,6 +3,6 @@
 namespace Application.Services.TokenJWT.dto; 
 
 public class DtoInputToken {
-    public string Username { get; set; }
-    public string UserType { get; set; }
+    public string username { get; set; }
+    public string userType { get; set; }
 }
