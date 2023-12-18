@@ -1,29 +1,165 @@
 -- Inserting addresses
 INSERT INTO address (street, postalCode, city, number) VALUES
-    ('Main Street', '12345', 'Cityville', '1'),
-    ('Star Avenue', '54321', 'Galaxy City', '42'),
-    ('Millennium Square', '67890', 'Spaceport', '7');
+('Tatooine Street', '12345', 'Mos Eisley', '42'),
+('Coruscant Avenue', '54321', 'Galactic City', '7'),
+('Naboo Boulevard', '67890', 'Theed', '1138'),
+('Hoth Lane', '98765', 'Echo Base', '5'),
+('Endor Path', '24680', 'Bright Tree Village', '22'),
+('Kashyyyk Road', '13579', 'Tree Top City', '3'),
+('Dagobah Swamp', '11223', 'Yoda Hut', '9'),
+('Mustafar Way', '33445', 'Lava City', '66'),
+('Kamino Lane', '55667', 'Tipoca City', '501'),
+('Jakku Trail', '77889', 'Niima Outpost', '13'),
+('Geonosis Avenue', '99000', 'Stalgasin Hive', '212'),
+('Bespin Cloud', '11223', 'Cloud City', '32'),
+('Alderaan Lane', '33445', 'Organa City', '5'),
+('Yavin IV Path', '55667', 'Rebel Base', '94'),
+('Dantooine Road', '77889', 'Settlement 421', '7'),
+('Lothal Street', '99000', 'Capital City', '1138'),
+('Mandalore Avenue', '11223', 'Keldabe', '17'),
+('Ryloth Lane', '33445', 'Lessu', '21'),
+('Kessel Run', '55667', 'Spice Mine', '12'),
+('Korriban Path', '77889', 'Valley of the Dark Lords', '66'),
+('Mon Cala Boulevard', '99000', 'Shipyards', '3'),
+('Sullust Road', '11223', 'SoroSuub Facility', '8'),
+('Tatooine Street', '33445', 'Mos Espa', '1138'),
+('Coruscant Avenue', '55667', 'Senate District', '21'),
+('Naboo Boulevard', '77889', 'Otoh Gunga', '5'),
+('Hoth Lane', '99000', 'Rebel Echo Base', '7'),
+('Endor Path', '11223', 'Ewok Village', '42'),
+('Kashyyyk Road', '33445', 'Wroshyr Tree', '9'),
+('Dagobah Swamp', '55667', 'Yoda Training Ground', '1138'),
+('Mustafar Way', '77889', 'Lava River', '666'),
+('Kamino Lane', '99000', 'Clone Trooper Barracks', '501'),
+('Jakku Trail', '11223', 'Junkyard Outpost', '13'),
+('Geonosis Avenue', '33445', 'Droid Factory', '212'),
+('Bespin Cloud', '55667', 'Cloud City Tower', '32'),
+('Alderaan Lane', '77889', 'Royal Palace', '5'),
+('Yavin IV Path', '99000', 'Rebel War Room', '94'),
+('Dantooine Road', '11223', 'Ruins of Dantooine', '7'),
+('Lothal Street', '33445', 'Imperial Command Center', '1138'),
+('Mandalore Avenue', '55667', 'Mandalorian Enclave', '17'),
+('Ryloth Lane', '77889', 'Twi lek Village', '21'),
+('Kessel Run', '99000', 'Smuggler s Cove', '12'),
+('Korriban Path', '11223', 'Sith Academy', '66'),
+('Mon Cala Boulevard', '33445', 'Mon Calamari City', '3'),
+('Sullust Road', '55667', 'Lava Caves', '8'),
+('Tatooine Street', '77889', 'Jawa Trading Post', '1138'),
+('Coruscant Avenue', '99000', 'Jedi Temple', '21'),
+('Naboo Boulevard', '11223', 'Gungan City', '5'),
+('Hoth Lane', '33445', 'Ice Plains', '7'),
+('Endor Path', '55667', 'Ewok Tree Village', '42');
+
 GO
 -- Inserting cars
 INSERT INTO car (plateNumber, model, nbSeats, brand, carType, fuelType) VALUES
-    ('ABC123', 'Millennium Falcon', 5, 'Corellian Engineering Corporation', 0, 0),
-    ('DEF456', 'X-34 Landspeeder', 2, 'SoroSuub Corporation', 0, 0),
-    ('GHI789', 'Slave I', 3, 'Kuat Systems Engineering', 0, 0);
+('FALC0N1', 'Millennium Falcon', 5, 'Corellian Engineering Corporation', 1, 3),
+('XW1NGR', 'X-wing Starfighter', 1, 'Incom Corporation', 2, 4),
+('T13EF1GHT', 'TIE Fighter', 1, 'Sienar Fleet Systems', 2, 4),
+('L4NDSP33DR', 'Landspeeder', 2, 'SoroSuub Corporation', 0, 1),
+('ATAT4LK', 'AT-AT Walker', 40, 'Kuat Drive Yards', 3, 5),
+('SL4VESP1D3R', 'Slave I', 1, 'Kuat Systems Engineering', 2, 4),
+('SP33DB1K3', 'Speeder Bike', 1, 'Aratech Repulsor Company', 0, 1),
+('ST4RDESTROYR', 'Imperial Star Destroyer', 1000, 'Kuat Drive Yards', 3, 5),
+('TWIDBL4D3', 'Twi lek Blade', 2, 'Ubrikkian Industries', 0, 1),
+('J4WAS4NDCRAWL3R', 'Jawa Sandcrawler', 10, 'Corellian Mining Corporation', 3, 2),
+('S1THS3D4N', 'Sith Speeder', 2, 'Sith Empire Motors', 0, 1),
+('R0Y4LB4RG3', 'Royal Barge', 100, 'Theed Palace Space Vessel Engineering Corps', 3, 5),
+('P0DR4C3R', 'Podracer', 1, 'Collor Pondrat Plug-F Mammoth', 0, 2),
+('B4NTH4', 'Bantha', 2, 'Tatooine Motors', 0, 1),
+('M4ND4L0R14N', 'Mandalorian Gauntlet Fighter', 1, 'MandalMotors', 2, 4),
+('CR90CRV13R', 'CR90 Corvette', 100, 'Corellian Engineering Corporation', 3, 5),
+('K1RT4NKER', 'Kirtaner', 4, 'Kirtania Motors', 0, 1),
+('W00K13ROAR', 'Wookiee Roaring Beast', 2, 'Kashyyyk Speeder Corporation', 0, 1),
+('D41LYGHR0N', 'Dailyghron', 4, 'Trade Federation', 0, 1),
+('FLY1NGL4NDSP33D', 'Flying Landspeeder', 2, 'SoroSuub Corporation', 0, 1),
+('TW4RTHOG', 'Tusken Warthog', 2, 'Tatooine Motors', 0, 1),
+('ST4RFURY', 'Star Fury', 1, 'Earth Alliance', 2, 4),
+('D4RKSLD3', 'Dark Sleek Speeder', 1, 'Sith Empire Motors', 2, 4),
+('CL0N3J3T', 'Clone Jet Trooper', 1, 'Kamino Drive Yards', 2, 4),
+('HYPRSP4C3', 'Hyper Space', 0, 'Unknown', 4, 6),
+('N1GHTR1D3R', 'Night Rider', 1, 'Knight Rider Industries', 2, 4),
+('S0L0SP3C1AL', 'Solo Special', 2, 'Corellian Engineering Corporation', 0, 1),
+('4R0N4UT', 'Aronaut', 1, 'Alderaan Spaceworks', 2, 4),
+('R1DG3B4CK', 'Ridgeback', 4, 'Ubrikkian Industries', 0, 1),
+('T4L0NCL45P3R', 'Talon Clawper', 1, 'MandalMotors', 2, 4),
+('FL3X1BL3F1N', 'Flexible Fin', 1, 'Mon Calamari Shipyards', 2, 4),
+('ST3LTHM0D3', 'Stealth Mode', 1, 'Sienar Fleet Systems', 2, 4),
+('S1L3NTR1D3R', 'Silent Rider', 1, 'Sith Empire Motors', 2, 4),
+('W00K13W4RR10R', 'Wookiee Warrior', 1, 'Kashyyyk Speeder Corporation', 0, 1),
+('CL4NG3RF1GHT3R', 'Clanger Fighter', 1, 'Clanger Engineering', 2, 4),
+('R4P1DSTR1D3R', 'Rapid Strider', 1, 'Geonosian Motors', 0, 1),
+('F1R3H4WK', 'Firehawk', 2, 'Sienar Fleet Systems', 0, 1),
+('S0L4RRAC3R', 'Solar Racer', 1, 'Corellian Engineering Corporation', 0, 1),
+('G4L4CT1CG4LL0P', 'Galactic Gallop', 1, 'Unknown', 0, 1),
+('SH4D0WSL33K', 'Shadow Sleek', 1, 'Sith Empire Motors', 2, 4),
+('V1P3R', 'Viper', 1, 'Ubrikkian Industries', 2, 4),
+('ST4RSTR1D3R', 'Star Strider', 1, 'Sith Empire Motors', 2, 4),
+('M1DKN1GHT3R', 'Midnighter', 1, 'Sith Empire Motors', 2, 4),
+('SP4C3G4Z3R', 'Space Gazer', 2, 'Unknown', 0, 1),
+('T1T4N1UM', 'Titanium', 1, 'Sith Empire Motors', 2, 4),
+('R4V3N', 'Raven', 1, 'Ubrikkian Industries', 2, 4),
+('TW1ST3DSTR1D3R', 'Twisted Strider', 1, 'Sith Empire Motors', 2, 4),
+('FURYR1D3R', 'Fury Rider', 1, 'Sith Empire Motors', 2, 4);
+
 GO
 -- Inserting users
 INSERT INTO users (userType, username, password, email, birthDate, isBanned, phoneNumber, lastName, firstName, gender, addressId, carPlate) VALUES
-    ('Driver', 'luke_skywalker', 'password123', 'luke@example.com', '1980-05-25', 0, '1234567890', 'Skywalker', 'Luke', 'Male', 1, 'ABC123'),
-    ('Passenger', 'leia_organa', 'pass456', 'leia@example.com', '1983-09-19', 0, '9876543210', 'Organa', 'Leia', 'Female', 2, 'DEF456'),
-    ('Admin', 'han_solo', 'soloPass', 'han@example.com', '1977-04-29', 0, '6543210987', 'Solo', 'Han', 'Male', 3, 'GHI789');
+('admin', 'obiwanadmin', 'adminpass', 'obiwan@admin.com', '1977-05-25', 0, '123-456-7890', NULL, NULL, NULL, NULL, NULL),
+('admin', 'yodaadmin', 'adminpass', 'yoda@admin.com', '1945-02-17', 0, '987-654-3210', NULL, NULL, NULL, NULL, NULL),
+('passenger', 'lukepassenger', 'pass123', 'luke@passenger.com', '1971-09-19', 0, '555-555-5555', 'Skywalker', 'Luke', 'Male', 1, NULL),
+('passenger', 'leiapassenger', 'pass123', 'leia@passenger.com', '1977-05-25', 0, '555-555-5555', 'Organa', 'Leia', 'Female', 2, NULL),
+('passenger', 'hanpassenger', 'pass123', 'han@passenger.com', '1977-05-25', 0, '555-555-5555', 'Solo', 'Han', 'Male', 3, NULL),
+('driver', 'anakindriver', 'driverpass', 'anakin@driver.com', '1983-05-19', 0, '333-333-3333', 'Skywalker', 'Anakin', 'Male', 4, 'FALC0N1'),
+('driver', 'padmedriver', 'driverpass', 'padme@driver.com', '1981-05-12', 0, '333-333-3333', 'Amidala', 'Padmé', 'Female', 5, 'TW1ST3DSTR1D3R'),
+('driver', 'obiwandriver', 'driverpass', 'obiwan@driver.com', '1970-08-14', 0, '333-333-3333', 'Kenobi', 'Obi-Wan', 'Male', 6, 'ST3LTHM0D3'),
+('driver', 'chewbaccadriver', 'driverpass', 'chewbacca@driver.com', '1966-03-18', 0, '333-333-3333', 'Chewbacca', NULL, 'Male', 7, 'W00K13ROAR'),
+('driver', 'landodriver', 'driverpass', 'lando@driver.com', '1944-05-14', 0, '333-333-3333', 'Calrissian', 'Lando', 'Male', 8, 'S0L0SP3C1AL'),
+('passenger', 'vaderpassenger', 'pass123', 'vader@passenger.com', '1977-05-25', 0, '555-555-5555', 'Vader', 'Darth', 'Male', 9, NULL),
+('driver', 'bobbafettdriver', 'driverpass', 'boba@driver.com', '1982-12-18', 0, '333-333-3333', 'Fett', 'Boba', 'Male', 10, 'SL4VESP1D3R'),
+('admin', 'admin50', 'adminpass', 'admin50@admin.com', '1980-01-01', 0, '555-555-5555', NULL, NULL, NULL, NULL, NULL),
+('passenger', 'passenger50', 'pass123', 'passenger50@passenger.com', '1990-01-01', 0, '555-555-5555', 'LastName50', 'FirstName50', 'Male', 11, NULL),
+('driver', 'driver50', 'driverpass', 'driver50@driver.com', '1985-01-01', 0, '555-555-5555', 'LastName50', 'FirstName50', 'Female', 12, 'TW1ST3DSTR1D3R');
+
 GO
 -- Inserting trips
 INSERT INTO trip (idDriver, smoke, priceKm, luggage, petFriendly, date, occupiedSeats, idStartingPoint, idDestination) VALUES
-    (1, 0, 0.5, 1, 1, '2023-11-01 08:00:00', 3, 1, 2),
-    (2, 1, 0.3, 1, 0, '2023-11-02 12:30:00', 2, 2, 3),
-    (3, 0, 0.8, 0, 1, '2023-11-03 15:45:00', 1, 3, 1);
+-- Inserting trips
+INSERT INTO trip (idDriver, smoke, priceKm, luggage, petFriendly, date, occupiedSeats, idStartingPoint, idDestination)
+VALUES
+(4, 0, 0.25, 1, 0, '2023-01-01 08:00:00', 3, 1, 2),
+(5, 1, 0.30, 0, 1, '2023-01-02 12:30:00', 2, 3, 4),
+(6, 0, 0.22, 1, 1, '2023-01-03 15:45:00', 4, 5, 6),
+(7, 1, 0.28, 0, 1, '2023-01-04 09:15:00', 3, 7, 8),
+(8, 0, 0.35, 1, 0, '2023-01-05 17:30:00', 2, 9, 10),
+(9, 1, 0.20, 0, 1, '2023-01-06 14:00:00', 4, 11, 12),
+(10, 0, 0.32, 1, 1, '2023-01-07 10:45:00', 3, 13, 14),
+(4, 1, 0.26, 1, 0, '2023-01-08 16:30:00', 2, 15, 16),
+(5, 0, 0.28, 0, 1, '2023-01-09 11:00:00', 4, 17, 18),
+(6, 1, 0.24, 1, 1, '2023-01-10 18:45:00', 3, 19, 20),
+(10, 1, 0.35, 1, 1, '2023-02-19 09:15:00', 3, 23, 24);
+
+(4, 0, 0.25, 1, 0, '2023-01-02 08:00:00', 3, 1, 2),
+(5, 1, 0.30, 0, 1, '2023-01-03 12:30:00', 2, 3, 4),
+(6, 0, 0.22, 1, 1, '2023-01-04 15:45:00', 4, 5, 6),
+(7, 1, 0.28, 0, 1, '2023-01-05 09:15:00', 3, 7, 8),
+(8, 0, 0.35, 1, 0, '2023-01-06 17:30:00', 2, 9, 10),
+(9, 1, 0.20, 0, 1, '2023-01-07 14:00:00', 4, 11, 12),
+(10, 0, 0.32, 1, 1, '2023-01-08 10:45:00', 3, 13, 14),
+(4, 1, 0.26, 1, 0, '2023-01-09 16:30:00', 2, 15, 16),
+(5, 0, 0.28, 0, 1, '2023-01-10 11:00:00', 4, 17, 18),
+(6, 1, 0.24, 1, 1, '2023-01-11 18:45:00', 3, 19, 20),
+(10, 1, 0.35, 1, 1, '2023-02-12 09:15:00', 3, 23, 24);
+
 GO
 -- Inserting bookings
-INSERT INTO booking (date, reservedSeats, idPassenger, idEntryPoint, idTrip) VALUES
-    ('2023-10-30 10:00:00', 2, 2, 2, 1),
-    ('2023-10-31 14:15:00', 1, 1, 1, 2),
-    ('2023-11-01 20:30:00', 3, 3, 3, 3);
+-- Inserting bookings
+INSERT INTO booking (date, reservedSeats, idPassenger, idEntryPoint, idTrip)
+VALUES
+('2023-01-01 10:00:00', 2, 3, 2, 1),
+('2023-01-02 13:45:00', 1, 4, 4, 2),
+('2023-01-03 16:30:00', 3, 5, 6, 3),
+('2023-02-16 10:15:00', 2, 11, 20, 48),
+('2023-02-18 16:30:00', 3, 12, 22, 49),
+('2023-02-19 10:45:00', 1, 13, 24, 50);
+
