@@ -1,3 +1,5 @@
+USE WayMate;
+GO
 -- Inserting addresses
 INSERT INTO address (street, postalCode, city, number) VALUES
 ('Tatooine Street', '12345', 'Mos Eisley', '42'),
@@ -123,7 +125,6 @@ INSERT INTO users (userType, username, password, email, birthDate, isBanned, pho
 
 GO
 -- Inserting trips
-INSERT INTO trip (idDriver, smoke, priceKm, luggage, petFriendly, date, occupiedSeats, idStartingPoint, idDestination) VALUES
 -- Inserting trips
 INSERT INTO trip (idDriver, smoke, priceKm, luggage, petFriendly, date, occupiedSeats, idStartingPoint, idDestination)
 VALUES
@@ -159,7 +160,7 @@ VALUES
 ('2023-01-01 10:00:00', 2, 3, 2, 1),
 ('2023-01-02 13:45:00', 1, 4, 4, 2),
 ('2023-01-03 16:30:00', 3, 5, 6, 3),
-('2023-02-16 10:15:00', 2, 11, 20, 48),
-('2023-02-18 16:30:00', 3, 12, 22, 49),
-('2023-02-19 10:45:00', 1, 13, 24, 50);
+('2023-02-16 10:15:00', 2, 11, 20, 4),
+('2023-02-18 16:30:00', 3, 12, 22, 5),
+('2023-02-19 10:45:00', 1, 13, 24, 5);
 

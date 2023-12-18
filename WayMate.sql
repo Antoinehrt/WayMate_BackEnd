@@ -3,6 +3,21 @@ GO
 CREATE DATABASE WayMate;
 GO
 
+--drop table dbo.booking
+--go
+
+--drop table dbo.trip
+--go
+
+--drop table dbo.users
+--go
+
+--drop table dbo.address
+--go
+
+--drop table dbo.car
+--go
+
 USE WayMate;
 GO
 -- Creating the 'address' table
