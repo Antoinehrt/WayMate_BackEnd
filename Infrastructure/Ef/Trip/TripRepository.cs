@@ -15,4 +15,22 @@ public class TripRepository : ITripRepository
     {
         return _context.Trip.ToList();
     }
+
+    public DbTrip Create(int idDriver, bool smoke, float priceKm, bool luggage, bool petFriendly, DateTime date, int occupiedSeats,
+        int idStartingPoint, int idDestination)
+    {
+        var trip = new DbTrip { IdDriver = idDriver, Smoke = smoke, PriceKm = priceKm, Luggage = luggage, PetFriendly = petFriendly, Date = date, OccupiedSeats = occupiedSeats};
+        _context.Trip.Add(trip);
+        _context.SaveChanges();
+        return trip;
+    }
+
+    public DbTrip FetchById(int id)
+    {
+        var trip = _context.Trip.FirstOrDefault(t => t.Id == id);
+        
+        if(trip == null) throw new KeyNotFoundException($"Trip with id{id} has not been found");
+
+        return trip;
+    }
 }
