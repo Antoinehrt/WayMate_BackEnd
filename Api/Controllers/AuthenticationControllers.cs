@@ -36,21 +36,13 @@ public class AuthenticationControllers : ControllerBase {
     [HttpGet("login")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<string> Login([FromQuery][Required] string email, [FromQuery][Required] string password) {
+    public ActionResult<DtoOutputLogin> Login([FromQuery][Required] string email, [FromQuery][Required] string password) {
         try {
-            if (string.IsNullOrWhiteSpace(password)) {
-                return BadRequest("Password is required.");
+            var authResult = _useCaseLogin.Execute(email, password); 
+            if (!authResult.isLogged) {
+                return BadRequest("Wrong credentials");
             }
-
-            if (!_useCaseLogin.Execute(email, password).IsLogged) {
-                return Unauthorized();
-            }
-
-            var user = _userCaseFetchUserByEmail.Execute(email);
-            if (user == null) {
-                throw new KeyNotFoundException($"User with email '{email}' not found.");
-            }
-            return GenerateAndSetToken(user.Username, user.UserType).Token.ToString();
+            return authResult;
         }
         catch (KeyNotFoundException e) {
             return NotFound(new {
@@ -61,19 +53,17 @@ public class AuthenticationControllers : ControllerBase {
     
     [AllowAnonymous]
     [HttpGet("token")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public DtoOutputToken GenerateAndSetToken([FromQuery][Required]string username, [FromQuery][Required]string userType) {
         var dto = new DtoInputToken { Username = username, UserType = userType };
         var token = _tokenService.BuildToken(_configuration["JWT:Key"], _configuration["JWT:Issuer"], dto);
-
-        Response.Cookies.Append("cookie", token, new CookieOptions {
+        
+        Response.Cookies.Append("WayMateToken", token, new CookieOptions {
             Secure = true,
-            HttpOnly = true
+            HttpOnly = false,
         });
 
         return new DtoOutputToken {
-            Token = token
+            token = token
         };
     }
 

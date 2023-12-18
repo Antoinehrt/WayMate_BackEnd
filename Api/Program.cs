@@ -37,27 +37,6 @@ builder.Services.AddDbContext<WaymateContext>(a => a.UseSqlServer(
     builder.Configuration.GetConnectionString("db"))
 );
 
-//JWT configuration
-var jwtKey = builder.Configuration.GetSection("JWT:Key").Get<string>();
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options => {
-        options.TokenValidationParameters = new TokenValidationParameters {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["JWT:Issuer"],
-            ValidAudience = builder.Configuration["JWT:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
-        };
-        options.Events = new JwtBearerEvents {
-            OnMessageReceived = context => {
-                context.Token = context.Request.Cookies["cookie"];
-                return Task.CompletedTask;
-            }
-        };
-    });
 
 //Repository
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
@@ -115,13 +94,34 @@ builder.Services.AddScoped<UseCaseLogin>();
 builder.Services.AddScoped<UseCaseRegistrationEmail>();
 builder.Services.AddScoped<UseCaseRegistrationUsername>();
 
+//JWT configuration
+var jwtKey = builder.Configuration.GetSection("JWT:Key").Get<string>();
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options => {
+        options.TokenValidationParameters = new TokenValidationParameters {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
+            ValidAudience = builder.Configuration["JWT:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+        };
+        options.Events = new JwtBearerEvents {
+            OnMessageReceived = context => {
+                context.Token = context.Request.Cookies["WayMateToken"];
+                return Task.CompletedTask;
+            }
+        };
+    });
 
 builder.Services.AddCors(options => {
     options.AddPolicy("Dev", policyBuilder =>
         policyBuilder.WithOrigins("http://localhost:4200")
             .AllowAnyMethod()
-            .AllowAnyHeader());
+            .AllowAnyHeader()
+            .AllowCredentials());
 });
 var app = builder.Build();
 
