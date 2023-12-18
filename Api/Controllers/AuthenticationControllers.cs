@@ -52,9 +52,8 @@ public class AuthenticationControllers : ControllerBase {
     }
     
     [AllowAnonymous]
-    [HttpGet("token")]
-    public DtoOutputToken GenerateAndSetToken([FromQuery][Required]string username, [FromQuery][Required]string userType) {
-        var dto = new DtoInputToken { Username = username, UserType = userType };
+    [HttpPost("token")]
+    public DtoOutputToken GenerateAndSetToken(DtoInputToken dto) {
         var token = _tokenService.BuildToken(_configuration["JWT:Key"], _configuration["JWT:Issuer"], dto);
         
         Response.Cookies.Append("WayMateToken", token, new CookieOptions {

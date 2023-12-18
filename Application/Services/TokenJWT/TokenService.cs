@@ -11,8 +11,8 @@ public class TokenService{
 
     public string BuildToken(string key, string issuer, DtoInputToken token) {
         var claims = new[] {
-            new Claim(ClaimTypes.Name, token.Username),
-            new Claim(ClaimTypes.Role, token.UserType.ToString()),
+            new Claim(ClaimTypes.Name, token.username),
+            new Claim(ClaimTypes.Role, token.userType.ToString()),
             new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
         };
 
