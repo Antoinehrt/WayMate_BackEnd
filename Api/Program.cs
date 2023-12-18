@@ -82,6 +82,8 @@ builder.Services.AddScoped<UseCaseFetchIdByAddress>();
 
 //Use Case Trip
 builder.Services.AddScoped<UseCaseFetchAllTrip>();
+builder.Services.AddScoped<UseCaseCreateTrip>();
+builder.Services.AddScoped<UseCaseFetchTripById>();
 
 //Use Case Car
 builder.Services.AddScoped<UseCaseCreateCar>();
