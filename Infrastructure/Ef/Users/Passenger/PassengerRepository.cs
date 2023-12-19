@@ -42,7 +42,7 @@ public class PassengerRepository : IPassengerRepository {
         if (passengerToUpdate == null) throw new KeyNotFoundException($"Passenger with id {id} has not been found.");
 
         passengerToUpdate.Username = username;
-        passengerToUpdate.Password = password;
+        passengerToUpdate.Password = _passwordHasher.HashPwd(password);
         passengerToUpdate.Email = email;
         passengerToUpdate.BirthDate = birthdate;
         passengerToUpdate.IsBanned = isbanned;
