@@ -35,8 +35,8 @@ CREATE TABLE car (
     model VARCHAR(50) NOT NULL,
     nbSeats INT NOT NULL,
     brand VARCHAR(50) NOT NULL,
-    carType INT NOT NULL DEFAULT 0,
-    fuelType INT NOT NULL DEFAULT 0
+    carType VARCHAR(50) NOT NULL,
+    fuelType VARCHAR(50) NOT NULL
 );
 GO
 -- Creating the 'users' table
