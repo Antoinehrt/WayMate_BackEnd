@@ -107,59 +107,56 @@ INSERT INTO car (plateNumber, model, nbSeats, brand, carType, fuelType) VALUES
 GO
 -- Inserting users
 INSERT INTO users (userType, username, password, email, birthDate, isBanned, phoneNumber, lastName, firstName, gender, addressId, carPlate) VALUES
-('admin', 'obiwanadmin', 'adminpass', 'obiwan@admin.com', '1977-05-25', 0, '123-456-7890', NULL, NULL, NULL, NULL, NULL),
-('admin', 'yodaadmin', 'adminpass', 'yoda@admin.com', '1945-02-17', 0, '987-654-3210', NULL, NULL, NULL, NULL, NULL),
-('passenger', 'lukepassenger', 'pass123', 'luke@passenger.com', '1971-09-19', 0, '555-555-5555', 'Skywalker', 'Luke', 'Male', 1, NULL),
-('passenger', 'leiapassenger', 'pass123', 'leia@passenger.com', '1977-05-25', 0, '555-555-5555', 'Organa', 'Leia', 'Female', 2, NULL),
-('passenger', 'hanpassenger', 'pass123', 'han@passenger.com', '1977-05-25', 0, '555-555-5555', 'Solo', 'Han', 'Male', 3, NULL),
-('driver', 'anakindriver', 'driverpass', 'anakin@driver.com', '1983-05-19', 0, '333-333-3333', 'Skywalker', 'Anakin', 'Male', 4, 'FALC0N1'),
-('driver', 'padmedriver', 'driverpass', 'padme@driver.com', '1981-05-12', 0, '333-333-3333', 'Amidala', 'Padmé', 'Female', 5, 'TW1ST3DSTR1D3R'),
-('driver', 'obiwandriver', 'driverpass', 'obiwan@driver.com', '1970-08-14', 0, '333-333-3333', 'Kenobi', 'Obi-Wan', 'Male', 6, 'ST3LTHM0D3'),
-('driver', 'chewbaccadriver', 'driverpass', 'chewbacca@driver.com', '1966-03-18', 0, '333-333-3333', 'Chewbacca', NULL, 'Male', 7, 'W00K13ROAR'),
-('driver', 'landodriver', 'driverpass', 'lando@driver.com', '1944-05-14', 0, '333-333-3333', 'Calrissian', 'Lando', 'Male', 8, 'S0L0SP3C1AL'),
-('passenger', 'vaderpassenger', 'pass123', 'vader@passenger.com', '1977-05-25', 0, '555-555-5555', 'Vader', 'Darth', 'Male', 9, NULL),
+('Admin', 'obiwanadmin', 'adminpass', 'obiwan@admin.com', '1977-05-25', 0, '123-456-7890', NULL, NULL, NULL, NULL, NULL),
+('Admin', 'yodaadmin', 'adminpass', 'yoda@admin.com', '1945-02-17', 0, '987-654-3210', NULL, NULL, NULL, NULL, NULL),
+('Passenger', 'lukepassenger', 'pass123', 'luke@passenger.com', '1971-09-19', 0, '555-555-5555', 'Skywalker', 'Luke', 'Male', 1, NULL),
+('Passenger', 'leiapassenger', 'pass123', 'leia@passenger.com', '1977-05-25', 0, '555-555-5555', 'Organa', 'Leia', 'Female', 2, NULL),
+('Passenger', 'hanpassenger', 'pass123', 'han@passenger.com', '1977-05-25', 0, '555-555-5555', 'Solo', 'Han', 'Male', 3, NULL),
+('Driver', 'anakindriver', 'driverpass', 'anakin@driver.com', '1983-05-19', 0, '333-333-3333', 'Skywalker', 'Anakin', 'Male', 4, 'FALC0N1'),
+('Driver', 'padmedriver', 'driverpass', 'padme@driver.com', '1981-05-12', 0, '333-333-3333', 'Amidala', 'Padmé', 'Female', 5, 'TW1ST3DSTR1D3R'),
+('Driver', 'obiwandriver', 'driverpass', 'obiwan@driver.com', '1970-08-14', 0, '333-333-3333', 'Kenobi', 'Obi-Wan', 'Male', 6, 'ST3LTHM0D3'),
+('Driver', 'chewbaccadriver', 'driverpass', 'chewbacca@driver.com', '1966-03-18', 0, '333-333-3333', 'Chewbacca', NULL, 'Male', 7, 'W00K13ROAR'),
+('Driver', 'landodriver', 'driverpass', 'lando@driver.com', '1944-05-14', 0, '333-333-3333', 'Calrissian', 'Lando', 'Male', 8, 'S0L0SP3C1AL'),
+('Passenger', 'vaderpassenger', 'pass123', 'vader@passenger.com', '1977-05-25', 0, '555-555-5555', 'Vader', 'Darth', 'Male', 9, NULL),
 ('driver', 'bobbafettdriver', 'driverpass', 'boba@driver.com', '1982-12-18', 0, '333-333-3333', 'Fett', 'Boba', 'Male', 10, 'SL4VESP1D3R'),
-('admin', 'admin50', 'adminpass', 'admin50@admin.com', '1980-01-01', 0, '555-555-5555', NULL, NULL, NULL, NULL, NULL),
-('passenger', 'passenger50', 'pass123', 'passenger50@passenger.com', '1990-01-01', 0, '555-555-5555', 'LastName50', 'FirstName50', 'Male', 11, NULL),
-('driver', 'driver50', 'driverpass', 'driver50@driver.com', '1985-01-01', 0, '555-555-5555', 'LastName50', 'FirstName50', 'Female', 12, 'TW1ST3DSTR1D3R');
+('Admin', 'admin50', 'adminpass', 'admin50@admin.com', '1980-01-01', 0, '555-555-5555', NULL, NULL, NULL, NULL, NULL),
+('Passenger', 'passenger50', 'pass123', 'passenger50@passenger.com', '1990-01-01', 0, '555-555-5555', 'LastName50', 'FirstName50', 'Male', 11, NULL),
+('Driver', 'driver50', 'driverpass', 'driver50@driver.com', '1985-01-01', 0, '555-555-5555', 'LastName50', 'FirstName50', 'Female', 12, 'TW1ST3DSTR1D3R');
 
 GO
--- Inserting trips
 -- Inserting trips
 INSERT INTO trip (idDriver, smoke, priceKm, luggage, petFriendly, date, occupiedSeats, idStartingPoint, idDestination)
 VALUES
-(4, 0, 0.25, 1, 0, '2023-01-01 08:00:00', 3, 1, 2),
-(5, 1, 0.30, 0, 1, '2023-01-02 12:30:00', 2, 3, 4),
-(6, 0, 0.22, 1, 1, '2023-01-03 15:45:00', 4, 5, 6),
-(7, 1, 0.28, 0, 1, '2023-01-04 09:15:00', 3, 7, 8),
-(8, 0, 0.35, 1, 0, '2023-01-05 17:30:00', 2, 9, 10),
-(9, 1, 0.20, 0, 1, '2023-01-06 14:00:00', 4, 11, 12),
-(10, 0, 0.32, 1, 1, '2023-01-07 10:45:00', 3, 13, 14),
-(4, 1, 0.26, 1, 0, '2023-01-08 16:30:00', 2, 15, 16),
-(5, 0, 0.28, 0, 1, '2023-01-09 11:00:00', 4, 17, 18),
-(6, 1, 0.24, 1, 1, '2023-01-10 18:45:00', 3, 19, 20),
-(10, 1, 0.35, 1, 1, '2023-02-19 09:15:00', 3, 23, 24);
-
-(4, 0, 0.25, 1, 0, '2023-01-02 08:00:00', 3, 1, 2),
-(5, 1, 0.30, 0, 1, '2023-01-03 12:30:00', 2, 3, 4),
-(6, 0, 0.22, 1, 1, '2023-01-04 15:45:00', 4, 5, 6),
-(7, 1, 0.28, 0, 1, '2023-01-05 09:15:00', 3, 7, 8),
-(8, 0, 0.35, 1, 0, '2023-01-06 17:30:00', 2, 9, 10),
-(9, 1, 0.20, 0, 1, '2023-01-07 14:00:00', 4, 11, 12),
-(10, 0, 0.32, 1, 1, '2023-01-08 10:45:00', 3, 13, 14),
-(4, 1, 0.26, 1, 0, '2023-01-09 16:30:00', 2, 15, 16),
-(5, 0, 0.28, 0, 1, '2023-01-10 11:00:00', 4, 17, 18),
-(6, 1, 0.24, 1, 1, '2023-01-11 18:45:00', 3, 19, 20),
-(10, 1, 0.35, 1, 1, '2023-02-12 09:15:00', 3, 23, 24);
-
+(6, 0, 0.25, 1, 0, '2024-01-01 08:00:00', 3, 1, 2),
+(8, 1, 0.30, 0, 1, '2024-01-02 12:30:00', 2, 3, 4),
+(6, 0, 0.22, 1, 1, '2024-01-03 15:45:00', 4, 5, 6),
+(7, 1, 0.28, 0, 1, '2024-01-04 09:15:00', 3, 7, 8),
+(8, 0, 0.35, 1, 0, '2024-01-05 17:30:00', 2, 9, 10),
+(9, 1, 0.20, 0, 1, '2024-01-06 14:00:00', 4, 11, 12),
+(9, 0, 0.32, 1, 1, '2024-01-07 10:45:00', 3, 13, 14),
+(7, 1, 0.26, 1, 0, '2024-01-08 16:30:00', 2, 15, 16),
+(8, 0, 0.28, 0, 1, '2024-01-09 11:00:00', 4, 17, 18),
+(6, 1, 0.24, 1, 1, '2024-01-10 18:45:00', 3, 19, 20),
+(8, 1, 0.35, 1, 1, '2024-02-19 09:15:00', 3, 23, 24),
+(9, 0, 0.32, 1, 1, '2024-02-22 10:45:00', 3, 25, 26),
+(7, 1, 0.26, 1, 0, '2024-02-23 16:30:00', 2, 27, 28),
+(8, 0, 0.28, 0, 1, '2024-02-24 11:00:00', 4, 29, 30),
+(6, 1, 0.24, 1, 1, '2024-02-25 18:45:00', 3, 31, 32),
+(8, 1, 0.35, 1, 1, '2024-02-26 09:15:00', 3, 33, 34),
+(9, 0, 0.32, 1, 1, '2024-02-27 10:45:00', 3, 35, 36),
+(7, 1, 0.26, 1, 0, '2024-02-28 16:30:00', 2, 37, 38),
+(8, 0, 0.28, 0, 1, '2024-03-01 11:00:00', 4, 39, 40),
+(6, 1, 0.24, 1, 1, '2024-03-02 18:45:00', 3, 41, 42),
+(8, 1, 0.35, 1, 1, '2024-03-03 09:15:00', 3, 43, 44),
+(9, 0, 0.32, 1, 1, '2024-03-04 10:45:00', 3, 45, 46),
+(7, 1, 0.26, 1, 0, '2024-03-05 16:30:00', 2, 47, 48);
 GO
--- Inserting bookings
 -- Inserting bookings
 INSERT INTO booking (date, reservedSeats, idPassenger, idEntryPoint, idTrip)
 VALUES
 ('2023-01-01 10:00:00', 2, 3, 2, 1),
 ('2023-01-02 13:45:00', 1, 4, 4, 2),
-('2023-01-03 16:30:00', 3, 5, 6, 3),
+('2023-01-03 16:30:00', 3, 5, 6 , 3),
 ('2023-02-16 10:15:00', 2, 11, 20, 4),
 ('2023-02-18 16:30:00', 3, 12, 22, 5),
 ('2023-02-19 10:45:00', 1, 13, 24, 5);
