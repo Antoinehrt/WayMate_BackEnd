@@ -28,8 +28,8 @@ public class CarRepository : ICarRepository
     {
         var car = new DbCar
         {
-            NumberPlate = numberPlate, Brand = brand, Model = model, NbSeats = nbSeats, FuelType = fuelType,
-            CarType = carType
+            NumberPlate = numberPlate, Brand = brand, Model = model, NbSeats = nbSeats, FuelType = Enum.GetName(typeof(FuelType), fuelType),
+            CarType = Enum.GetName(typeof(CarType), carType)
         };
         _context.Cars.Add(car);
         _context.SaveChanges();
@@ -53,8 +53,8 @@ public class CarRepository : ICarRepository
         carToUpdate.Brand = brand;
         carToUpdate.Model = model;
         carToUpdate.NbSeats = nbSeats;
-        carToUpdate.FuelType = fuelType;
-        carToUpdate.CarType = carType;
+        carToUpdate.FuelType = Enum.GetName(typeof(FuelType), fuelType);
+        carToUpdate.CarType = Enum.GetName(typeof(CarType), carType);
 
         _context.SaveChanges();
         return true;
