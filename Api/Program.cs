@@ -111,6 +111,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
         };
         options.Events = new JwtBearerEvents {
+            OnTokenValidated = context =>{
+                return Task.CompletedTask;
+            },
             OnMessageReceived = context => {
                 context.Token = context.Request.Cookies["WayMateToken"];
                 return Task.CompletedTask;
@@ -137,6 +140,7 @@ app.UseHttpsRedirection();
 
 app.UseCors("Dev");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
