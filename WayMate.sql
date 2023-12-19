@@ -35,8 +35,9 @@ CREATE TABLE car (
     model VARCHAR(50) NOT NULL,
     nbSeats INT NOT NULL,
     brand VARCHAR(50) NOT NULL,
-    carType INT NOT NULL DEFAULT 0,
-    fuelType INT NOT NULL DEFAULT 0
+    carType VARCHAR(50) NOT NULL,
+    fuelType VARCHAR(50) NOT NULL, 
+    color VARCHAR(50) NOT NULL
 );
 GO
 -- Creating the 'users' table
@@ -61,11 +62,12 @@ CREATE TABLE trip (
     id INT IDENTITY PRIMARY KEY NOT NULL,
     idDriver INT NOT NULL REFERENCES users(id),
     smoke BIT NOT NULL,
-    priceKm FLOAT NOT NULL,
+    price FLOAT NOT NULL,
     luggage BIT NOT NULL,
     petFriendly BIT NOT NULL,
     date DATETIME NOT NULL,
-    occupiedSeats INT NOT NULL,
+    driverMessage VARCHAR(200),
+    climatisation BIT NOT NULL,
     idStartingPoint INT NOT NULL REFERENCES address(id),
     idDestination INT NOT NULL REFERENCES address(id)
 );
@@ -76,7 +78,6 @@ CREATE TABLE booking (
     date DATETIME NOT NULL,
     reservedSeats INT NOT NULL,
     idPassenger INT NOT NULL REFERENCES users(id),
-    idEntryPoint INT NOT NULL REFERENCES address(id),
     idTrip INT NOT NULL REFERENCES trip(id)
 );
 GO
