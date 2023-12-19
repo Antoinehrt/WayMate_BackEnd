@@ -107,21 +107,21 @@ INSERT INTO car (plateNumber, model, nbSeats, brand, carType, fuelType, color) V
 GO
 -- Inserting users
 INSERT INTO users (userType, username, password, email, birthDate, isBanned, phoneNumber, lastName, firstName, gender, addressId, carPlate) VALUES
-('Admin', 'obiwanadmin', 'adminpass', 'obiwan@admin.com', '1977-05-25', 0, '123-456-7890', NULL, NULL, NULL, NULL, NULL),
-('Admin', 'yodaadmin', 'adminpass', 'yoda@admin.com', '1945-02-17', 0, '987-654-3210', NULL, NULL, NULL, NULL, NULL),
-('Passenger', 'lukepassenger', 'pass123', 'luke@passenger.com', '1971-09-19', 0, '555-555-5555', 'Skywalker', 'Luke', 'Male', 1, NULL),
-('Passenger', 'leiapassenger', 'pass123', 'leia@passenger.com', '1977-05-25', 0, '555-555-5555', 'Organa', 'Leia', 'Female', 2, NULL),
-('Passenger', 'hanpassenger', 'pass123', 'han@passenger.com', '1977-05-25', 0, '555-555-5555', 'Solo', 'Han', 'Male', 3, NULL),
-('Driver', 'anakindriver', 'driverpass', 'anakin@driver.com', '1983-05-19', 0, '333-333-3333', 'Skywalker', 'Anakin', 'Male', 4, 'FALC0N1'),
-('Driver', 'padmedriver', 'driverpass', 'padme@driver.com', '1981-05-12', 0, '333-333-3333', 'Amidala', 'Padmé', 'Female', 5, 'TW1ST3DSTR1D3R'),
-('Driver', 'obiwandriver', 'driverpass', 'obiwan@driver.com', '1970-08-14', 0, '333-333-3333', 'Kenobi', 'Obi-Wan', 'Male', 6, 'ST3LTHM0D3'),
-('Driver', 'chewbaccadriver', 'driverpass', 'chewbacca@driver.com', '1966-03-18', 0, '333-333-3333', 'Chewbacca', NULL, 'Male', 7, 'W00K13ROAR'),
-('Driver', 'landodriver', 'driverpass', 'lando@driver.com', '1944-05-14', 0, '333-333-3333', 'Calrissian', 'Lando', 'Male', 8, 'S0L0SP3C1AL'),
-('Passenger', 'vaderpassenger', 'pass123', 'vader@passenger.com', '1977-05-25', 0, '555-555-5555', 'Vader', 'Darth', 'Male', 9, NULL),
-('driver', 'bobbafettdriver', 'driverpass', 'boba@driver.com', '1982-12-18', 0, '333-333-3333', 'Fett', 'Boba', 'Male', 10, 'SL4VESP1D3R'),
-('Admin', 'admin50', 'adminpass', 'admin50@admin.com', '1980-01-01', 0, '555-555-5555', NULL, NULL, NULL, NULL, NULL),
-('Passenger', 'passenger50', 'pass123', 'passenger50@passenger.com', '1990-01-01', 0, '555-555-5555', 'LastName50', 'FirstName50', 'Male', 11, NULL),
-('Driver', 'driver50', 'driverpass', 'driver50@driver.com', '1985-01-01', 0, '555-555-5555', 'LastName50', 'FirstName50', 'Female', 12, 'TW1ST3DSTR1D3R');
+('Admin', 'obiwanadmin', '$2a$12$rrbtKJ1hzSpsufceTr6D1Oo/.9ADJ2.WhXgDKiN432ayPrW2oHSpC', 'obiwan@admin.com', '1977-05-25', 0, '123-456-7890', NULL, NULL, NULL, NULL, NULL),
+('Admin', 'yodaadmin', '$2a$12$mEJkGiq8D/e/1jkfoxIXi.g4.bUaSpfCPMNV7fpor9TYnkvFTFrT.', 'yoda@admin.com', '1945-02-17', 0, '987-654-3210', NULL, NULL, NULL, NULL, NULL),
+('Passenger', 'lukepassenger', '$2a$12$W05xsnDc32fAf./PzEXQSu68Bh5ZtAwWctTVpCyXK0IF8zySYG1w6', 'luke@passenger.com', '1971-09-19', 0, '555-555-5555', 'Skywalker', 'Luke', 'Male', 1, NULL),
+('Passenger', 'leiapassenger', '$2a$12$5tcu/2Fib0b5SksGxai4DuWrwUTtNFtpRsXhJzZH/Ahg9awU2DSGC', 'leia@passenger.com', '1977-05-25', 0, '555-555-5555', 'Organa', 'Leia', 'Female', 2, NULL),
+('Passenger', 'hanpassenger', '$2a$12$QcxWLZqayMMKwHO7E4BveuHYROZM9GNyeOrx8XOcQWLWZhe/dhstS', 'han@passenger.com', '1977-05-25', 0, '555-555-5555', 'Solo', 'Han', 'Male', 3, NULL),
+('Driver', 'anakindriver', '$2a$12$9W1iNOry8wyf42bk95n0y.rM31AoiqsEN1gRklM6deMM2y8aBSgIu', 'anakin@driver.com', '1983-05-19', 0, '333-333-3333', 'Skywalker', 'Anakin', 'Male', 4, 'FALC0N1'),
+('Driver', 'padmedriver', '$2a$12$x7ukm1VC7cbIqlPGulW7Uei4bnJU/vd9Nec59BbYCZgQcPwcnVy26', 'padme@driver.com', '1981-05-12', 0, '333-333-3333', 'Amidala', 'Padmé', 'Female', 5, 'TW1ST3DSTR1D3R'),
+('Driver', 'obiwandriver', '$2a$12$GKbjZNm65uNAIT25kiLpzeZ5qjnu/WVD9JjFjHI5tkjXr3PYi/T4C', 'obiwan@driver.com', '1970-08-14', 0, '333-333-3333', 'Kenobi', 'Obi-Wan', 'Male', 6, 'ST3LTHM0D3'),
+('Driver', 'chewbaccadriver', '$2a$12$g7b40BLvlDBAWdM5FQ7KGuYc.7Kr3mnd5t1fk4iyBl0qzQ6YY98uK', 'chewbacca@driver.com', '1966-03-18', 0, '333-333-3333', 'Chewbacca', NULL, 'Male', 7, 'W00K13ROAR'),
+('Driver', 'landodriver', '$2a$12$v.fyzCW3dvJzdC8hy.401ekd/UlD7bf4iVRawAIb1U..b7CD5Silu', 'lando@driver.com', '1944-05-14', 0, '333-333-3333', 'Calrissian', 'Lando', 'Male', 8, 'S0L0SP3C1AL'),
+('Passenger', 'vaderpassenger', '$2a$12$lyquARJCJZqdFB4wAn8sweCCZ2Q5RQRMPlroBEIYS6EgdNgdEemcG', 'vader@passenger.com', '1977-05-25', 0, '555-555-5555', 'Vader', 'Darth', 'Male', 9, NULL),
+('driver', 'bobbafettdriver', '$2a$12$mY//zJwTCZ9cC9nZ3vK.nO0JTvG9I6v9/SqYmAlVKbyUz60PjYhQy', 'boba@driver.com', '1982-12-18', 0, '333-333-3333', 'Fett', 'Boba', 'Male', 10, 'SL4VESP1D3R'),
+('Admin', 'admin50', '$2a$12$OeEt5MBXtHvErRqLz7JfMu/76vs5Ly0jrfNUGmIS2hPWHVlsXGpRS', 'admin50@admin.com', '1980-01-01', 0, '555-555-5555', NULL, NULL, NULL, NULL, NULL),
+('Passenger', 'passenger50', '$2a$12$QYcB9zu5Z/jG2RwLecEh4eSZ1CeDfB6mTfmrvd9M739nRaLcusZ1u', 'passenger50@passenger.com', '1990-01-01', 0, '555-555-5555', 'LastName50', 'FirstName50', 'Male', 11, NULL),
+('Driver', 'driver50', '$2a$12$6kbveG3LbPVb4HDUIhDuoODnGivEO2pmJ5KN2LHIk0fil.hF1EcAO', 'driver50@driver.com', '1985-01-01', 0, '555-555-5555', 'LastName50', 'FirstName50', 'Female', 12, 'TW1ST3DSTR1D3R');
 
 GO
 -- Inserting trips
