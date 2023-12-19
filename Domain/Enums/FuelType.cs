@@ -7,18 +7,18 @@ public enum FuelType: int  {
     Electric = 0,
     
     [Description("DIESEL")]
-    Diesel = 0,
+    Diesel = 1,
     
     [Description("GASOLINE")]
-    Gasoline = 0,
+    Gasoline = 2,
     
     [Description("HYBRID")]
-    Hybrid = 0,
+    Hybrid = 3,
     
     [Description("LPG")]
-    Lpg = 0,
+    Lpg = 4,
     
     [Description("OTHER")]
-    Other = 0
+    Other = 5
 
 }
