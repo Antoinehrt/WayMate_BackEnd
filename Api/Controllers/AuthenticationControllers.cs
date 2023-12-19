@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using Application.Services.TokenJWT;
 using Application.Services.TokenJWT.dto;
 using Application.UseCases.Authentication;
@@ -21,7 +22,6 @@ public class AuthenticationControllers : ControllerBase {
     private readonly UseCaseRegistrationEmail _useCaseRegistrationEmail;
     private readonly UseCaseRegistrationUsername _useCaseRegistrationUsername;
     private readonly UserCaseFetchUserByEmail _userCaseFetchUserByEmail;
-
 
     public AuthenticationControllers(UseCaseLogin useCaseLogin, UseCaseRegistrationEmail useCaseRegistrationEmail,
         UseCaseRegistrationUsername useCaseRegistrationUsername, TokenService tokenService,
@@ -65,7 +65,7 @@ public class AuthenticationControllers : ControllerBase {
         return Ok(registrationResult);
     }
 
-    [HttpPost("token")]
+    [HttpPost("generationToken")]
     public DtoOutputToken GenerateAndSetToken(DtoInputToken dto) {
         var token = _tokenService.BuildToken(_configuration["JWT:Key"], _configuration["JWT:Issuer"], dto);
         HttpContext.Response.Cookies.Append("WayMateToken", token, new CookieOptions {
@@ -81,8 +81,7 @@ public class AuthenticationControllers : ControllerBase {
         };
     }
 
-    [HttpGet(
-        "registration/by-email/{email:regex(^[[a-z0-9]]+(?:.[[a-z0-9]]+)*@(?:[[a-z0-9]](?:[[a-z0-9-]]*[[a-z0-9]])?.)+[[a-z0-9]](?:[[a-z0-9-]]*[[a-z0-9]])?$)}")]
+    [HttpGet("registration/by-email/{email:regex(^[[a-z0-9]]+(?:.[[a-z0-9]]+)*@(?:[[a-z0-9]](?:[[a-z0-9-]]*[[a-z0-9]])?.)+[[a-z0-9]](?:[[a-z0-9-]]*[[a-z0-9]])?$)}")]
     [ProducesResponseTypeAttribute(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public ActionResult<DtoOutputRegistration> FetchByEmail(string email) {
@@ -97,9 +96,15 @@ public class AuthenticationControllers : ControllerBase {
     }
 
 
-    [HttpGet]
-    [Authorize(Roles = "Admin")]
-    public ActionResult TestConnection() {
+    [HttpGet("IsConnected")]
+    [Authorize]
+    public ActionResult IsConnected() {
+        return Ok();
+    }
+
+    [HttpGet("TestConnectionPassenger")]
+    [Authorize(Roles = "Passenger")]
+    public ActionResult TestConnectionPassenger() {
         var identityName = User.Identity?.Name;
         Console.Write(identityName);
         return Ok(new {
@@ -107,27 +112,51 @@ public class AuthenticationControllers : ControllerBase {
         });
     }
 
-    [HttpGet("IsConnected")]
-    [Authorize]
-    public ActionResult IsConnected() {
-        return Ok();
+    [HttpGet("TestConnectionDriver")]
+    [Authorize(Roles = "Driver")]
+    public ActionResult TestConnectionDriver() {
+        var identityName = User.Identity?.Name;
+        Console.Write(identityName);
+        return Ok(new {
+            text = "Ok"
+        });
+    }
+
+    [HttpGet("TestConnectionAdmin")]
+    [Authorize(Roles = "Admin")]
+    public ActionResult TestConnectionAdmin() {
+        var identityName = User.Identity?.Name;
+        Console.Write(identityName);
+        return Ok(new {
+            text = "Ok"
+        });
     }
 
     
+    [HttpGet]
+    [Route("getUsername")]
+    [Authorize]
+    public ActionResult<DtoOutputUsername> GetUsername() {
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
+        if (identity == null) return BadRequest();
+        
+        var usernameClaim = identity.FindFirst(ClaimTypes.Name);
+        if (usernameClaim == null) return BadRequest(new { message = "Username not found in the token." });
+        
+        return Ok(new DtoOutputUsername{username = usernameClaim?.Value});
+    }
+
+
     [HttpPost("logout")]
-    public IActionResult Logout()
-    {
-        Response.Cookies.Delete("WayMateToken", new CookieOptions
-        {
+    public IActionResult Logout() {
+        Response.Cookies.Delete("WayMateToken", new CookieOptions {
             Secure = true,
             HttpOnly = true,
             SameSite = SameSiteMode.None,
-            MaxAge = TimeSpan.FromHours(-1), 
+            MaxAge = TimeSpan.FromHours(-1),
             IsEssential = true
         });
 
         return Ok(new { message = "Logout successful" });
     }
-
-
 }
