@@ -86,7 +86,7 @@ public class WaymateContext : DbContext
             entity.Property(b => b.Date).HasColumnName("date");
             entity.Property(b => b.ReservedSeats).HasColumnName("reservedSeats");
             entity.Property(b => b.IdPassenger).HasColumnName("idPassenger");
-            entity.Property(b => b.IdTrip).HasColumnName("idTrips");
+            entity.Property(b => b.IdTrip).HasColumnName("idTrip");
         });
     }
 }
