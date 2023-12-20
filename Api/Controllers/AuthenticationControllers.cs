@@ -133,8 +133,7 @@ public class AuthenticationControllers : ControllerBase {
     }
 
     
-    [HttpGet]
-    [Route("getUsername")]
+    [HttpGet("getUsername")]
     [Authorize]
     public ActionResult<DtoOutputUsername> GetUsername() {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
