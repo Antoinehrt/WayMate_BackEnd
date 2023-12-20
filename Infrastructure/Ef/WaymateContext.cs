@@ -12,8 +12,9 @@ public class WaymateContext : DbContext
     public DbSet<DbAddress> Address { get; set; }
     public DbSet<DbCar> Cars { get; set; }
     public DbSet<DbUser> Users { get; set; }
-    
     public DbSet<DbTrip> Trip { get; set; }
+    
+    public DbSet<DbBooking> Booking { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -75,6 +76,17 @@ public class WaymateContext : DbContext
             entity.Property(t => t.AirConditioning).HasColumnName("airConditioning");
             entity.Property(t => t.IdStartingPoint).HasColumnName("idStartingPoint");
             entity.Property(t => t.IdDestination).HasColumnName("idDestination");
+        });
+        
+        modelBuilder.Entity<DbBooking>(entity =>
+        {
+            entity.ToTable("booking");
+            entity.HasKey(b => b.Id);
+            entity.Property(b => b.Id).HasColumnName("id");
+            entity.Property(b => b.Date).HasColumnName("date");
+            entity.Property(b => b.ReservedSeats).HasColumnName("reservedSeats");
+            entity.Property(b => b.IdPassenger).HasColumnName("idPassenger");
+            entity.Property(b => b.IdTrip).HasColumnName("idTrip");
         });
     }
 }
