@@ -19,7 +19,7 @@ public class UseCaseCreateCar : IUseCaseWriter<DtoOutputCar, DtoInputCreateCar>
     public DtoOutputCar Execute(DtoInputCreateCar input)
     {
         var dbCar = _carRepository.Create(input.NumberPlate, input.Brand, input.Model, input.NbSeats, input.FuelType,
-            input.CarType);
+            input.CarType, input.Color);
         return _mapper.Map<DtoOutputCar>(dbCar);
         
     }

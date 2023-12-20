@@ -11,4 +11,5 @@ public class DtoInputCreateCar
     [Required] public int NbSeats { get; set; }
     [Required] public FuelType FuelType { get; set; }
     [Required] public CarType CarType { get; set; }
+    [Required] public string Color { get; set; }
 }

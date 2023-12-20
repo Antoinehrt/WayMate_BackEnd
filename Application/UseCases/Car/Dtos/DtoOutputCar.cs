@@ -10,4 +10,5 @@ public class DtoOutputCar
     public int NbSeats { get; set; }
     public string FuelType { get; set; }
     public string CarType { get; set; }
+    public string Color { get; set; }
 }

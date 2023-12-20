@@ -35,9 +35,10 @@ public class WaymateContext : DbContext
             entity.Property(c => c.NumberPlate).HasColumnName("plateNumber");
             entity.Property(c => c.Model).HasColumnName("model");
             entity.Property(c => c.NbSeats).HasColumnName("nbSeats");
-            entity.Property(c => c.FuelType).HasColumnName("fuelType");
             entity.Property(c => c.Brand).HasColumnName("brand");
             entity.Property(c => c.CarType).HasColumnName("carType");
+            entity.Property(c => c.FuelType).HasColumnName("fuelType");
+            entity.Property(c => c.Color).HasColumnName("color");
 
         });
         
