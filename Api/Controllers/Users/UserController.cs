@@ -15,19 +15,22 @@ public class UserController : ControllerBase {
     private readonly UseCaseDeleteUser _useCaseDeleteUser;
     private readonly UseCaseUpdateUser _useCaseUpdateUser;
     private readonly UseCaseCreateUser _useCaseCreateUser;
+    private readonly UseCaseFetchUserByUsername _useCaseFetchUserByUsername;
 
     public UserController(
         UseCaseFetchAllUser useCaseFetchAllUser,
         UseCaseFetchUserById useCaseFetchUserById,
         UserCaseFetchUserByEmail userCaseFetchUserByEmail,
         UseCaseDeleteUser useCaseDeleteUser,
-        UseCaseUpdateUser useCaseUpdateUser, UseCaseCreateAdmin useCaseCreateAdmin, UseCaseCreateUser useCaseCreateUser) {
+        UseCaseUpdateUser useCaseUpdateUser, UseCaseCreateAdmin useCaseCreateAdmin, UseCaseCreateUser useCaseCreateUser, 
+        UseCaseFetchUserByUsername useCaseFetchUserByUsername) {
         _useCaseFetchAllUser = useCaseFetchAllUser;
         _useCaseFetchUserById = useCaseFetchUserById;
         _userCaseFetchUserByEmail = userCaseFetchUserByEmail;
         _useCaseDeleteUser = useCaseDeleteUser;
         _useCaseUpdateUser = useCaseUpdateUser;
         _useCaseCreateUser = useCaseCreateUser;
+        _useCaseFetchUserByUsername = useCaseFetchUserByUsername;
     }
 
     [HttpGet]
@@ -66,6 +69,22 @@ public class UserController : ControllerBase {
             });
         }
     }
+
+    [HttpGet("GetByUsername/{username:regex(^[[a-zA-Z0-9_-]]{{5,20}}$)}")]
+    [ProducesResponseTypeAttribute(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public ActionResult<DtoOutputUser> FetchByUsername(string username) {
+        try {
+            return Ok(_useCaseFetchUserByUsername.Execute(username));
+        }
+        catch (KeyNotFoundException e) {
+            return NotFound(new {
+                e.Message
+            });
+        }
+        
+    }
+
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

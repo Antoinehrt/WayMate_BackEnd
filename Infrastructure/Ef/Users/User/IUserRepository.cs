@@ -14,6 +14,8 @@ public interface IUserRepository
     DbUser Update(int id, string username, string password, string email, DateTime birthdate, bool isbanned, string phoneNumber,
         string lastName, string firstName, string gender, int addressId, string carPlate);
 
+    DbUser FetchByUsernameDbUser(string username);
+
     bool Delete(int id);
     bool FetchByUsername(string username);
     bool FetchByEmailBool(string email);

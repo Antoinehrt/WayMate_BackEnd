@@ -86,6 +86,7 @@ builder.Services.AddScoped<UseCaseCreateUser>();
 builder.Services.AddScoped<UseCaseUpdateUser>();
 builder.Services.AddScoped<UseCaseDeleteUser>();
 builder.Services.AddScoped<UserCaseFetchUserByEmail>();
+builder.Services.AddScoped<UseCaseFetchUserByUsername>();
 
 //Use Case Admin
 builder.Services.AddScoped<UseCaseCreateAdmin>();

@@ -42,6 +42,8 @@ public class Mapper : Profile
         CreateMap<User, DtoOutputUser>();
         CreateMap<DbUser, DtoOutputUser>();
         CreateMap<DbUser, User>();
+        CreateMap<DbUser, DtoOutputUser>();
+        
         
         //Admin
         CreateMap<DbUser, DtoOutputAdmin>();
@@ -55,8 +57,6 @@ public class Mapper : Profile
         //Authentication
         CreateMap<bool, DtoOutputLogin>();
         CreateMap<bool, DtoOutputRegistration>();
-        //A utiliser pour JWT
-        //CreateMap<string, DtoOutputLogin>();
         
 
 

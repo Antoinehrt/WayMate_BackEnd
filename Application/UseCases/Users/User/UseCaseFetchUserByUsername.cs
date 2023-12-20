@@ -3,19 +3,21 @@ using Application.UseCases.Utils;
 using AutoMapper;
 using Infrastructure.Ef.Users.User;
 
-namespace Application.UseCases.Users.User; 
+namespace Application.UseCases.Users.User;
 
-public class UserCaseFetchUserByEmail : IUseCaseParameterizeQuery<DtoOutputUser, string>{
+public class UseCaseFetchUserByUsername : IUseCaseParameterizeQuery<DtoOutputUser, string> {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public UserCaseFetchUserByEmail(IUserRepository userRepository, IMapper mapper) {
+    public UseCaseFetchUserByUsername(IUserRepository userRepository, IMapper mapper) {
         _userRepository = userRepository;
         _mapper = mapper;
     }
 
-    public DtoOutputUser Execute(string email) {
-        var dbUser = _userRepository.FetchByEmail(email);
+    public DtoOutputUser Execute(string username) {
+        var dbUser = _userRepository.FetchByUsernameDbUser(username);
+
         return _mapper.Map<DtoOutputUser>(dbUser);
     }
+
 }
