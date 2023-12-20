@@ -67,7 +67,7 @@ CREATE TABLE trip (
     petFriendly BIT NOT NULL,
     date DATETIME NOT NULL,
     driverMessage VARCHAR(200),
-    climatisation BIT NOT NULL,
+    airConditioning BIT NOT NULL,
     idStartingPoint INT NOT NULL REFERENCES address(id),
     idDestination INT NOT NULL REFERENCES address(id)
 );
