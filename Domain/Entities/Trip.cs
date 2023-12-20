@@ -13,19 +13,9 @@ public class Trip {
     public Address StartAddress { get; set; }
     public Address DestinationAddress { get; set; }
     public Car Car { get; set; }
+    public string DriverMessage { get; set; }
+    public bool AirConditioning { get; set; }
     private User _driver;
-
-    public User Driver
-    {
-        get => _driver;
-        set
-        {
-            if (value.UserType == UserType.Driver)
-                _driver = value;
-            else throw new ArgumentException($"This user is not a driver.");
-        }
-    }
-
     public int CalculateAvailableSeates() {
         //TODO : cette méthode
         return 0;

@@ -21,13 +21,15 @@ public class UseCaseCreateTrip : IUseCaseWriter<DtoOutputTrip, DtoInputCreateTri
         var dbTrip = _tripRepository.Create(
             input.IdDriver,
             input.Smoke,
-            input.PriceKm,
+            input.Price,
             input.Luggage,
             input.PetFriendly,
             input.Date,
-            input.OccupiedSeats,
+            input.DriverMessage,
+            input.AirConditioning,
             input.IdStartingPoint,
             input.IdDestination
+            
             );
         return _mapper.Map<DtoOutputTrip>(dbTrip);
     }

@@ -16,10 +16,12 @@ public class TripRepository : ITripRepository
         return _context.Trip.ToList();
     }
 
-    public DbTrip Create(int idDriver, bool smoke, float priceKm, bool luggage, bool petFriendly, DateTime date, int occupiedSeats,
-        int idStartingPoint, int idDestination)
+    public DbTrip Create(int idDriver, bool smoke, float price, bool luggage, bool petFriendly, DateTime date,
+        string driverMessage, bool airConditioning, int idStartingPoint, int idDestination)
     {
-        var trip = new DbTrip { IdDriver = idDriver, Smoke = smoke, PriceKm = priceKm, Luggage = luggage, PetFriendly = petFriendly, Date = date, OccupiedSeats = occupiedSeats};
+        var trip = new DbTrip { IdDriver = idDriver, Smoke = smoke, Price = price, Luggage = luggage, 
+            PetFriendly = petFriendly, Date = date, DriverMessage = driverMessage, 
+            AirConditioning = airConditioning, IdStartingPoint = idStartingPoint, IdDestination = idDestination};
         _context.Trip.Add(trip);
         _context.SaveChanges();
         return trip;

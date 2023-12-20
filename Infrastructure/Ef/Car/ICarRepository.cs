@@ -7,7 +7,7 @@ public interface ICarRepository
 {
     IEnumerable<DbCar> FetchAll();
     DbCar FetchById(string numberPlate);
-    DbCar Create(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType);
+    DbCar Create(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType, string color);
     bool Delete(string numberPlate);
-    bool Update(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType);
+    bool Update(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType, string color);
 }

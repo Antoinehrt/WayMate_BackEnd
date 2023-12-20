@@ -9,6 +9,7 @@ public class Car {
     private int _nbSeats;
     public FuelType FuelType { get; set; }
     public CarType CarType { get; set; }
+    public string Color { get; set; }
 
     
     public int NbSeats {

@@ -43,7 +43,7 @@ public class DriverRepository : IDriverRepository {
         if (driverToUpdate == null) throw new KeyNotFoundException($"Passenger with id {id} has not been found.");
 
         driverToUpdate.Username = username;
-        driverToUpdate.Password = password;
+        driverToUpdate.Password = _passwordHasher.HashPwd(password);
         driverToUpdate.Email = email;
         driverToUpdate.BirthDate = birthdate;
         driverToUpdate.IsBanned = isbanned;
