@@ -127,37 +127,37 @@ GO
 -- Inserting trips
 INSERT INTO trip (idDriver, smoke, price, luggage, petFriendly, date, driverMessage, airConditioning, idStartingPoint, idDestination)
 VALUES
-(6, 0, 0.25, 1, 0, '2024-01-01 08:00:00', "I am willing to pick you up from your home.", 1, 1, 2),
-(8, 1, 0.30, 0, 1, '2024-01-02 12:30:00', "I can drop you off wherever you want.", 0, 3, 4),
-(6, 0, 0.22, 1, 1, '2024-01-03 15:45:00', "I can drop you off wherever you want.", 1, 5, 6),
-(7, 1, 0.28, 0, 1, '2024-01-04 09:15:00', "I can drop you off wherever you want.", 0, 7, 8),
-(8, 0, 0.35, 1, 0, '2024-01-05 17:30:00', "I am willing to pick you up from your home.", 0, 9, 10),
-(9, 1, 0.20, 0, 1, '2024-01-06 14:00:00', "I do not accept animals, I am allergic.", 1, 11, 12),
-(9, 0, 0.32, 1, 1, '2024-01-07 10:45:00', "I do not accept animals, I am allergic.", 1, 13, 14),
-(7, 1, 0.26, 1, 0, '2024-01-08 16:30:00', "I am willing to pick you up from your home.", 0, 15, 16),
-(8, 0, 0.28, 0, 1, '2024-01-09 11:00:00', "I do not accept animals, I am allergic.", 1, 17, 18),
-(6, 1, 0.24, 1, 1, '2024-01-10 18:45:00', "I can drop you off wherever you want.", 0, 19, 20),
-(8, 1, 0.35, 1, 1, '2024-02-19 09:15:00', "I can drop you off wherever you want.", 1, 23, 24),
-(9, 0, 0.32, 1, 1, '2024-02-22 10:45:00', "I do not accept animals, I am allergic.", 1, 25, 26),
-(7, 1, 0.26, 1, 0, '2024-02-23 16:30:00', "I am willing to pick you up from your home.", 0, 27, 28),
-(8, 0, 0.28, 0, 1, '2024-02-24 11:00:00', "I can drop you off wherever you want.", 1, 29, 30),
-(6, 1, 0.24, 1, 1, '2024-02-25 18:45:00', "I am willing to pick you up from your home.", 1, 31, 32),
-(8, 1, 0.35, 1, 1, '2024-02-26 09:15:00', "I do not accept animals, I am allergic.", 0, 33, 34),
-(9, 0, 0.32, 1, 1, '2024-02-27 10:45:00', "I can drop you off wherever you want.", 1, 35, 36),
-(7, 1, 0.26, 1, 0, '2024-02-28 16:30:00', "I am willing to pick you up from your home.", 0, 37, 38),
-(8, 0, 0.28, 0, 1, '2024-03-01 11:00:00', "I do not accept animals, I am allergic.", 1, 39, 40),
-(6, 1, 0.24, 1, 1, '2024-03-02 18:45:00', "I can drop you off wherever you want.", 1, 41, 42),
-(8, 1, 0.35, 1, 1, '2024-03-03 09:15:00', "I am willing to pick you up from your home.", 0, 43, 44),
-(9, 0, 0.32, 1, 1, '2024-03-04 10:45:00', "I am willing to pick you up from your home.", 0, 45, 46),
-(7, 1, 0.26, 1, 0, '2024-03-05 16:30:00', "I am willing to pick you up from your home.", 0, 47, 48);
+(6, 0, 0.25, 1, 0, '2024-01-01 08:00:00', 'I am willing to pick you up from your home.', 1, 1, 2),
+(8, 1, 0.30, 0, 1, '2024-01-02 12:30:00', 'I can drop you off wherever you want.', 0, 3, 4),
+(6, 0, 0.22, 1, 1, '2024-01-03 15:45:00', 'I can drop you off wherever you want.', 1, 5, 6),
+(7, 1, 0.28, 0, 1, '2024-01-04 09:15:00', 'I can drop you off wherever you want.', 0, 7, 8),
+(8, 0, 0.35, 1, 0, '2024-01-05 17:30:00', 'I am willing to pick you up from your home.', 0, 9, 10),
+(9, 1, 0.20, 0, 1, '2024-01-06 14:00:00', 'I do not accept animals, I am allergic.', 1, 11, 12),
+(9, 0, 0.32, 1, 1, '2024-01-07 10:45:00', 'I do not accept animals, I am allergic.', 1, 13, 14),
+(7, 1, 0.26, 1, 0, '2024-01-08 16:30:00', 'I am willing to pick you up from your home.', 0, 15, 16),
+(8, 0, 0.28, 0, 1, '2024-01-09 11:00:00', 'I do not accept animals, I am allergic.', 1, 17, 18),
+(6, 1, 0.24, 1, 1, '2024-01-10 18:45:00', 'I can drop you off wherever you want.', 0, 19, 20),
+(8, 1, 0.35, 1, 1, '2024-02-19 09:15:00', 'I can drop you off wherever you want.', 1, 23, 24),
+(9, 0, 0.32, 1, 1, '2024-02-22 10:45:00', 'I do not accept animals, I am allergic.', 1, 25, 26),
+(7, 1, 0.26, 1, 0, '2024-02-23 16:30:00', 'I am willing to pick you up from your home.', 0, 27, 28),
+(8, 0, 0.28, 0, 1, '2024-02-24 11:00:00', 'I can drop you off wherever you want.', 1, 29, 30),
+(6, 1, 0.24, 1, 1, '2024-02-25 18:45:00', 'I am willing to pick you up from your home.', 1, 31, 32),
+(8, 1, 0.35, 1, 1, '2024-02-26 09:15:00', 'I do not accept animals, I am allergic.', 0, 33, 34),
+(9, 0, 0.32, 1, 1, '2024-02-27 10:45:00', 'I can drop you off wherever you want.', 1, 35, 36),
+(7, 1, 0.26, 1, 0, '2024-02-28 16:30:00', 'I am willing to pick you up from your home.', 0, 37, 38),
+(8, 0, 0.28, 0, 1, '2024-03-01 11:00:00', 'I do not accept animals, I am allergic.', 1, 39, 40),
+(6, 1, 0.24, 1, 1, '2024-03-02 18:45:00', 'I can drop you off wherever you want.', 1, 41, 42),
+(8, 1, 0.35, 1, 1, '2024-03-03 09:15:00', 'I am willing to pick you up from your home.', 0, 43, 44),
+(9, 0, 0.32, 1, 1, '2024-03-04 10:45:00', 'I am willing to pick you up from your home.', 0, 45, 46),
+(7, 1, 0.26, 1, 0, '2024-03-05 16:30:00', 'I am willing to pick you up from your home.', 0, 47, 48);
 GO
 -- Inserting bookings
-INSERT INTO booking (date, reservedSeats, idPassenger, idEntryPoint, idTrip)
+INSERT INTO booking (date, reservedSeats, idPassenger, idTrip)
 VALUES
-('2023-01-01 10:00:00', 2, 3, 2, 1),
-('2023-01-02 13:45:00', 1, 4, 4, 2),
-('2023-01-03 16:30:00', 3, 5, 6 , 3),
-('2023-02-16 10:15:00', 2, 11, 20, 4),
-('2023-02-18 16:30:00', 3, 12, 22, 5),
-('2023-02-19 10:45:00', 1, 13, 24, 5);
+('2023-01-01 10:00:00', 2, 3, 1),
+('2023-01-02 13:45:00', 1, 4, 2),
+('2023-01-03 16:30:00', 3, 5, 3),
+('2023-02-16 10:15:00', 2, 11, 4),
+('2023-02-18 16:30:00', 3, 12, 5),
+('2023-02-19 10:45:00', 1, 13, 5);
 
