@@ -3,6 +3,7 @@ using Application;
 using Application.Services.TokenJWT;
 using Application.UseCases.Address;
 using Application.UseCases.Authentication;
+using Application.UseCases.Booking;
 using Application.UseCases.Car;
 using Application.UseCases.Trip;
 using Application.UseCases.Users.Admin;
@@ -12,6 +13,7 @@ using Application.UseCases.Users.User;
 using Infrastructure.Ef;
 using Infrastructure.Ef.Address;
 using Infrastructure.Ef.Authentication;
+using Infrastructure.Ef.Booking;
 using Infrastructure.Ef.Car;
 using Infrastructure.Ef.Trip;
 using Infrastructure.Ef.Users.Admin;
@@ -41,6 +43,7 @@ builder.Services.AddDbContext<WaymateContext>(a => a.UseSqlServer(
 //Repository
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<ITripRepository, TripRepository>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
@@ -63,6 +66,11 @@ builder.Services.AddScoped<UseCaseFetchIdByAddress>();
 builder.Services.AddScoped<UseCaseFetchAllTrip>();
 builder.Services.AddScoped<UseCaseCreateTrip>();
 builder.Services.AddScoped<UseCaseFetchTripById>();
+
+//Use Case Trip
+builder.Services.AddScoped<UseCaseFetchAllBooking>();
+builder.Services.AddScoped<UseCaseCreateBooking>();
+builder.Services.AddScoped<UseCaseFetchBookingById>();
 
 //Use Case Car
 builder.Services.AddScoped<UseCaseCreateCar>();
