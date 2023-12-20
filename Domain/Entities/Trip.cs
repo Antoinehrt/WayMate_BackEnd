@@ -13,6 +13,8 @@ public class Trip {
     public Address StartAddress { get; set; }
     public Address DestinationAddress { get; set; }
     public Car Car { get; set; }
+    public string DriverMessage { get; set; }
+    public bool AirConditioning { get; set; }
     private User _driver;
 
     public User Driver

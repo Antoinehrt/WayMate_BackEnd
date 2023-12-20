@@ -67,11 +67,12 @@ public class WaymateContext : DbContext
             entity.Property(t => t.Id).HasColumnName("id");
             entity.Property(t => t.IdDriver).HasColumnName("idDriver");
             entity.Property(t => t.Smoke).HasColumnName("smoke");
-            entity.Property(t => t.PriceKm).HasColumnName("priceKm");
+            entity.Property(t => t.Price).HasColumnName("price");
             entity.Property(t => t.Luggage).HasColumnName("luggage");
             entity.Property(t => t.PetFriendly).HasColumnName("petFriendly");
             entity.Property(t => t.Date).HasColumnName("date");
-            entity.Property(t => t.OccupiedSeats).HasColumnName("occupiedSeats");
+            entity.Property(t => t.DriverMessage).HasColumnName("driverMessage");
+            entity.Property(t => t.AirConditioning).HasColumnName("airConditioning");
             entity.Property(t => t.IdStartingPoint).HasColumnName("idStartingPoint");
             entity.Property(t => t.IdDestination).HasColumnName("idDestination");
         });
