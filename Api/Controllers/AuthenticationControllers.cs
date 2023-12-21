@@ -65,6 +65,7 @@ public class AuthenticationControllers : ControllerBase {
         return Ok(registrationResult);
     }
 
+    [AllowAnonymous]
     [HttpPost("generationToken")]
     public DtoOutputToken GenerateAndSetToken(DtoInputToken dto) {
         var token = _tokenService.BuildToken(_configuration["JWT:Key"], _configuration["JWT:Issuer"], dto);

@@ -89,7 +89,7 @@ public class AdminController : ControllerBase {
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult update(int id, [FromBody] DtoInputUpdateAdmin dto) {
+    public ActionResult Update(int id, [FromBody] DtoInputUpdateAdmin dto) {
         dto.Id = id;
         var output = _useCaseUpdateAdmin.Execute(dto);
         return CreatedAtAction(
