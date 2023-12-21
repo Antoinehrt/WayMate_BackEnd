@@ -31,7 +31,7 @@ public class User {
 
     public string PhoneNumber
     {
-        get => _birthdate;
+        get => _phoneNumber;
         set
         {
             if (Regex.IsMatch(value, @"^((((\+3[2-3]) )|0)4[0-9]{2})/[0-9]{2}\.[0-9]{2}\.[0-9]{2}$"))
