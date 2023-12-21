@@ -11,14 +11,20 @@ public class TripController : ControllerBase
     private readonly UseCaseFetchAllTrip _useCaseFetchAllTrip;
     private readonly UseCaseCreateTrip _useCaseCreateTrip;
     private readonly UseCaseFetchTripById _useCaseFetchTripById;
+    private readonly UseCaseDeleteTrip _useCaseDeleteTrip;
+    private readonly UseCaseUpdateTrip _useCaseUpdateTrip;
 
     public TripController(UseCaseFetchAllTrip useCaseFetchAllTrip, 
         UseCaseCreateTrip useCaseCreateTrip, 
-        UseCaseFetchTripById useCaseFetchTripById)
+        UseCaseFetchTripById useCaseFetchTripById, 
+        UseCaseUpdateTrip useCaseUpdateTrip, 
+        UseCaseDeleteTrip useCaseDeleteTrip)
     {
         _useCaseFetchAllTrip = useCaseFetchAllTrip;
         _useCaseCreateTrip = useCaseCreateTrip;
         _useCaseFetchTripById = useCaseFetchTripById;
+        _useCaseUpdateTrip = useCaseUpdateTrip;
+        _useCaseDeleteTrip = useCaseDeleteTrip;
     }
 
     [HttpGet]
@@ -56,5 +62,23 @@ public class TripController : ControllerBase
             new { id = output.Id },
             output
         );
+    }
+    
+    [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult Delete(int id)
+    {
+        if(_useCaseDeleteTrip.Execute(id)) return NoContent();
+        return NotFound();
+    }
+    
+    [HttpPut("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult Update(int id, [FromBody] DtoInputUpdateTrip dto)
+    {
+        dto.Id = id;
+        return _useCaseUpdateTrip.Execute(dto) ? NoContent() : NotFound();
     }
 }

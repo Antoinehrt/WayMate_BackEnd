@@ -66,6 +66,8 @@ builder.Services.AddScoped<UseCaseFetchIdByAddress>();
 builder.Services.AddScoped<UseCaseFetchAllTrip>();
 builder.Services.AddScoped<UseCaseCreateTrip>();
 builder.Services.AddScoped<UseCaseFetchTripById>();
+builder.Services.AddScoped<UseCaseDeleteTrip>();
+builder.Services.AddScoped<UseCaseUpdateTrip>();
 
 //Use Case Booking
 builder.Services.AddScoped<UseCaseFetchAllBooking>();
