@@ -9,4 +9,6 @@ public interface IBookingRepository
     DbBooking FetchById(int id);
 
     DbBooking Create(DateTime date, int reservedSeats, int idPassenger, int idTrip);
+    
+    bool Delete(int id);
 }

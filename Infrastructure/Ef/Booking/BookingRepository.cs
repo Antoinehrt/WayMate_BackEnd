@@ -32,4 +32,19 @@ public class BookingRepository : IBookingRepository
         _context.SaveChanges();
         return booking;
     }
+    
+    public bool Delete(int id)
+    {
+        var bookingToDelete = _context.Booking.FirstOrDefault(b => b.Id == id);
+
+        if (bookingToDelete == null)
+        {
+            throw new KeyNotFoundException($"Booking with id {id} has not been found");
+        }
+
+        _context.Booking.Remove(bookingToDelete);
+        _context.SaveChanges();
+
+        return true;
+    }
 }

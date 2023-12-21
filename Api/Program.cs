@@ -66,11 +66,14 @@ builder.Services.AddScoped<UseCaseFetchIdByAddress>();
 builder.Services.AddScoped<UseCaseFetchAllTrip>();
 builder.Services.AddScoped<UseCaseCreateTrip>();
 builder.Services.AddScoped<UseCaseFetchTripById>();
+builder.Services.AddScoped<UseCaseDeleteTrip>();
+builder.Services.AddScoped<UseCaseUpdateTrip>();
 
-//Use Case Trip
+//Use Case Booking
 builder.Services.AddScoped<UseCaseFetchAllBooking>();
 builder.Services.AddScoped<UseCaseCreateBooking>();
 builder.Services.AddScoped<UseCaseFetchBookingById>();
+builder.Services.AddScoped<UseCaseDeleteBooking>();
 
 //Use Case Car
 builder.Services.AddScoped<UseCaseCreateCar>();
