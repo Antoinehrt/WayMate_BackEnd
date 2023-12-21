@@ -1,4 +1,5 @@
-﻿using Application.UseCases.Booking;
+﻿using Application.UseCases.Address;
+using Application.UseCases.Booking;
 using Application.UseCases.Booking.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,13 +12,16 @@ public class BookingController : ControllerBase
     private readonly UseCaseCreateBooking _useCaseCreateBooking;
     private readonly UseCaseFetchAllBooking _useCaseFetchAllBooking;
     private readonly UseCaseFetchBookingById _useCaseFetchBookingById;
+    private readonly UseCaseDeleteBooking _useCaseDeleteBooking;
+    
 
 
-    public BookingController(UseCaseCreateBooking useCaseCreateBooking, UseCaseFetchAllBooking useCaseFetchAllBooking, UseCaseFetchBookingById useCaseFetchBookingById)
+    public BookingController(UseCaseCreateBooking useCaseCreateBooking, UseCaseFetchAllBooking useCaseFetchAllBooking, UseCaseFetchBookingById useCaseFetchBookingById, UseCaseDeleteBooking useCaseDeleteBooking)
     {
         _useCaseCreateBooking = useCaseCreateBooking;
         _useCaseFetchAllBooking = useCaseFetchAllBooking;
         _useCaseFetchBookingById = useCaseFetchBookingById;
+        _useCaseDeleteBooking = useCaseDeleteBooking;
     }
 
     [HttpGet]
@@ -55,5 +59,14 @@ public class BookingController : ControllerBase
             new { id = output.Id },
             output
         );
+    }
+    
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult Delete(int id)
+    {
+        if(_useCaseDeleteBooking.Execute(id)) return NoContent();
+        return NotFound();
     }
 }
