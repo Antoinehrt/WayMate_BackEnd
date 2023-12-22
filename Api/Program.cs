@@ -98,6 +98,7 @@ builder.Services.AddScoped<UseCaseUpdateAdmin>();
 //Use Case Passenger
 builder.Services.AddScoped<UseCaseCreatePassenger>();
 builder.Services.AddScoped<UseCaseUpdatePassenger>();
+builder.Services.AddScoped<UseCaseChangeUserTypeFromPassenger>();
 
 //Use Case Driver
 builder.Services.AddScoped<UseCaseCreateDriver>();

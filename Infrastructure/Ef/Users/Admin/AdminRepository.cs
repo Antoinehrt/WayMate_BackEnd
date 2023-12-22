@@ -35,7 +35,7 @@ public class AdminRepository : IAdminRepository {
         if (adminToUpdate == null) throw new KeyNotFoundException($"Admin with id {id} has not been found");
 
         adminToUpdate.Username = username;
-        adminToUpdate.Password = _passwordHasher.HashPwd(password);
+        adminToUpdate.Password = password;
         adminToUpdate.Email = email;
         adminToUpdate.BirthDate = birthDate;
         adminToUpdate.IsBanned = isBanned;

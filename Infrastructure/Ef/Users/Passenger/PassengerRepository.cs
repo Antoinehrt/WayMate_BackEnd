@@ -42,7 +42,7 @@ public class PassengerRepository : IPassengerRepository {
         if (passengerToUpdate == null) throw new KeyNotFoundException($"Passenger with id {id} has not been found.");
 
         passengerToUpdate.Username = username;
-        passengerToUpdate.Password = _passwordHasher.HashPwd(password);
+        passengerToUpdate.Password = password;
         passengerToUpdate.Email = email;
         passengerToUpdate.BirthDate = birthdate;
         passengerToUpdate.IsBanned = isbanned;
@@ -55,5 +55,12 @@ public class PassengerRepository : IPassengerRepository {
         _context.SaveChanges();
 
         return passengerToUpdate;
+    }
+
+    public void ChangeUserType(int id) {
+        var passengerToUpdate = _context.Users.FirstOrDefault(u => u.Id == id);
+        if (passengerToUpdate == null) throw new KeyNotFoundException($"Passenger with id {id} has not been found.");
+        passengerToUpdate.UserType = UserType.Driver.ToString();
+        _context.SaveChanges();
     }
 }

@@ -13,12 +13,13 @@ public class PassengerController : ControllerBase{
     private readonly UseCaseUpdatePassenger _useCaseUpdatePassenger;
     private readonly UseCaseFetchUserById _useCaseFetchUserById;
     private readonly UseCaseFetchAllUser _useCaseFetchAllUser;
-
-    public PassengerController(UseCaseCreatePassenger useCaseCreatePassenger, UseCaseUpdatePassenger useCaseUpdatePassenger, UseCaseFetchUserById useCaseFetchUserById, UseCaseFetchAllUser useCaseFetchAllUser) {
+    private readonly UseCaseChangeUserTypeFromPassenger _useCaseChangeUserTypeFromPassenger;
+    public PassengerController(UseCaseCreatePassenger useCaseCreatePassenger, UseCaseUpdatePassenger useCaseUpdatePassenger, UseCaseFetchUserById useCaseFetchUserById, UseCaseFetchAllUser useCaseFetchAllUser, UseCaseChangeUserTypeFromPassenger useCaseChangeUserTypeFromPassenger) {
         _useCaseCreatePassenger = useCaseCreatePassenger;
         _useCaseUpdatePassenger = useCaseUpdatePassenger;
         _useCaseFetchUserById = useCaseFetchUserById;
         _useCaseFetchAllUser = useCaseFetchAllUser;
+        _useCaseChangeUserTypeFromPassenger = useCaseChangeUserTypeFromPassenger;
     }
     
     [HttpGet]
@@ -100,5 +101,11 @@ public class PassengerController : ControllerBase{
             new { id = output.Id },
             output
         );
+    }
+
+    [HttpGet("changeUserType/{id:int}")]
+    public ActionResult ChangeUserRole(int id) {
+        _useCaseChangeUserTypeFromPassenger.Execute(id);
+        return Ok(new { text = "Ok" });
     }
 }
