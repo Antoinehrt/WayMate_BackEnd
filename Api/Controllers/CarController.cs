@@ -29,8 +29,7 @@ public class CarController : ControllerBase
         return Ok(_useCaseFetchAllCar.Execute());
     }
 
-    [HttpGet]
-    [Route("getById/{numberPlate}")]
+    [HttpGet("getById/{numberPlate}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<DtoOutputCar> FetchById(string numberPlate)
