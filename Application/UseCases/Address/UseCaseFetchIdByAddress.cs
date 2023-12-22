@@ -11,9 +11,9 @@ public class UseCaseFetchIdByAddress
         _addressRepository = addressRepository;
     }
 
-    public async Task<int> GetIdByAddressAsync(string street, string postalCode, string city, string number)
+    public async Task<int> GetIdByAddressAsync(string street, string postalCode, string city, string number, string country)
     {
-        var id = await _addressRepository.GetIdByAddress(street, postalCode, city, number);
+        var id = await _addressRepository.GetIdByAddress(street, postalCode, city, number, country);
 
         return id;
     }

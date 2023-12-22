@@ -91,11 +91,12 @@ public class AddressController : ControllerBase
         [FromQuery] string street,
         [FromQuery] string postalCode,
         [FromQuery] string city,
-        [FromQuery] string number)
+        [FromQuery] string number,
+        [FromQuery] string country)
     {
         try
         {
-            int addressId = await _useCaseFetchIdByAddress.GetIdByAddressAsync(street, postalCode, city, number);
+            int addressId = await _useCaseFetchIdByAddress.GetIdByAddressAsync(street, postalCode, city, number, country);
 
             var dto = new DtoOutputAddressId
             {

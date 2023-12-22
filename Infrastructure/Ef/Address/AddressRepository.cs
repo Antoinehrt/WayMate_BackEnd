@@ -25,9 +25,9 @@ public class AddressRepository : IAddressRepository
         return address;
     }
 
-    public DbAddress Create(string street, string postalCode, string city, string number)
+    public DbAddress Create(string street, string postalCode, string city, string number, string country)
     {
-        var address = new DbAddress { Street = street, PostalCode = postalCode, City = city, Number = number };
+        var address = new DbAddress { Street = street, PostalCode = postalCode, City = city, Number = number, Country = country};
         _context.Address.Add(address);
         _context.SaveChanges();
         return address;
@@ -47,7 +47,7 @@ public class AddressRepository : IAddressRepository
         return true;
     }
 
-    public bool Update(int id, string street, string postalCode, string city, string number)
+    public bool Update(int id, string street, string postalCode, string city, string number, string country)
     {
         var addressToUpdate = _context.Address.FirstOrDefault(a => a.Id == id);
         if (addressToUpdate == null) return false;
@@ -56,19 +56,21 @@ public class AddressRepository : IAddressRepository
         addressToUpdate.Street = street;
         addressToUpdate.PostalCode = postalCode;
         addressToUpdate.Number = number;
+        addressToUpdate.Country = country;
 
         _context.SaveChanges();
         return true;
     }
 
-    public async Task<int> GetIdByAddress(string street, string postalCode, string city, string number)
+    public async Task<int> GetIdByAddress(string street, string postalCode, string city, string number, string country)
     {
         var addressEntity = await _context.Address
             .FirstOrDefaultAsync(a =>
                 a.Street == street &&
                 a.PostalCode == postalCode &&
                 a.City == city &&
-                a.Number == number);
+                a.Number == number &&
+                a.Country == country);
 
         return addressEntity?.Id ?? 0;
     }

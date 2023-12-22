@@ -26,7 +26,8 @@ CREATE TABLE address (
     street VARCHAR(50) NOT NULL,
     postalCode VARCHAR(6) NOT NULL,
     city VARCHAR(50) NOT NULL,
-    number VARCHAR(6) NOT NULL
+    number VARCHAR(6) NOT NULL,
+    country VARCHAR(50) NOT NULL
 );
 GO
 -- Creating the 'car' table

@@ -8,6 +8,5 @@ public class Address {
     public string PostalCode { get; set; }
     public string City { get; set; }
     public string Number { get; set; }
-    private User _passenger;
-   
+    public string Country { get; set; }
 }
