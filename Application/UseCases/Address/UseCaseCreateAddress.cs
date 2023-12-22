@@ -20,7 +20,7 @@ public class UseCaseCreateAddress : IUseCaseWriter<DtoOutputAddress,DtoInputCrea
 
     public DtoOutputAddress Execute(DtoInputCreateAddress input)
     {
-        var dbAddress = _addressRepository.Create(input.Street, input.PostalCode, input.City, input.Number);
+        var dbAddress = _addressRepository.Create(input.Street, input.PostalCode, input.City, input.Number, input.Country);
         return _mapper.Map<DtoOutputAddress>(dbAddress);
     }
 }

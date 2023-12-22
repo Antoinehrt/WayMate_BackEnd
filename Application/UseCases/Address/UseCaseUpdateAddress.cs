@@ -14,8 +14,7 @@ public class UseCaseUpdateAddress: IUseCaseParameterizeQuery<bool,DtoInputUpdate
         _addressRepository = addressRepository;
     }
 
-    public bool Execute(DtoInputUpdateAddress param)
-    {
-        return _addressRepository.Update(param.Id, param.Street, param.PostalCode, param.City, param.Number);
+    public bool Execute(DtoInputUpdateAddress param) {
+        return _addressRepository.Update(param.Id, param.Street, param.PostalCode, param.City, param.Number, param.Country);
     }
 }

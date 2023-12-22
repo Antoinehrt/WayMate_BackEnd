@@ -24,12 +24,12 @@ public class CarRepository : ICarRepository
         return car;
     }
 
-    public DbCar Create(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType)
+    public DbCar Create(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType, string color)
     {
         var car = new DbCar
         {
-            NumberPlate = numberPlate, Brand = brand, Model = model, NbSeats = nbSeats, FuelType = fuelType,
-            CarType = carType
+            NumberPlate = numberPlate, Brand = brand, Model = model, NbSeats = nbSeats, FuelType = Enum.GetName(typeof(FuelType), fuelType),
+            CarType = Enum.GetName(typeof(CarType), carType), Color = color
         };
         _context.Cars.Add(car);
         _context.SaveChanges();
@@ -45,7 +45,7 @@ public class CarRepository : ICarRepository
         return true;
     }
 
-    public bool Update(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType)
+    public bool Update(string numberPlate, string brand, string model, int nbSeats, FuelType fuelType, CarType carType, string color)
     {
         var carToUpdate = _context.Cars.FirstOrDefault(c => c.NumberPlate == numberPlate);
         if (carToUpdate == null) return false;
@@ -53,8 +53,9 @@ public class CarRepository : ICarRepository
         carToUpdate.Brand = brand;
         carToUpdate.Model = model;
         carToUpdate.NbSeats = nbSeats;
-        carToUpdate.FuelType = fuelType;
-        carToUpdate.CarType = carType;
+        carToUpdate.FuelType = Enum.GetName(typeof(FuelType), fuelType);
+        carToUpdate.CarType = Enum.GetName(typeof(CarType), carType);
+        carToUpdate.Color = color;
 
         _context.SaveChanges();
         return true;

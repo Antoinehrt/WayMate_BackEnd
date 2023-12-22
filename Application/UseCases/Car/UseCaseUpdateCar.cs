@@ -16,6 +16,6 @@ public class UseCaseUpdateCar : IUseCaseParameterizeQuery<bool, DtoInputUpdateCa
 
     public bool Execute(DtoInputUpdateCar update)
     {
-        return _carRepository.Update(update.NumberPlate, update.Brand, update.Model, update.NbSeats, update.FuelType, update.CarType);
+        return _carRepository.Update(update.NumberPlate, update.Brand, update.Model, update.NbSeats, update.FuelType, update.CarType, update.Color);
     }
 }

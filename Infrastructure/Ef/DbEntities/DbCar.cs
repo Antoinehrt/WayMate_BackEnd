@@ -8,6 +8,8 @@ public class DbCar
     public string Brand { get; set; }
     public string Model { get; set; }
     public int NbSeats { get; set; }
-    public FuelType FuelType { get; set; }
-    public CarType CarType { get; set; }
+    public string? FuelType { get; set; }
+    public string? CarType { get; set; }
+    
+    public string Color { get; set; }
 }
