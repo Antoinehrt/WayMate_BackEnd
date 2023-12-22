@@ -3,12 +3,10 @@
 namespace Domain.Entities.Users; 
 
 public class User {
-    public int IdUser { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
     private string _birthdate;
-    public bool? IsAdmin {get; set;}
     public bool IsBanned { get; set; }
     public string Birthdate
     {
