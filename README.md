@@ -1,5 +1,7 @@
 # WayMate — Back-end
 
+![Logo WayMate](preview.png)
+
 **WayMate is the back-end for a final-year project of a carpooling (ridesharing) web application. This repository implements the REST API, business logic, and data persistence layer for user management, trip offers, bookings, and vehicle management using Clean Architecture principles.**
 
 Table of contents
